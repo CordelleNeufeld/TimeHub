@@ -12,8 +12,8 @@ public class Database {
         if(connection == null) {
             try {
                 Class.forName("com.mysql.jdbc.Driver");
-                connection = DriverManager.getConnection("jdbc:mysql://php.scweb.ca/" + "aandersonecommerce",
-                        "aanderson", "8557585575s611hs611h");
+                connection = DriverManager.getConnection("jdbc:mysql://php.scweb.ca/" + "dbName",
+                        "userName", "Password");
                 System.out.println("Created Connection");
             }
             catch(Exception e) {
