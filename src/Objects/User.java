@@ -4,16 +4,19 @@ public class User {
     private String firstName;
     private String lastName;
     private String lastAccessed;
+    private Task[] tasks;
 
     /**
      * @param firstName First Name of user
      * @param lastName Last Name of the user
      * @param lastAccessed Last time the user Accessed the Program
+     * @param tasks Tasks the user is assigned
      */
-    public User(String firstName, String lastName, String lastAccessed) {
+    public User(String firstName, String lastName, String lastAccessed, Task[] tasks) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.lastAccessed = lastAccessed;
+        this.tasks = tasks;
     }
 
     public String getFirstName() {
