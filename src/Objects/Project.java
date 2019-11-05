@@ -1,28 +1,33 @@
 package Objects;
 
+import java.util.ArrayList;
+
 public class Project {
-    private Category[] categories;
+    private ArrayList<Category> categories;
+    private ArrayList<Task> tasks;
     private String title;
     private String description;
 
     /**
      *
-     * @param categories Project Category
+     * @param categories Project Categories
+     * @param tasks Project Tasks
      * @param title Project Title
      * @param description Project Description
      */
-    public Project(Category[] categories, String title, String description) {
+    public Project(ArrayList<Category> categories, ArrayList<Task> tasks, String title, String description) {
         this.categories = categories;
+        this.tasks = tasks;
         this.title = title;
         this.description = description;
     }
 
-    public Category[] getCategories() {
+    public ArrayList<Category> getCategories() {
         return categories;
     }
 
-    public void setCategories(Category[] categories) {
-        this.categories = categories;
+    public ArrayList<Task> getTasks() {
+        return tasks;
     }
 
     public String getTitle() {

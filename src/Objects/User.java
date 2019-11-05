@@ -1,10 +1,12 @@
 package Objects;
 
+import java.util.ArrayList;
+
 public class User {
     private String firstName;
     private String lastName;
     private String lastAccessed;
-    private Task[] tasks;
+    private ArrayList<Task> tasks;
 
     /**
      * @param firstName First Name of user
@@ -12,7 +14,7 @@ public class User {
      * @param lastAccessed Last time the user Accessed the Program
      * @param tasks Tasks the user is assigned
      */
-    public User(String firstName, String lastName, String lastAccessed, Task[] tasks) {
+    public User(String firstName, String lastName, String lastAccessed, ArrayList<Task> tasks) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.lastAccessed = lastAccessed;
@@ -37,5 +39,9 @@ public class User {
 
     public String getLastAccessed() {
         return lastAccessed;
+    }
+
+    public ArrayList<Task> getTasks() {
+        return tasks;
     }
 }

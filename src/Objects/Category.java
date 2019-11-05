@@ -6,7 +6,7 @@ public class Category {
 
     /**
      * @param title Category Name
-     * @param description Category
+     * @param description Category description
      */
     public Category(String title, String description) {
         this.title = title;
