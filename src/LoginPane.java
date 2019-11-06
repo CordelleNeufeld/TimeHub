@@ -16,8 +16,15 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * This class is for the login screen
+ * @author Hasan Muslemani
+ */
 public class LoginPane extends VBox {
 
+	/**
+	 * LoginPane no-arg constructor
+	 */
     public LoginPane() {
         Label promptLabel = new Label("Please enter your database login credentials");
 
