@@ -15,9 +15,8 @@ import javafx.stage.Stage;
  * Hasan Muslemani
  * Cordelle Neufeld
  * 
- * 
+ * Modification date: 2019-11-01 by Hasan for the LoginPane
  */
-
 
 public class Main extends Application {
 
