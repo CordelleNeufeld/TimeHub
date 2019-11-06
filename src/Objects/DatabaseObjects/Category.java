@@ -1,4 +1,4 @@
-package Objects;
+package Objects.DatabaseObjects;
 
 public class Category {
     private String title;
