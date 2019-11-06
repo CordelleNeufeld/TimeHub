@@ -28,6 +28,10 @@ hs_err_pid*
 
 .idea
 
+# ADDITIONAL CUSTOM GIT IGNORE 2019-11-05
+
+config.txt
+
 # ADDITIONAL CUSTOM GIT IGNORE FROM GITIGNORE.IO 2019-10-23
 
 # Created by https://www.gitignore.io/api/macos,eclipse,intellij

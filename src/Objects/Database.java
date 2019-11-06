@@ -1,7 +1,10 @@
 package Objects;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.Scanner;
 
 public class Database {
 
@@ -9,21 +12,26 @@ public class Database {
     private Connection connection = null;
 
     private Database() {
-        if(connection == null) {
+        if (connection == null) {
             try {
-                Class.forName("com.mysql.jdbc.Driver");
-                connection = DriverManager.getConnection("jdbc:mysql://php.scweb.ca/" + "dbName",
-                        "userName", "Password");
-                System.out.println("Created Connection");
-            }
-            catch(Exception e) {
-                e.printStackTrace();
+                Scanner configReader = new Scanner(new File("config.txt"));
+
+                try {
+                    Class.forName("com.mysql.jdbc.Driver");
+                    connection = DriverManager.getConnection("jdbc:mysql://" + configReader.nextLine() + "/" + configReader.nextLine(),
+                            configReader.nextLine(), configReader.nextLine());
+                    System.out.println("Created Connection");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } catch (IOException x) {
+                x.printStackTrace();
             }
         }
     }
 
     public static Database getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new Database();
         }
         return instance;
