@@ -1,4 +1,4 @@
-package Objects.DatabaseObjects;
+package javabeans;
 
 public class Category {
     private String title;

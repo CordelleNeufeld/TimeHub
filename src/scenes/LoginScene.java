@@ -1,3 +1,5 @@
+package scenes;
+
 import javafx.scene.Scene;
 
 public class LoginScene extends Scene {

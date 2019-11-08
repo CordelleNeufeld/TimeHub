@@ -1,4 +1,6 @@
-import Objects.Database;
+package panes;
+
+import classes.Database;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,14 +20,17 @@ import java.util.List;
 
 /**
  * This class is for the login screen
+ *
  * @author Hasan Muslemani
  */
 public class LoginPane extends VBox {
 
-	/**
-	 * LoginPane no-arg constructor
-	 */
+    /**
+     * LoginPane no-arg constructor
+     */
     public LoginPane() {
+
+        //Set up labels
         Label promptLabel = new Label("Please enter your database login credentials");
 
         VBox labelsVBox = new VBox(25);
@@ -38,6 +43,8 @@ public class LoginPane extends VBox {
         labelsVBox.getChildren().addAll(hostLabel, userLabel, passwordLabel, nameLabel);
         labelsVBox.setAlignment(Pos.CENTER);
 
+
+        //Set up login Fields
         VBox textFieldVBox = new VBox(15);
 
         TextField hostTextField = new TextField();
@@ -48,24 +55,31 @@ public class LoginPane extends VBox {
         textFieldVBox.getChildren().addAll(hostTextField, userTextField, passwordTextField, nameTextField);
         textFieldVBox.setAlignment(Pos.CENTER);
 
+
+        //Put Labels and Login Fields Together
         HBox labelsAndInputHBox = new HBox(15);
         labelsAndInputHBox.getChildren().addAll(labelsVBox, textFieldVBox);
         labelsAndInputHBox.setAlignment(Pos.CENTER);
 
-        Button loginBtn = new Button("Login");
 
-        //Error Text
-        Text error = new Text("Login failed. Please Check your credentials.");
+        //Errors (Make sure to set 'Managed' to false)
+        Text error = new Text();
         error.setFill(Color.RED);
         error.setManaged(false);
 
+
+        //Login Button
+        Button loginBtn = new Button("Login");
+
+
+        //Put everything on the screen
         getChildren().addAll(promptLabel, labelsAndInputHBox, error, loginBtn);
         setSpacing(35);
         setAlignment(Pos.CENTER);
 
+
         //Button Listener
         loginBtn.setOnMouseClicked(e -> {
-            //TODO: Input Sanitation
 
             try {
                 List<String> lines = Arrays.asList(hostTextField.getText(), userTextField.getText(), passwordTextField.getText(), nameTextField.getText());
@@ -75,6 +89,7 @@ public class LoginPane extends VBox {
                 exception.printStackTrace();
             }
             if (Database.getInstance() == null) {
+                error.setText("Login failed. Please Check your database credentials.");
                 error.setManaged(true);
             }
         });
