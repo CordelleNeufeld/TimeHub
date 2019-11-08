@@ -17,6 +17,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * This class is for the login screen
@@ -24,6 +26,9 @@ import java.util.List;
  * @author Hasan Muslemani
  */
 public class LoginPane extends VBox {
+
+    private Pattern alphaNumericPattern = Pattern.compile("^[a-zA-Z0-9 ]*$");
+    private Pattern hostPattern = Pattern.compile("^[a-zA-Z .]*$");
 
     /**
      * LoginPane no-arg constructor
@@ -80,19 +85,37 @@ public class LoginPane extends VBox {
 
         //Button Listener
         loginBtn.setOnMouseClicked(e -> {
+            Matcher hostMatch = hostPattern.matcher(hostTextField.getText());
+            Matcher userMatch = alphaNumericPattern.matcher(userTextField.getText());
+            Matcher passwordMatch = alphaNumericPattern.matcher(passwordTextField.getText());
+            Matcher nameMatch = alphaNumericPattern.matcher(nameTextField.getText());
 
-            try {
-                List<String> lines = Arrays.asList(hostTextField.getText(), userTextField.getText(), passwordTextField.getText(), nameTextField.getText());
-                Path file = Paths.get("config.txt");
-                Files.write(file, lines, StandardCharsets.UTF_8);
-            } catch (IOException exception) {
-                exception.printStackTrace();
-            }
-            if (Database.getInstance() == null) {
-                error.setText("Login failed. Please Check your database credentials.");
+            if (!hostMatch.matches()) {
+                error.setText("Please check that the host field contains only letters and periods.");
                 error.setManaged(true);
+            } else if (!userMatch.matches()) {
+                error.setText("Please check that the user field contains only letters and numbers.");
+                error.setManaged(true);
+            } else if (!passwordMatch.matches()) {
+                error.setText("Please check that the database password field contains only letters and numbers");
+                error.setManaged(true);
+            } else if (!nameMatch.matches()) {
+                error.setText("Please check that the database name field does not contain any invalid characters.");
+                error.setManaged(true);
+            } else {
+                try {
+                    List<String> lines = Arrays.asList(hostTextField.getText(), userTextField.getText(), passwordTextField.getText(), nameTextField.getText());
+                    Path file = Paths.get("config.txt");
+                    Files.write(file, lines, StandardCharsets.UTF_8);
+                } catch (IOException exception) {
+                    exception.printStackTrace();
+                }
+
+                if (Database.getInstance() == null) {
+                    error.setText("Login failed. Please Check your database credentials.");
+                    error.setManaged(true);
+                }
             }
         });
     }
-
 }
