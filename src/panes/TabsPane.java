@@ -1,13 +1,11 @@
-import Objects.Database;
-import javafx.application.Application;
-import javafx.scene.Scene;
+package panes;
+
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 import tabs.AddHoursTab;
 import tabs.HomeTab;
 import tabs.OrganizeTab;

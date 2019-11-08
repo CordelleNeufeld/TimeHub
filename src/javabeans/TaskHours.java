@@ -1,4 +1,4 @@
-package Objects.DatabaseObjects;
+package javabeans;
 
 import java.sql.Date;
 

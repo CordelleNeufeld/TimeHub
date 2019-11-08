@@ -1,4 +1,7 @@
+package scenes;
+
 import javafx.scene.Scene;
+import panes.TabsPane;
 
 public class TabsPaneScene extends Scene{
 	

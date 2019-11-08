@@ -1,6 +1,6 @@
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
+import scenes.LoginScene;
 
 /*
  * TimeHub App
@@ -15,7 +15,7 @@ import javafx.stage.Stage;
  * Hasan Muslemani
  * Cordelle Neufeld
  * 
- * Modification date: 2019-11-01 by Hasan for the LoginPane
+ * Modification date: 2019-11-01 by Hasan for the panes.LoginPane
  */
 
 public class Main extends Application {

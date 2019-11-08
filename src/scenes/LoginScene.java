@@ -1,4 +1,7 @@
+package scenes;
+
 import javafx.scene.Scene;
+import panes.LoginPane;
 
 public class LoginScene extends Scene {
 
