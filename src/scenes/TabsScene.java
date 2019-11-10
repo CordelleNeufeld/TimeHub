@@ -3,9 +3,9 @@ package scenes;
 import javafx.scene.Scene;
 import panes.TabsPane;
 
-public class TabsPaneScene extends Scene{
+public class TabsScene extends Scene{
 	
-	public TabsPaneScene() {
+	public TabsScene() {
 		super(new TabsPane(), 1000, 1000);
 	}
 
