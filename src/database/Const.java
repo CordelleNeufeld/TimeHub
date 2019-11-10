@@ -1,5 +1,11 @@
 package database;
 
+/*
+ * Database constants and SQL creation queries
+ * @author Cordelle Neufeld
+ * Creation Date: 2019-11-10
+ */
+
 public class Const {
 	
 	// TASKS TABLE
