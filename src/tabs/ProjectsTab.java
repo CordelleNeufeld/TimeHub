@@ -2,6 +2,7 @@ package tabs;
 
 import classes.ProjectButton;
 import javabeans.Project;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -35,12 +36,13 @@ public class ProjectsTab extends Tab {
         }
 
         //New Project Button
-
+        Button newProjectButton = new Button("Add Project");
 
         //Set up borderPane
         BorderPane mainPane = new BorderPane();
         mainPane.setTop(projectsTitle);
         mainPane.setCenter(buttonListView);
+        mainPane.setBottom(newProjectButton);
 
         //Add content to Tab
         setContent(mainPane);
