@@ -45,7 +45,7 @@ public class TabsPane extends BorderPane {
 		tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		
 		// Populate the TabPane
-		tabPane.getTabs().addAll(new HomeTab(), new AddHoursTab(), new OrganizeTab(), new StatsTab(), new ProjectsTab(new ArrayList<>(), tabPane));
+		tabPane.getTabs().addAll(new HomeTab(), new AddHoursTab(), new OrganizeTab(), new StatsTab(), new ProjectsTab(new ArrayList<>(), tabPane), new ProjectFormTab(new ArrayList<>()));
 				
 		// Set the top of the BorderPane to the MenuBar
 		setTop(menuTimeHub);

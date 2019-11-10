@@ -28,7 +28,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		//TODO: Check if config.txt exists, and try to access DB if it does
-		primaryStage.setScene(new LoginScene());
+		primaryStage.setScene(new TabsScene());
 		primaryStage.show();
 	}
 

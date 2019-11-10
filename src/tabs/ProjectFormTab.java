@@ -1,9 +1,12 @@
 package tabs;
 
+import java.util.ArrayList;
+
+import javabeans.Category;
 import javabeans.Project;
-import javabeans.Task;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
@@ -12,15 +15,16 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
-public class TaskFormTab extends Tab{
+public class ProjectFormTab extends Tab{
 	
-	public TaskFormTab(Project project) {
+	public ProjectFormTab(ArrayList<Category> categories) {
+		
 		
 		//the vbox to hold everything
 		VBox mainVBox = new VBox();
 		
 		//task label
-		Label taskLabel = new Label("Task Creation Form");
+		Label taskLabel = new Label("Project Creation Form");
 		
 		//vbox for the labels
 		VBox labelsVBox = new VBox(25);
@@ -56,15 +60,27 @@ public class TaskFormTab extends Tab{
 		Text error = new Text("Name field cannot be empty");
         error.setFill(Color.RED);
         error.setManaged(false);
+        
+        mainVBox.getChildren().addAll(taskLabel, labelsAndInputsHBox);
+        
+        //arraylist to hold all checkboxes of categories
+        ArrayList<CheckBox> checkboxes = new ArrayList<>();
+        
+        //display each category
+        for(Category category : categories) {
+        	CheckBox checkbox = new CheckBox(category.getTitle());
+        	checkboxes.add(checkbox);
+        	mainVBox.getChildren().add(checkbox);
+        }
 		
         //add everything to the vbox
-        mainVBox.getChildren().addAll(taskLabel, labelsAndInputsHBox, error, submitBtn);
+        mainVBox.getChildren().addAll(error, submitBtn);
         mainVBox.setAlignment(Pos.CENTER);
         mainVBox.setSpacing(25);
         
         //add the vbox to the tab and add title 
         this.setContent(mainVBox);
-        this.setText("Task Form");
+        this.setText("Project Form");
 				
         //submit button on-click listener
 		submitBtn.setOnAction(e -> {
@@ -73,10 +89,9 @@ public class TaskFormTab extends Tab{
 				error.setManaged(true);
 			}
 			
-			//Make a new Task object
-			Task task = new Task(project, null, nameInput.getText(), descInput.getText());
+			//make a new Project object
+			Project project = new Project(categories, null, nameInput.getText(), descInput.getText());
 		});
-		
 	}
 
 }

@@ -44,5 +44,6 @@ public class ProjectsTab extends Tab {
 
         //Add content to Tab
         setContent(mainPane);
+        setText("Projects");
     }
 }
