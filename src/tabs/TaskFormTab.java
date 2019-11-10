@@ -1,4 +1,4 @@
-package panes;
+package tabs;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -10,9 +10,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
-public class TaskForm extends Tab{
+public class TaskFormTab extends Tab{
 	
-	public TaskForm() {
+	public TaskFormTab() {
 		
 		VBox mainVBox = new VBox();
 		

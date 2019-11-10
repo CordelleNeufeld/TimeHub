@@ -1,4 +1,4 @@
-package panes;
+package tabs;
 
 import javabeans.Project;
 import javafx.scene.control.Button;
@@ -10,9 +10,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class ProjectOverview extends Tab{
+public class ProjectOverviewTab extends Tab{
 	
-	public ProjectOverview(Project project) {
+	public ProjectOverviewTab(Project project) {
 		
 		VBox mainVBox = new VBox(30);
 		
