@@ -1,6 +1,7 @@
 import javafx.application.Application;
 import javafx.stage.Stage;
 import scenes.LoginScene;
+import scenes.TabsScene;
 
 /*
  * TimeHub App

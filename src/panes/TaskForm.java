@@ -3,15 +3,18 @@ package panes;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
-public class TaskForm extends VBox {
+public class TaskForm extends Tab{
 	
 	public TaskForm() {
+		
+		VBox mainVBox = new VBox();
 		
 		Label taskLabel = new Label("Task Creation Form");
 		
@@ -41,9 +44,12 @@ public class TaskForm extends VBox {
         error.setFill(Color.RED);
         error.setManaged(false);
 		
-		this.getChildren().addAll(taskLabel, labelsAndInputsHBox, error, submitBtn);
-		this.setAlignment(Pos.CENTER);
-		this.setSpacing(25);
+        mainVBox.getChildren().addAll(taskLabel, labelsAndInputsHBox, error, submitBtn);
+        mainVBox.setAlignment(Pos.CENTER);
+        mainVBox.setSpacing(25);
+        
+        this.setContent(mainVBox);
+        this.setText("Task Form");
 				
 		submitBtn.setOnAction(e -> {
 			if(nameInput.getText().equals("")) {
