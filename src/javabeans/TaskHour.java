@@ -2,7 +2,7 @@ package javabeans;
 
 import java.sql.Date;
 
-public class TaskHours {
+public class TaskHour {
     private Date date;
     private Double hours;
 
@@ -11,7 +11,7 @@ public class TaskHours {
      * @param date Date the user worked on the task
      * @param hours Hours added to the task
      */
-    public TaskHours(Date date, Double hours) {
+    public TaskHour(Date date, Double hours) {
         this.date = date;
         this.hours = hours;
     }
