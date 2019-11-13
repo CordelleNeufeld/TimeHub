@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Task {
     private Project project;
-    private ArrayList<TaskHours> taskHours;
+    private ArrayList<TaskHour> taskHours;
     private String title;
     private String description;
 
@@ -15,7 +15,7 @@ public class Task {
      * @param title Task Title
      * @param description Task Description
      */
-    public Task(Project project, ArrayList<TaskHours> taskHours, String title, String description) {
+    public Task(Project project, ArrayList<TaskHour> taskHours, String title, String description) {
         this.project = project;
         this.taskHours = taskHours;
         this.title = title;
@@ -30,7 +30,7 @@ public class Task {
         this.project = project;
     }
 
-    public ArrayList<TaskHours> getTaskHours() {
+    public ArrayList<TaskHour> getTaskHours() {
         return taskHours;
     }
 
