@@ -19,6 +19,8 @@ import java.util.ArrayList;
 
 public class TabsPane extends BorderPane {
 	
+	public static TabPane tabPane;
+	
 	public TabsPane() {
 			
 		// Build menu bar
@@ -39,7 +41,7 @@ public class TabsPane extends BorderPane {
 		menuTimeHub.getMenus().addAll(fileMenu, creditsMenu);
 		
 		// Create a TabPane
-		TabPane tabPane = new TabPane();
+		tabPane = new TabPane();
 		
 		// Set auto-policy to prevent user from closing tabs
 		tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
