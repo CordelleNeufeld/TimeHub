@@ -1,6 +1,7 @@
 package panes;
 
 import classes.Database;
+import home.Main;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -9,6 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import scenes.TabsScene;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -85,37 +87,38 @@ public class LoginPane extends VBox {
 
         //Button Listener
         loginBtn.setOnMouseClicked(e -> {
-            Matcher hostMatch = hostPattern.matcher(hostTextField.getText());
-            Matcher userMatch = alphaNumericPattern.matcher(userTextField.getText());
-            Matcher passwordMatch = alphaNumericPattern.matcher(passwordTextField.getText());
-            Matcher nameMatch = alphaNumericPattern.matcher(nameTextField.getText());
-
-            if (!hostMatch.matches()) {
-                error.setText("Please check that the host field contains only letters and periods.");
-                error.setManaged(true);
-            } else if (!userMatch.matches()) {
-                error.setText("Please check that the user field contains only letters and numbers.");
-                error.setManaged(true);
-            } else if (!passwordMatch.matches()) {
-                error.setText("Please check that the database password field contains only letters and numbers");
-                error.setManaged(true);
-            } else if (!nameMatch.matches()) {
-                error.setText("Please check that the database name field does not contain any invalid characters.");
-                error.setManaged(true);
-            } else {
-                try {
-                    List<String> lines = Arrays.asList(hostTextField.getText(), userTextField.getText(), passwordTextField.getText(), nameTextField.getText());
-                    Path file = Paths.get("config.txt");
-                    Files.write(file, lines, StandardCharsets.UTF_8);
-                } catch (IOException exception) {
-                    exception.printStackTrace();
-                }
-
-                if (Database.getInstance() == null) {
-                    error.setText("Login failed. Please Check your database credentials.");
-                    error.setManaged(true);
-                }
-            }
+//            Matcher hostMatch = hostPattern.matcher(hostTextField.getText());
+//            Matcher userMatch = alphaNumericPattern.matcher(userTextField.getText());
+//            Matcher passwordMatch = alphaNumericPattern.matcher(passwordTextField.getText());
+//            Matcher nameMatch = alphaNumericPattern.matcher(nameTextField.getText());
+//
+//            if (!hostMatch.matches()) {
+//                error.setText("Please check that the host field contains only letters and periods.");
+//                error.setManaged(true);
+//            } else if (!userMatch.matches()) {
+//                error.setText("Please check that the user field contains only letters and numbers.");
+//                error.setManaged(true);
+//            } else if (!passwordMatch.matches()) {
+//                error.setText("Please check that the database password field contains only letters and numbers");
+//                error.setManaged(true);
+//            } else if (!nameMatch.matches()) {
+//                error.setText("Please check that the database name field does not contain any invalid characters.");
+//                error.setManaged(true);
+//            } else {
+//                try {
+//                    List<String> lines = Arrays.asList(hostTextField.getText(), userTextField.getText(), passwordTextField.getText(), nameTextField.getText());
+//                    Path file = Paths.get("config.txt");
+//                    Files.write(file, lines, StandardCharsets.UTF_8);
+//                } catch (IOException exception) {
+//                    exception.printStackTrace();
+//                }
+//
+//                if (Database.getInstance() == null) {
+//                    error.setText("Login failed. Please Check your database credentials.");
+//                    error.setManaged(true);
+//                }
+//            }
+        	Main.mainStage.setScene(new TabsScene());
         });
     }
 }
