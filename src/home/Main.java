@@ -1,3 +1,4 @@
+package home;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import scenes.LoginScene;
@@ -20,6 +21,8 @@ import scenes.TabsScene;
  */
 
 public class Main extends Application {
+	
+	public static Stage mainStage;
 
 	public static void main(String[] args) {
 		Application.launch(args);
@@ -27,9 +30,10 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		mainStage = primaryStage;
 		//TODO: Check if config.txt exists, and try to access DB if it does
-		primaryStage.setScene(new TabsScene());
-		primaryStage.show();
+		mainStage.setScene(new LoginScene());
+		mainStage.show();
 	}
 
 }
