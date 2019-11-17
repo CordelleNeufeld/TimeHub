@@ -3,34 +3,43 @@ package javabeans;
 import java.util.ArrayList;
 
 public class Task {
-	private int id;
-    private Project project;
+    private int id;
     private ArrayList<TaskHour> taskHours;
     private String title;
     private String description;
 
     /**
-     *
-     * @param project Project the Task is under
-     * @param taskHours Task TaskHours
-     * @param title Task Title
+     * @param id          Task Id
+     * @param taskHours   Task TaskHours
+     * @param title       Task Title
      * @param description Task Description
      */
-    public Task(int id, Project project, ArrayList<TaskHour> taskHours, String title, String description) {
-    	this.id = id;
-    	this.project = project;
+    public Task(int id, ArrayList<TaskHour> taskHours, String title, String description) {
+        this.id = id;
         this.taskHours = taskHours;
         this.title = title;
         this.description = description;
     }
 
-    public Project getProject() {
-        return project;
+    /**
+     * Secondary constructor for creating new Tasks
+     *
+     * @param taskHours   Task TaskHours
+     * @param title       Task Title
+     * @param description Task Description
+     */
+    public Task(ArrayList<TaskHour> taskHours, String title, String description) {
+        this.id = 0;
+        this.taskHours = taskHours;
+        this.title = title;
+        this.description = description;
     }
 
-    public void setProject(Project project) {
-        this.project = project;
+    public int getId() {
+        return id;
     }
+
+
 
     public ArrayList<TaskHour> getTaskHours() {
         return taskHours;
@@ -51,9 +60,4 @@ public class Task {
     public void setDescription(String description) {
         this.description = description;
     }
-    
-    public int getId() {
-		return id;
-	}
-
 }

@@ -10,7 +10,9 @@ import javafx.scene.text.Text;
 
 public class HourLogsTab extends Tab{
 	
-	public HourLogsTab(ArrayList<Task> tasks) {
+	private static HourLogsTab instance = null;
+	
+	private HourLogsTab(ArrayList<Task> tasks) {
 		Text tasksText = new Text("Tasks");
 		
 		//listview for all the tasks
@@ -36,6 +38,15 @@ public class HourLogsTab extends Tab{
 		//set the content of the tab to the listview and the title to Hour Logs
 		this.setContent(listView);
 		this.setText("Hour Logs");
+		this.setClosable(true);
+	}
+	
+	public static HourLogsTab getInstance(ArrayList<Task> tasks) {
+		if(instance == null) {
+			instance = new HourLogsTab(tasks);
+		}
+		
+		return instance;
 	}
 
 }

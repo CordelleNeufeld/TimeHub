@@ -12,12 +12,22 @@ package tabs;
 import javafx.scene.control.Tab;
 
 public class OrganizeTab extends Tab {
+	
+	private static OrganizeTab instance = null;
 
-	public OrganizeTab() {
-		super();
+	private OrganizeTab() {
 		
 		// set title
 		this.setText("Organize");
+		this.setClosable(false);
+	}
+	
+	public static OrganizeTab getInstance() {
+		if(instance == null) {
+			instance = new OrganizeTab();
+		}
+		
+		return instance;
 	}
 	
 }

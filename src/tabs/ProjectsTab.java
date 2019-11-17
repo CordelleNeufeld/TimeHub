@@ -5,16 +5,18 @@ import javabeans.Project;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import panes.TabsPane;
 
 import java.util.ArrayList;
 
 public class ProjectsTab extends Tab {
+	
+	private static ProjectsTab instance = null;
 
-    public ProjectsTab(ArrayList<Project> projects, TabPane tabPane) {
+    private ProjectsTab(ArrayList<Project> projects) {
 
         //Title
         Text projectsTitle = new Text("Projects");
@@ -28,7 +30,7 @@ public class ProjectsTab extends Tab {
 
             projectButton.setOnAction(event -> {
                 Tab projectTab = new ProjectOverviewTab(((ProjectButton) event.getSource()).getProject());
-                tabPane.getTabs().add(projectTab);
+                TabsPane.tabPane.getTabs().add(projectTab);
 
             });
 
@@ -47,5 +49,13 @@ public class ProjectsTab extends Tab {
         //Add content to Tab
         setContent(mainPane);
         setText("Projects");
+        this.setClosable(true);
     }
+
+	public static ProjectsTab getInstance(ArrayList<Project> projects) {
+		if(instance == null) {
+			instance = new ProjectsTab(projects);
+		}
+		return instance;
+	}
 }
