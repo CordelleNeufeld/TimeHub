@@ -6,9 +6,13 @@
 
 package tables;
 
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import daos.TaskHourDAO;
+import database.Const;
+import javabeans.Task;
 import javabeans.TaskHour;
 
 public class TaskHoursTable implements TaskHourDAO {
@@ -26,9 +30,17 @@ public class TaskHoursTable implements TaskHourDAO {
 	}
 
 	@Override
-	public void updateTaskHour(TaskHour taskHour) {
-		// TODO Auto-generated method stub
-		
+	public void updateTaskHour(TaskHour taskHour, Task task) {
+		String query = "UPDATE " + Const.TABLE_TASK_HOURS + " SET " +
+				Const.TASK_HOURS_COLUMN_HOURS + " " + taskHour.getHours() + "," +
+				Const.TASK_HOURS_COLUMN_DATE + " " + taskHour.getDate() + 
+				" WHERE " + Const.TASK_HOURS_COLUMN_TASK_ID + " = " + task.getId();
+			try {
+				Statement updateProject = db.getConnection().createStatement();
+				updateProject.executeQuery(query);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 	}
 
 	@Override

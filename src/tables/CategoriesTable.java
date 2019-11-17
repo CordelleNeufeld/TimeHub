@@ -66,9 +66,17 @@ public class CategoriesTable implements CategoryDAO {
 	}
 
 	@Override
-	public void updateCategory(Category category) {
-		// TODO Auto-generated method stub
-		
+	public void updateCategory(Category category) {	
+		String query = "UPDATE " + Const.TABLE_CATEGORIES + " SET " +
+				Const.CATEGORIES_COLUMN_TITLE + " " + category.getTitle() + "," +
+				Const.CATEGORIES_COLUMN_DESCRIPTION + " " + category.getDescription() + 
+				" WHERE " + Const.CATEGORIES_COLUMN_ID + " = " + category.getId();
+			try {
+				Statement updateCategory = db.getConnection().createStatement();
+				updateCategory.executeQuery(query);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 	}
 
 	@Override
