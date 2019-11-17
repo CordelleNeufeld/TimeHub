@@ -75,7 +75,8 @@ public class TaskFormTab extends Tab{
 			}
 			
 			//Make a new Task object
-			Task task = new Task(project, null, nameInput.getText(), descInput.getText());
+			Task task = new Task(null, nameInput.getText(), descInput.getText());
+			project.getTasks().add(task);
 		});
 		
 	}
