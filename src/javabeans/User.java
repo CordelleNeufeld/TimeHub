@@ -3,6 +3,7 @@ package javabeans;
 import java.util.ArrayList;
 
 public class User {
+	private int id;
     private String firstName;
     private String lastName;
     private String lastAccessed;
@@ -14,8 +15,9 @@ public class User {
      * @param lastAccessed Last time the user Accessed the Program
      * @param tasks Tasks the user is assigned
      */
-    public User(String firstName, String lastName, String lastAccessed, ArrayList<Task> tasks) {
-        this.firstName = firstName;
+    public User(int id, String firstName, String lastName, String lastAccessed, ArrayList<Task> tasks) {
+    	this.id = id;
+    	this.firstName = firstName;
         this.lastName = lastName;
         this.lastAccessed = lastAccessed;
         this.tasks = tasks;
@@ -44,4 +46,9 @@ public class User {
     public ArrayList<Task> getTasks() {
         return tasks;
     }
+    
+    public int getId() {
+		return id;
+	}
+    
 }
