@@ -55,8 +55,8 @@ public class ProjectsTable implements ProjectDAO {
 		String query = "SELECT * FROM " + Const.TABLE_PROJECTS + " WHERE " + Const.PROJECTS_COLUMN_ID + " = " + projectID;
         Project project = null;
         try {
-            Statement getConditions = db.getConnection().createStatement();
-            ResultSet data = getConditions.executeQuery(query);
+            Statement getProject = db.getConnection().createStatement();
+            ResultSet data = getProject.executeQuery(query);
             
             while(data.next()) {
                 project = new Project(data.getInt(Const.PROJECTS_COLUMN_ID),
