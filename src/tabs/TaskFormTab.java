@@ -65,6 +65,7 @@ public class TaskFormTab extends Tab{
         //add the vbox to the tab and add title 
         this.setContent(mainVBox);
         this.setText("Task Form");
+        this.setClosable(true);
 				
         //submit button on-click listener
 		submitBtn.setOnAction(e -> {
@@ -74,7 +75,8 @@ public class TaskFormTab extends Tab{
 			}
 			
 			//Make a new Task object
-			Task task = new Task(project, null, nameInput.getText(), descInput.getText());
+			Task task = new Task(null, nameInput.getText(), descInput.getText());
+			project.getTasks().add(task);
 		});
 		
 	}

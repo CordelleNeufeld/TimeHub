@@ -44,6 +44,7 @@ public class ProjectOverviewTab extends Tab{
 		//set the content to the hbox and set the title
 		this.setContent(mainHBox);
 		this.setText("Project Overview");
+		this.setClosable(true);
 	}
 
 }

@@ -17,7 +17,7 @@ import javafx.scene.text.Text;
 
 public class ProjectFormTab extends Tab{
 	
-	public ProjectFormTab(ArrayList<Category> categories) {
+	public ProjectFormTab(ArrayList<Category> categories, ArrayList<Project> projects) {
 		
 		
 		//the vbox to hold everything
@@ -81,6 +81,7 @@ public class ProjectFormTab extends Tab{
         //add the vbox to the tab and add title 
         this.setContent(mainVBox);
         this.setText("Project Form");
+        this.setClosable(true);
 				
         //submit button on-click listener
 		submitBtn.setOnAction(e -> {
@@ -91,6 +92,7 @@ public class ProjectFormTab extends Tab{
 			
 			//make a new Project object
 			Project project = new Project(categories, null, nameInput.getText(), descInput.getText());
+			projects.add(project);
 		});
 	}
 
