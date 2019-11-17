@@ -3,6 +3,7 @@ package javabeans;
 import java.util.ArrayList;
 
 public class Task {
+	private int id;
     private Project project;
     private ArrayList<TaskHour> taskHours;
     private String title;
@@ -15,8 +16,9 @@ public class Task {
      * @param title Task Title
      * @param description Task Description
      */
-    public Task(Project project, ArrayList<TaskHour> taskHours, String title, String description) {
-        this.project = project;
+    public Task(int id, Project project, ArrayList<TaskHour> taskHours, String title, String description) {
+    	this.id = id;
+    	this.project = project;
         this.taskHours = taskHours;
         this.title = title;
         this.description = description;
@@ -49,4 +51,9 @@ public class Task {
     public void setDescription(String description) {
         this.description = description;
     }
+    
+    public int getId() {
+		return id;
+	}
+
 }

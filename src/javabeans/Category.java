@@ -1,6 +1,7 @@
 package javabeans;
 
 public class Category {
+	private int id;
     private String title;
     private String description;
 
@@ -8,8 +9,9 @@ public class Category {
      * @param title Category Name
      * @param description Category description
      */
-    public Category(String title, String description) {
-        this.title = title;
+    public Category(int id, String title, String description) {
+        this.id = id;
+    	this.title = title;
         this.description = description;
     }
 
@@ -25,7 +27,12 @@ public class Category {
         return description;
     }
 
-    public void setDescription(String description) {
+	public void setDescription(String description) {
         this.description = description;
     }
+	
+    public int getId() {
+		return id;
+	}
+    
 }
