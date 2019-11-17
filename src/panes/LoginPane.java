@@ -87,6 +87,10 @@ public class LoginPane extends VBox {
 
         //Button Listener
         loginBtn.setOnMouseClicked(e -> {
+        	
+        	// TODO: This section was commented out by Hasan 2019-11-13
+        	// to provide a temporary bypass of the login screen direct to HomeTab
+        	
 //            Matcher hostMatch = hostPattern.matcher(hostTextField.getText());
 //            Matcher userMatch = alphaNumericPattern.matcher(userTextField.getText());
 //            Matcher passwordMatch = alphaNumericPattern.matcher(passwordTextField.getText());

@@ -10,7 +10,9 @@ import java.util.ArrayList;
 
 public class CategoriesTab extends Tab {
 
-    public CategoriesTab(ArrayList<Category> categories) {
+    private static CategoriesTab instance = null;
+
+    private CategoriesTab(ArrayList<Category> categories) {
         //Title
         Text projectsTitle = new Text("Projects");
         projectsTitle.setTextAlignment(TextAlignment.CENTER);
@@ -18,7 +20,7 @@ public class CategoriesTab extends Tab {
         //Set up the List View
         Accordion accordion = new Accordion();
 
-        for (Category category: categories) {
+        for (Category category : categories) {
             TitledPane titledPane = new TitledPane(category.getTitle(), new Label(category.getDescription()));
             accordion.getPanes().add(titledPane);
         }
@@ -34,5 +36,15 @@ public class CategoriesTab extends Tab {
 
         //Add content to Tab
         setContent(mainPane);
+        setText("Categories");
+        this.setClosable(true);
+    }
+
+    public static CategoriesTab getInstance(ArrayList<Category> categories) {
+        if (instance == null) {
+            instance = new CategoriesTab(categories);
+        }
+
+        return instance;
     }
 }

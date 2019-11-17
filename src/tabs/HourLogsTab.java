@@ -1,41 +1,53 @@
 package tabs;
 
-import java.util.ArrayList;
-
 import javabeans.Task;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class HourLogsTab extends Tab{
-	
-	public HourLogsTab(ArrayList<Task> tasks) {
-		Text tasksText = new Text("Tasks");
-		
-		//listview for all the tasks
-		ListView<HBox> listView = new ListView<>();
-		
-		//for each to loop through the tasks arraylist
-		for(Task task : tasks) {
-			//hbox for the tasks information
-			HBox taskInfosHBox = new HBox(30);
-			
-			//texts for the tasks info
-			Text dateText = new Text("Monday");
-			Text hoursText = new Text("5");
-			Text projectText = new Text("Project");
-			
-			//add all the tasks info to the hbox
-			taskInfosHBox.getChildren().addAll(dateText, hoursText, projectText);
-			
-			//add the hbox to the listview
-			listView.getItems().add(taskInfosHBox);
-		}
-		
-		//set the content of the tab to the listview and the title to Hour Logs
-		this.setContent(listView);
-		this.setText("Hour Logs");
-	}
+import java.util.ArrayList;
 
+public class HourLogsTab extends Tab {
+
+    private static HourLogsTab instance = null;
+
+    private HourLogsTab(ArrayList<Task> tasks) {
+
+        //Create Title
+        Text tasksText = new Text("Tasks");
+
+        //ListView for the Tasks
+        ListView<HBox> listView = new ListView<>();
+
+        //Populate the ListView
+        for (Task task : tasks) {
+            HBox taskInfoHBox = new HBox(30);
+
+            Text dateText = new Text("Monday");
+            Text hoursText = new Text("5");
+            Text projectText = new Text("Project");
+
+            taskInfoHBox.getChildren().addAll(dateText, hoursText, projectText);
+
+            listView.getItems().add(taskInfoHBox);
+        }
+
+        //Create MainVBox
+        VBox mainVBox = new VBox(tasksText, listView);
+
+        //Set the Content and Styling of the Tab
+        setContent(mainVBox);
+        setText("Hour Logs");
+        setClosable(true);
+    }
+
+    public static HourLogsTab getInstance(ArrayList<Task> tasks) {
+        if (instance == null) {
+            instance = new HourLogsTab(tasks);
+        }
+
+        return instance;
+    }
 }
