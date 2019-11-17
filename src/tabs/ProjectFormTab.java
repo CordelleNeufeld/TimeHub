@@ -81,6 +81,7 @@ public class ProjectFormTab extends Tab{
         //add the vbox to the tab and add title 
         this.setContent(mainVBox);
         this.setText("Project Form");
+        this.setClosable(true);
 				
         //submit button on-click listener
 		submitBtn.setOnAction(e -> {

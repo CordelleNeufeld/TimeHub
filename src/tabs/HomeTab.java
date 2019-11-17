@@ -16,8 +16,10 @@ import javafx.scene.layout.VBox;
 import panes.TabsPane;
 
 public class HomeTab extends Tab {
+	
+	private static HomeTab instance = null;
 
-	public HomeTab() {
+	private HomeTab() {
 		
 		//vbox for buttons
 		VBox buttonsVBox = new VBox(50);
@@ -30,7 +32,7 @@ public class HomeTab extends Tab {
 		//category button on-click listener
 		categoriesButton.setOnAction(e -> {
 			//make a new category tab and add it to the tabs and select it as the current tab
-			CategoriesTab category = new CategoriesTab(new ArrayList<>());
+			CategoriesTab category = CategoriesTab.getInstance(new ArrayList<>());
 			TabsPane.tabPane.getTabs().add(category);
 			TabsPane.tabPane.getSelectionModel().select(category);
 		});
@@ -38,7 +40,7 @@ public class HomeTab extends Tab {
 		//projects button on-click listener
 		projectsButton.setOnAction(e -> {
 			//make a new project tab and add it to the tabs and select it as the current tab
-			ProjectsTab project = new ProjectsTab(new ArrayList<>(), TabsPane.tabPane);
+			ProjectsTab project = ProjectsTab.getInstance(new ArrayList<>());
 			TabsPane.tabPane.getTabs().add(project);
 			TabsPane.tabPane.getSelectionModel().select(project);
 		});
@@ -46,7 +48,7 @@ public class HomeTab extends Tab {
 		//tasks button on-click listener
 		tasksButton.setOnAction(e -> {
 			//make a new tasks tab and add it to the tabs and select it as the current tab
-			HourLogsTab hourLogs = new HourLogsTab(new ArrayList<>());
+			HourLogsTab hourLogs = HourLogsTab.getInstance(new ArrayList<>());
 			TabsPane.tabPane.getTabs().add(hourLogs);
 			TabsPane.tabPane.getSelectionModel().select(hourLogs);
 		});
@@ -59,6 +61,15 @@ public class HomeTab extends Tab {
 		this.setContent(buttonsVBox);
 		// set title
 		this.setText("Home");
+		this.setClosable(false);
 	}
+	
+	public static HomeTab getInstance() {
+		if(instance == null) {
+			instance = new HomeTab();
+		}
+    	
+    	return instance;
+    }
 	
 }

@@ -16,6 +16,7 @@ public class AddHoursTab extends Tab {
 		
 		// set title
 		this.setText("Add Hours");
+		this.setClosable(true);
 	}
 	
 }

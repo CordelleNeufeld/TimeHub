@@ -10,12 +10,22 @@ package tabs;
 import javafx.scene.control.Tab;
 
 public class StatsTab extends Tab {
+	
+	private static StatsTab instance = null;
 
-	public StatsTab() {
-		super();
+	private StatsTab() {
 		
 		// set title
 		this.setText("Stats");
+		this.setClosable(false);
+	}
+	
+	public static StatsTab getInstance() {
+		if(instance == null) {
+			instance = new StatsTab();
+		}
+		
+		return instance;
 	}
 	
 }

@@ -42,12 +42,9 @@ public class TabsPane extends BorderPane {
 		
 		// Create a TabPane
 		tabPane = new TabPane();
-		
-		// Set auto-policy to prevent user from closing tabs
-		tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
-		
+				
 		// Populate the TabPane
-		tabPane.getTabs().addAll(new HomeTab(), new AddHoursTab(), new OrganizeTab(), new StatsTab(), new ProjectsTab(new ArrayList<>(), tabPane), new ProjectFormTab(new ArrayList<>()), new HourLogsTab(new ArrayList<>()));
+		tabPane.getTabs().addAll(HomeTab.getInstance(), OrganizeTab.getInstance(), StatsTab.getInstance());
 				
 		// Set the top of the BorderPane to the MenuBar
 		setTop(menuTimeHub);
