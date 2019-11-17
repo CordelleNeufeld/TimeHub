@@ -1,18 +1,35 @@
 package javabeans;
 
 public class Category {
-	private int id;
+    private int id;
     private String title;
     private String description;
 
     /**
-     * @param title Category Name
+     * @param id          Category Id
+     * @param title       Category Name
      * @param description Category description
      */
     public Category(int id, String title, String description) {
         this.id = id;
-    	this.title = title;
+        this.title = title;
         this.description = description;
+    }
+
+    /**
+     * Secondary Constructor for creating new Categories
+     *
+     * @param title       Category Name
+     * @param description Category description
+     */
+    public Category(String title, String description) {
+        this.id = 0;
+        this.title = title;
+        this.description = description;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getTitle() {
@@ -27,12 +44,7 @@ public class Category {
         return description;
     }
 
-	public void setDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
-	
-    public int getId() {
-		return id;
-	}
-    
 }
