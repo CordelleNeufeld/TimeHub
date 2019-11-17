@@ -54,8 +54,8 @@ public class TasksTable implements TaskDAO {
 		String query = "SELECT * FROM " + Const.TABLE_TASKS + " WHERE " + Const.TASKS_COLUMN_ID + " = " + taskID;
         Task task = null;
         try {
-            Statement getConditions = db.getConnection().createStatement();
-            ResultSet data = getConditions.executeQuery(query);
+            Statement getTask = db.getConnection().createStatement();
+            ResultSet data = getTask.executeQuery(query);
             
             while(data.next()) {
                 task = new Task(data.getInt(Const.TASKS_COLUMN_ID),

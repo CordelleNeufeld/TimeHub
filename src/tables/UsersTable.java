@@ -54,8 +54,8 @@ public class UsersTable implements UserDAO {
 		String query = "SELECT * FROM " + Const.TABLE_USERS + " WHERE " + Const.USERS_COLUMN_ID + " = " + userID;
         User user = null;
         try {
-            Statement getConditions = db.getConnection().createStatement();
-            ResultSet data = getConditions.executeQuery(query);
+            Statement getUser = db.getConnection().createStatement();
+            ResultSet data = getUser.executeQuery(query);
             
             while(data.next()) {
                 user = new User(data.getInt(Const.USERS_COLUMN_ID),
