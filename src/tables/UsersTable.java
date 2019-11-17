@@ -75,17 +75,8 @@ public class UsersTable implements UserDAO {
 
 	@Override
 	public void updateUser(User user) {
-		String query = "UPDATE " + Const.TABLE_USERS + " SET " +
-			Const.USERS_COLUMN_NAME_FIRST + " " + user.getFirstName() + "," +
-			Const.USERS_COLUMN_NAME_LAST + " " + user.getLastName() + "," +
-			Const.USERS_COLUMN_LAST_ACCESSED + " " + user.getLastAccessed() +
-			" WHERE " + Const.USERS_COLUMN_ID + " = " + user.getId();
-		try {
-			Statement updateUser = db.getConnection().createStatement();
-			updateUser.executeQuery(query);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
