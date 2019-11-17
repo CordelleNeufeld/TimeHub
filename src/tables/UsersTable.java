@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import classes.Database;
 import daos.UserDAO;
 import database.Const;
-import javabeans.Task;
 import javabeans.User;
 
 public class UsersTable implements UserDAO {
@@ -37,8 +36,10 @@ public class UsersTable implements UserDAO {
 						data.getString(Const.USERS_COLUMN_NAME_FIRST),
 						data.getString(Const.USERS_COLUMN_NAME_LAST),
 						data.getString(Const.USERS_COLUMN_LAST_ACCESSED),
-						// placeholder
+						
+						// TODO placeholder
 						new ArrayList<>()));
+				
 			} 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -50,8 +51,26 @@ public class UsersTable implements UserDAO {
 
 	@Override
 	public User getUser(int userID) {
-		// TODO Auto-generated method stub
-		return null;
+		String query = "SELECT * FROM " + Const.TABLE_USERS + " WHERE " + Const.USERS_COLUMN_ID + " = " + userID;
+        User user = null;
+        try {
+            Statement getUser = db.getConnection().createStatement();
+            ResultSet data = getUser.executeQuery(query);
+            
+            while(data.next()) {
+                user = new User(data.getInt(Const.USERS_COLUMN_ID),
+                		data.getString(Const.USERS_COLUMN_NAME_FIRST),
+						data.getString(Const.USERS_COLUMN_NAME_LAST),
+						data.getString(Const.USERS_COLUMN_LAST_ACCESSED),
+						
+						// TODO placeholder
+						new ArrayList<>());
+                
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
 	}
 
 	@Override
