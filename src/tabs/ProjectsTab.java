@@ -13,8 +13,8 @@ import panes.TabsPane;
 import java.util.ArrayList;
 
 public class ProjectsTab extends Tab {
-	
-	private static ProjectsTab instance = null;
+
+    private static ProjectsTab instance = null;
 
     private ProjectsTab(ArrayList<Project> projects) {
 
@@ -25,7 +25,7 @@ public class ProjectsTab extends Tab {
         //Set up the List View
         ListView<ProjectButton> buttonListView = new ListView<>();
 
-        for (Project project: projects) {
+        for (Project project : projects) {
             ProjectButton projectButton = new ProjectButton(project.getTitle(), project);
 
             projectButton.setOnAction(event -> {
@@ -52,10 +52,10 @@ public class ProjectsTab extends Tab {
         this.setClosable(true);
     }
 
-	public static ProjectsTab getInstance(ArrayList<Project> projects) {
-		if(instance == null) {
-			instance = new ProjectsTab(projects);
-		}
-		return instance;
-	}
+    public static ProjectsTab getInstance(ArrayList<Project> projects) {
+        if (instance == null) {
+            instance = new ProjectsTab(projects);
+        }
+        return instance;
+    }
 }
