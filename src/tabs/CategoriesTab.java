@@ -9,8 +9,8 @@ import javafx.scene.text.TextAlignment;
 import java.util.ArrayList;
 
 public class CategoriesTab extends Tab {
-	
-	private static CategoriesTab instance = null;
+
+    private static CategoriesTab instance = null;
 
     private CategoriesTab(ArrayList<Category> categories) {
         //Title
@@ -20,7 +20,7 @@ public class CategoriesTab extends Tab {
         //Set up the List View
         Accordion accordion = new Accordion();
 
-        for (Category category: categories) {
+        for (Category category : categories) {
             TitledPane titledPane = new TitledPane(category.getTitle(), new Label(category.getDescription()));
             accordion.getPanes().add(titledPane);
         }
@@ -39,12 +39,12 @@ public class CategoriesTab extends Tab {
         setText("Categories");
         this.setClosable(true);
     }
-    
+
     public static CategoriesTab getInstance(ArrayList<Category> categories) {
-		if(instance == null) {
-			instance = new CategoriesTab(categories);
-		}
-    	
-    	return instance;
+        if (instance == null) {
+            instance = new CategoriesTab(categories);
+        }
+
+        return instance;
     }
 }
