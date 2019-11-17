@@ -6,17 +6,46 @@
 
 package tables;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
+import classes.Database;
 import daos.UserDAO;
+import database.Const;
+import javabeans.Task;
 import javabeans.User;
 
 public class UsersTable implements UserDAO {
+	
+	Database db = Database.getInstance();
+	ArrayList<User> users;
 
 	@Override
 	public ArrayList<User> getAllUsers() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		String query = "SELECT * FROM " + Const.TABLE_USERS;
+		users = new ArrayList<User>();
+		
+		try {
+			Statement getUsers = db.getConnection().createStatement();
+			ResultSet data = getUsers.executeQuery(query);
+			
+			while(data.next()) {
+				users.add(new User(data.getInt(Const.USERS_COLUMN_ID),
+						data.getString(Const.USERS_COLUMN_NAME_FIRST),
+						data.getString(Const.USERS_COLUMN_NAME_LAST),
+						data.getString(Const.USERS_COLUMN_LAST_ACCESSED),
+						// placeholder
+						new ArrayList<>()));
+			} 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return users;
+		
 	}
 
 	@Override

@@ -7,8 +7,7 @@ public class TaskHour {
     private Double hours;
 
     /**
-     *
-     * @param date Date the user worked on the task
+     * @param date  Date the user worked on the task
      * @param hours Hours added to the task
      */
     public TaskHour(Date date, Double hours) {
