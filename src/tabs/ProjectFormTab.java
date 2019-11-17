@@ -1,99 +1,84 @@
 package tabs;
 
-import java.util.ArrayList;
-
 import javabeans.Category;
 import javabeans.Project;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
-public class ProjectFormTab extends Tab{
-	
-	public ProjectFormTab(ArrayList<Category> categories, ArrayList<Project> projects) {
-		
-		
-		//the vbox to hold everything
-		VBox mainVBox = new VBox();
-		
-		//task label
-		Label taskLabel = new Label("Project Creation Form");
-		
-		//vbox for the labels
-		VBox labelsVBox = new VBox(25);
-		
-		//labels
-		Label nameLabel = new Label("Name: ");
-		Label descLabel = new Label("Description:");
-		
-		//add labels to vbox and center it
-		labelsVBox.getChildren().addAll(nameLabel, descLabel);
-		labelsVBox.setAlignment(Pos.CENTER);
-		
-		//vbox for the inputs
-		VBox inputsVBox = new VBox(15);
-		
-		//inputs
-		TextField nameInput = new TextField();
-		TextField descInput = new TextField();
-		
-		//add inputs to the vbox and center it
-		inputsVBox.getChildren().addAll(nameInput, descInput);
-		inputsVBox.setAlignment(Pos.CENTER);
-		
-		//added inputs and labels vbox into an hbox
-		HBox labelsAndInputsHBox = new HBox(15);
-		labelsAndInputsHBox.getChildren().addAll(labelsVBox, inputsVBox);
-		labelsAndInputsHBox.setAlignment(Pos.CENTER);
-		
-		//button for submit
-		Button submitBtn = new Button("Submit");
-		
-		//error that will show if user enters wrong values
-		Text error = new Text("Name field cannot be empty");
+import java.util.ArrayList;
+
+public class ProjectFormTab extends Tab {
+
+    public ProjectFormTab(ArrayList<Category> categories, ArrayList<Project> projects) {
+
+        //Task Label
+        Label taskLabel = new Label("Project Creation Form");
+
+        //Name and Description Labels
+        Label nameLabel = new Label("Name: ");
+        Label descLabel = new Label("Description:");
+
+        //Create VBox for the Labels
+        VBox labelsVBox = new VBox(25);
+        labelsVBox.getChildren().addAll(nameLabel, descLabel);
+        labelsVBox.setAlignment(Pos.CENTER);
+
+        //Name and Description Input
+        TextField nameInput = new TextField();
+        TextField descInput = new TextField();
+
+        //Create VBox for the Inputs
+        VBox inputsVBox = new VBox(15);
+        inputsVBox.getChildren().addAll(nameInput, descInput);
+        inputsVBox.setAlignment(Pos.CENTER);
+
+        //Create HBox for Labels and Inputs
+        HBox labelsAndInputsHBox = new HBox(15);
+        labelsAndInputsHBox.getChildren().addAll(labelsVBox, inputsVBox);
+        labelsAndInputsHBox.setAlignment(Pos.CENTER);
+
+        //Error Text if no name is entered
+        Text error = new Text("Name field cannot be empty");
         error.setFill(Color.RED);
         error.setManaged(false);
-        
+
+        //Create and Populate the Main VBox
+        VBox mainVBox = new VBox();
         mainVBox.getChildren().addAll(taskLabel, labelsAndInputsHBox);
-        
-        //arraylist to hold all checkboxes of categories
+
+        //Create and Display the Category Checkboxes
         ArrayList<CheckBox> checkboxes = new ArrayList<>();
-        
-        //display each category
-        for(Category category : categories) {
-        	CheckBox checkbox = new CheckBox(category.getTitle());
-        	checkboxes.add(checkbox);
-        	mainVBox.getChildren().add(checkbox);
+        for (Category category : categories) {
+            CheckBox checkbox = new CheckBox(category.getTitle());
+            checkboxes.add(checkbox);
+            mainVBox.getChildren().add(checkbox);
         }
-		
-        //add everything to the vbox
-        mainVBox.getChildren().addAll(error, submitBtn);
+
+        //Create the SubmitButton
+        Button submitButton = new Button("Submit");
+        submitButton.setOnAction(e -> {
+            //Show Error if needed
+            if (nameInput.getText().equals("")) {
+                error.setManaged(true);
+            } else {
+                //TODO: Check for to see if there are any Categories and Add them to the Project
+                Project project = new Project(categories, null, nameInput.getText(), descInput.getText());
+                projects.add(project);
+            }
+        });
+
+        //Add the Error and Submit Nodes and Style the VBox
+        mainVBox.getChildren().addAll(error, submitButton);
         mainVBox.setAlignment(Pos.CENTER);
         mainVBox.setSpacing(25);
-        
-        //add the vbox to the tab and add title 
-        this.setContent(mainVBox);
-        this.setText("Project Form");
-        this.setClosable(true);
-				
-        //submit button on-click listener
-		submitBtn.setOnAction(e -> {
-			//give error if name field is empty
-			if(nameInput.getText().equals("")) {
-				error.setManaged(true);
-			}
-			
-			//make a new Project object
-			Project project = new Project(categories, null, nameInput.getText(), descInput.getText());
-			projects.add(project);
-		});
-	}
 
+        //Set Content and Styling for the Tab
+        setContent(mainVBox);
+        setText("Project Form");
+        setClosable(true);
+    }
 }

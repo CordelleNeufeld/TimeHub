@@ -12,73 +12,62 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
-public class TaskFormTab extends Tab{
-	
-	public TaskFormTab(Project project) {
-		
-		//the vbox to hold everything
-		VBox mainVBox = new VBox();
-		
-		//task label
-		Label taskLabel = new Label("Task Creation Form");
-		
-		//vbox for the labels
-		VBox labelsVBox = new VBox(25);
-		
-		//labels
-		Label nameLabel = new Label("Name: ");
-		Label descLabel = new Label("Description:");
-		
-		//add labels to vbox and center it
-		labelsVBox.getChildren().addAll(nameLabel, descLabel);
-		labelsVBox.setAlignment(Pos.CENTER);
-		
-		//vbox for the inputs
-		VBox inputsVBox = new VBox(15);
-		
-		//inputs
-		TextField nameInput = new TextField();
-		TextField descInput = new TextField();
-		
-		//add inputs to the vbox and center it
-		inputsVBox.getChildren().addAll(nameInput, descInput);
-		inputsVBox.setAlignment(Pos.CENTER);
-		
-		//added inputs and labels vbox into an hbox
-		HBox labelsAndInputsHBox = new HBox(15);
-		labelsAndInputsHBox.getChildren().addAll(labelsVBox, inputsVBox);
-		labelsAndInputsHBox.setAlignment(Pos.CENTER);
-		
-		//button for submit
-		Button submitBtn = new Button("Submit");
-		
-		//error that will show if user enters wrong values
-		Text error = new Text("Name field cannot be empty");
+public class TaskFormTab extends Tab {
+
+    public TaskFormTab(Project project) {
+
+        //Create Task Label
+        Label taskLabel = new Label("Task Creation Form");
+
+        //Create Name and Descriptions Labels
+        Label nameLabel = new Label("Name: ");
+        Label descLabel = new Label("Description:");
+
+        //Create VBox for the Labels
+        VBox labelsVBox = new VBox(25);
+        labelsVBox.getChildren().addAll(nameLabel, descLabel);
+        labelsVBox.setAlignment(Pos.CENTER);
+
+        //Create Name and Description Inputs
+        TextField nameInput = new TextField();
+        TextField descInput = new TextField();
+
+        //Create VBox for Inputs
+        VBox inputsVBox = new VBox(15);
+        inputsVBox.getChildren().addAll(nameInput, descInput);
+        inputsVBox.setAlignment(Pos.CENTER);
+
+        //Create HBox for Labels and Inputs
+        HBox labelsAndInputsHBox = new HBox(15);
+        labelsAndInputsHBox.getChildren().addAll(labelsVBox, inputsVBox);
+        labelsAndInputsHBox.setAlignment(Pos.CENTER);
+
+        //Create Error Text
+        Text error = new Text("Name field cannot be empty");
         error.setFill(Color.RED);
         error.setManaged(false);
-		
-        //add everything to the vbox
+
+        //Create Submit Button
+        Button submitBtn = new Button("Submit");
+        submitBtn.setOnAction(e -> {
+            //Show Error if Necessary
+            if (nameInput.getText().equals("")) {
+                error.setManaged(true);
+            } else {
+                Task task = new Task(null, nameInput.getText(), descInput.getText());
+                project.getTasks().add(task);
+            }
+        });
+
+        //Create MainVBox
+        VBox mainVBox = new VBox();
         mainVBox.getChildren().addAll(taskLabel, labelsAndInputsHBox, error, submitBtn);
         mainVBox.setAlignment(Pos.CENTER);
         mainVBox.setSpacing(25);
-        
-        //add the vbox to the tab and add title 
-        this.setContent(mainVBox);
-        this.setText("Task Form");
-        this.setClosable(true);
-				
-        //submit button on-click listener
-		submitBtn.setOnAction(e -> {
-			//give error if name field is empty
-			if(nameInput.getText().equals("")) {
-				error.setManaged(true);
-			}
-			
-			//Make a new Task object
-			Task task = new Task(null, nameInput.getText(), descInput.getText());
-			project.getTasks().add(task);
-		});
-		
-	}
 
+        //Set Content and Styling of the Tab
+        setContent(mainVBox);
+        setText("Task Form");
+        setClosable(true);
+    }
 }
