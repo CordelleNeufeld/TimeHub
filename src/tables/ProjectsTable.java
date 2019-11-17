@@ -77,9 +77,18 @@ public class ProjectsTable implements ProjectDAO {
 
 	@Override
 	public void updateProject(Project project) {
-		// TODO Auto-generated method stub
-		
+		String query = "UPDATE " + Const.TABLE_PROJECTS + " SET " +
+				Const.PROJECTS_COLUMN_TITLE + " " + project.getTitle() + "," +
+				Const.PROJECTS_COLUMN_DESCRIPTION + " " + project.getDescription() + 
+				" WHERE " + Const.PROJECTS_COLUMN_ID + " = " + project.getId();
+			try {
+				Statement updateProject = db.getConnection().createStatement();
+				updateProject.executeQuery(query);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 	}
+	
 
 	@Override
 	public void deleteProject(Project project) {

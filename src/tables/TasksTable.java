@@ -76,8 +76,16 @@ public class TasksTable implements TaskDAO {
 
 	@Override
 	public void updateTask(Task task) {
-		// TODO Auto-generated method stub
-		
+		String query = "UPDATE " + Const.TABLE_TASKS + " SET " +
+				Const.TASKS_COLUMN_TITLE + " " + task.getTitle() + "," +
+				Const.TASKS_COLUMN_DESCRIPTION + " " + task.getDescription() + 
+				" WHERE " + Const.TASKS_COLUMN_ID + " = " + task.getId();
+			try {
+				Statement updateTask = db.getConnection().createStatement();
+				updateTask.executeQuery(query);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 	}
 
 	@Override
