@@ -15,7 +15,6 @@ import classes.Database;
 import daos.ProjectDAO;
 import database.Const;
 import javabeans.Project;
-import javabeans.User;
 
 public class ProjectsTable implements ProjectDAO {
 	
@@ -33,45 +32,47 @@ public class ProjectsTable implements ProjectDAO {
 			ResultSet data = getProjects.executeQuery(query);
 			
 			while(data.next()) {
-				users.add(new User(data.getInt(Const.USERS_COLUMN_ID),
-						data.getString(Const.USERS_COLUMN_NAME_FIRST),
-						data.getString(Const.USERS_COLUMN_NAME_LAST),
-						data.getString(Const.USERS_COLUMN_LAST_ACCESSED),
+				projects.add(new Project(data.getInt(Const.PROJECTS_COLUMN_ID),
 						
-						// TODO placeholder
-						new ArrayList<>()));
+						// TODO placeholders
+						new ArrayList<>(),
+						new ArrayList<>(),
+						
+						data.getString(Const.PROJECTS_COLUMN_TITLE),
+						data.getString(Const.PROJECTS_COLUMN_DESCRIPTION)));
 				
 			} 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		return users;
+		return projects;
 		
 	}
 
 	@Override
 	public Project getProject(int projectID) {
-		String query = "SELECT * FROM " + Const.TABLE_USERS + " WHERE " + Const.USERS_COLUMN_ID + " = " + userID;
-        User user = null;
+		String query = "SELECT * FROM " + Const.TABLE_PROJECTS + " WHERE " + Const.PROJECTS_COLUMN_ID + " = " + projectID;
+        Project project = null;
         try {
             Statement getConditions = db.getConnection().createStatement();
             ResultSet data = getConditions.executeQuery(query);
             
             while(data.next()) {
-                user = new User(data.getInt(Const.USERS_COLUMN_ID),
-                		data.getString(Const.USERS_COLUMN_NAME_FIRST),
-						data.getString(Const.USERS_COLUMN_NAME_LAST),
-						data.getString(Const.USERS_COLUMN_LAST_ACCESSED),
+                project = new Project(data.getInt(Const.PROJECTS_COLUMN_ID),
 						
-						// TODO placeholder
-						new ArrayList<>());
+						// TODO placeholders
+						new ArrayList<>(),
+						new ArrayList<>(),
+						
+						data.getString(Const.PROJECTS_COLUMN_TITLE),
+						data.getString(Const.PROJECTS_COLUMN_DESCRIPTION));
                 
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return user;
+        return project;
 	}
 
 	@Override

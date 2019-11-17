@@ -32,12 +32,13 @@ public class TasksTable implements TaskDAO {
 			
 			while(data.next()) {
 				tasks.add(new Task(data.getInt(Const.TASKS_COLUMN_ID),
-						data.getString(Const.TASKS_COLUMN_TITLE),
-						data.getString(Const.TASKS_COLUMN_DESCRIPTION),
-						data.getInt(Const.TASKS_COLUMN_PROJECT_ID),
 						
 						// TODO placeholder
-						new ArrayList<>()));
+						new ArrayList<>(),
+						
+						data.getString(Const.TASKS_COLUMN_TITLE),
+						data.getString(Const.TASKS_COLUMN_DESCRIPTION)
+						));
 				
 			} 
 		} catch (SQLException e) {
@@ -58,12 +59,13 @@ public class TasksTable implements TaskDAO {
             
             while(data.next()) {
                 task = new Task(data.getInt(Const.TASKS_COLUMN_ID),
-						data.getString(Const.TASKS_COLUMN_TITLE),
-						data.getString(Const.TASKS_COLUMN_DESCRIPTION),
-						data.getInt(Const.TASKS_COLUMN_PROJECT_ID),
 						
 						// TODO placeholder
-						new ArrayList<>()));
+						new ArrayList<>(),
+						
+						data.getString(Const.TASKS_COLUMN_TITLE),
+						data.getString(Const.TASKS_COLUMN_DESCRIPTION)
+						);
                 
             }
         } catch (SQLException e) {
