@@ -2,6 +2,9 @@
  * Database Access Object Class TasksTable for TaskDAO
  * @author Cordelle Neufeld
  * Creation Date: 2019-11-17
+ * Initial CRUD: Cordelle - Retrieve (get/getAll) and Hasan - Update
+ * Modification Date: 2019-11-22
+ * CRUD Completion: Hasan - Create and Cordelle - Delete
  */
 
 package tables;
@@ -90,8 +93,14 @@ public class TasksTable implements TaskDAO {
 
 	@Override
 	public void deleteTask(Task task) {
-		// TODO Auto-generated method stub
-		
+		String query  = "DELETE FROM " + Const.TABLE_TASKS + " WHERE " +
+				Const.TASKS_COLUMN_ID + " = " + task.getId();
+		try {
+			db.getConnection().createStatement().execute(query);
+			System.out.println("Deleted task");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
 	}
 
 	@Override
