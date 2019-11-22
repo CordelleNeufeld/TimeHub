@@ -2,6 +2,9 @@
  * Database Access Object Class TaskHoursTable for TaskHourDAO
  * @author Cordelle Neufeld
  * Creation Date: 2019-11-17
+ * Initial CRUD: Cordelle - Retrieve (get/getAll) and Hasan - Update
+ * Modification Date: 2019-11-22
+ * CRUD Completion: Hasan - Create and Cordelle - Delete
  */
 
 package tables;
@@ -79,9 +82,15 @@ public class TaskHoursTable implements TaskHourDAO {
 	}
 
 	@Override
-	public void deleteTaskHour(TaskHour taskHour) {
-		// TODO Auto-generated method stub
-		
+	public void deleteTaskHour(TaskHour taskHour, Task task) {
+		String query  = "DELETE FROM " + Const.TABLE_TASK_HOURS + " WHERE " +
+				Const.TASK_HOURS_COLUMN_TASK_ID + " = " + task.getId();
+		try {
+			db.getConnection().createStatement().execute(query);
+			System.out.println("Deleted task hour(s)");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
 	}
 
 	@Override

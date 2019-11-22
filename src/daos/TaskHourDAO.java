@@ -18,7 +18,7 @@ public interface TaskHourDAO {
 	public ArrayList<TaskHour> getAllTaskHours();
 	public TaskHour getTaskHour(int taskHourID);
 	public void updateTaskHour(TaskHour taskHour, Task task);
-	public void deleteTaskHour(TaskHour taskHour);
+	public void deleteTaskHour(TaskHour taskHour, Task task);
 	public void createTaskHour(TaskHour taskHour);
 	
 }
