@@ -2,6 +2,9 @@
  * Database Access Object Class ProjectsTable for ProjectDAO
  * @author Cordelle Neufeld
  * Creation Date: 2019-11-17
+ * Initial CRUD: Cordelle - Retrieve (get/getAll) and Hasan - Update
+ * Modification Date: 2019-11-22
+ * CRUD Completion: Hasan - Create and Cordelle - Delete
  */
 
 package tables;
@@ -92,8 +95,14 @@ public class ProjectsTable implements ProjectDAO {
 
 	@Override
 	public void deleteProject(Project project) {
-		// TODO Auto-generated method stub
-		
+		String query  = "DELETE FROM " + Const.TABLE_PROJECTS + " WHERE " +
+				Const.PROJECTS_COLUMN_ID + " = " + project.getId();
+		try {
+			db.getConnection().createStatement().execute(query);
+			System.out.println("Deleted project");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
 	}
 
 	@Override
