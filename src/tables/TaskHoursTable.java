@@ -95,8 +95,16 @@ public class TaskHoursTable implements TaskHourDAO {
 
 	@Override
 	public void createTaskHour(TaskHour taskHour) {
-		// TODO Auto-generated method stub
-		
+		String query = "INSERT INTO " + Const.TABLE_TASK_HOURS +
+				"(" + Const.TASK_HOURS_COLUMN_HOURS + ", " +
+				Const.TASK_HOURS_COLUMN_DATE + ") VALUES ('" +
+				taskHour.getHours() + "','" + taskHour.getDate() + "')";
+		try {
+			db.getConnection().createStatement().execute(query);
+			System.out.println("Inserted Task Hour");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
