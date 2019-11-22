@@ -96,8 +96,16 @@ public class TasksTable implements TaskDAO {
 
 	@Override
 	public void createTask(Task task) {
-		// TODO Auto-generated method stub
-		
+		String query = "INSERT INTO " + Const.TABLE_TASKS +
+				"(" + Const.TASKS_COLUMN_TITLE + ", " +
+				Const.TASKS_COLUMN_DESCRIPTION + ") VALUES ('" +
+				task.getTitle() + "','" + task.getDescription() + "')";
+		try {
+			db.getConnection().createStatement().execute(query);
+			System.out.println("Inserted Task");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -87,8 +87,16 @@ public class CategoriesTable implements CategoryDAO {
 
 	@Override
 	public void createCategory(Category category) {
-		// TODO Auto-generated method stub
-		
+		String query = "INSERT INTO " + Const.TABLE_CATEGORIES +
+				"(" + Const.CATEGORIES_COLUMN_TITLE + ", " +
+				Const.CATEGORIES_COLUMN_DESCRIPTION + ") VALUES ('" +
+				category.getTitle() + "','" + category.getDescription() + "')";
+		try {
+			db.getConnection().createStatement().execute(query);
+			System.out.println("Inserted Category");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -97,9 +97,17 @@ public class ProjectsTable implements ProjectDAO {
 	}
 
 	@Override
-	public void createProject(Project project) {
-		// TODO Auto-generated method stub
-		
+	public void createProject(Project project) {	
+		String query = "INSERT INTO " + Const.TABLE_PROJECTS +
+				"(" + Const.PROJECTS_COLUMN_TITLE + ", " +
+				Const.PROJECTS_COLUMN_DESCRIPTION + ") VALUES ('" +
+				project.getTitle() + "','" + project.getDescription() + "')";
+		try {
+			db.getConnection().createStatement().execute(query);
+			System.out.println("Inserted Project");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
