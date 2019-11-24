@@ -54,7 +54,7 @@ public class TaskFormTab extends Tab {
             if (nameInput.getText().equals("")) {
                 error.setManaged(true);
             } else {
-                Task task = new Task(null, nameInput.getText(), descInput.getText());
+                Task task = new Task(nameInput.getText(), descInput.getText(), null, 0);
                 project.getTasks().add(task);
             }
         });

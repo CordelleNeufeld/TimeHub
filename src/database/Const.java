@@ -14,13 +14,9 @@ public class Const {
 	public static final String TASKS_COLUMN_PROJECT_ID = "project_id";
 	public static final String TASKS_COLUMN_TITLE = "title";
 	public static final String TASKS_COLUMN_DESCRIPTION = "description";
-	
-	// TASK HOURS TABLE
-	public static final String TABLE_TASK_HOURS = "task_hours";
-	public static final String TASK_HOURS_COLUMN_TASK_ID = "task_id";
-	public static final String TASK_HOURS_COLUMN_HOURS = "hours";
-	public static final String TASK_HOURS_COLUMN_DATE = "date";
-	
+	public static final String TASKS_COLUMN_HOURS = "hours";
+	public static final String TASKS_COLUMN_DATE = "date";
+
 	// PROJECTS TABLE
 	public static final String TABLE_PROJECTS = "projects";
 	public static final String PROJECTS_COLUMN_ID = "id";
@@ -109,19 +105,11 @@ public class Const {
 			TASKS_COLUMN_ID + " int NOT NULL AUTO_INCREMENT, " +
 			TASKS_COLUMN_TITLE + " VARCHAR(20), " +
 			TASKS_COLUMN_DESCRIPTION + " VARCHAR(75), " +
+			TASKS_COLUMN_HOURS + " DECIMAL(4,2), " +
+			TASKS_COLUMN_DATE + " DATE, " +
 			TASKS_COLUMN_PROJECT_ID + " int NOT NULL, " +
 			"FOREIGN KEY (" + TASKS_COLUMN_PROJECT_ID + ") REFERENCES " +
 			TABLE_PROJECTS + "(" + PROJECTS_COLUMN_ID + "), " +
 			"PRIMARY KEY(" + TASKS_COLUMN_ID + ")" +
 			");";
-	
-	public static final String CREATE_TABLE_TASK_HOURS =
-			"CREATE TABLE " + TABLE_TASK_HOURS + "(" +
-			TASK_HOURS_COLUMN_HOURS + " DECIMAL(4,2), " +
-			TASK_HOURS_COLUMN_DATE + " DATE, " +
-			TASK_HOURS_COLUMN_TASK_ID + " int NOT NULL, " +
-			"FOREIGN KEY (" + TASK_HOURS_COLUMN_TASK_ID + ") REFERENCES " +
-			TABLE_TASKS + "(" + TASKS_COLUMN_ID + ")" +
-			");";
-	
 }

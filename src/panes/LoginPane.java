@@ -44,9 +44,9 @@ public class LoginPane extends VBox {
         VBox labelsVBox = new VBox(25);
 
         Label hostLabel = new Label("Database Host");
-        Label userLabel = new Label("Database User");
-        Label passwordLabel = new Label("Database Password");
-        Label nameLabel = new Label("Database Name");
+        Label userLabel = new Label("Database Name");
+        Label passwordLabel = new Label("Database User");
+        Label nameLabel = new Label("Database Password");
 
         labelsVBox.getChildren().addAll(hostLabel, userLabel, passwordLabel, nameLabel);
         labelsVBox.setAlignment(Pos.CENTER);
@@ -123,14 +123,19 @@ public class LoginPane extends VBox {
                 }
 
                 if (Database.getInstance().getConnection() == null) {
-                    System.out.println(Database.getInstance().getConnection());
                     error.setText("Login failed. Please Check your database credentials.");
                     error.setManaged(true);
-                    System.out.println("Boop");
-                } else {
-                    Main.mainStage.setScene(new TabsScene());
+                }
+                else {
+                	
+                	Main.mainStage.setScene(new TabsScene());
+                	
                 }
             }
+            
+                  
+                
+            
         });
     }
 }
