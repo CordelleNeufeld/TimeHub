@@ -9,6 +9,8 @@ import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 
+import classes.Database;
+
 public class HourLogsTab extends Tab {
 
     private static HourLogsTab instance = null;
@@ -25,11 +27,15 @@ public class HourLogsTab extends Tab {
         for (Task task : tasks) {
             HBox taskInfoHBox = new HBox(30);
 
-            Text dateText = new Text("Monday");
-            Text hoursText = new Text("5");
-            Text projectText = new Text("Project");
+            Text taskName = new Text(task.getTitle());
+            
+            
+            
+            Text taskHours = new Text("15");
+            Text taskDescription = new Text(task.getDescription());
+   
 
-            taskInfoHBox.getChildren().addAll(dateText, hoursText, projectText);
+            taskInfoHBox.getChildren().addAll(taskName, taskHours, taskDescription);
 
             listView.getItems().add(taskInfoHBox);
         }
