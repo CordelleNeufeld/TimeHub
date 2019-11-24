@@ -12,6 +12,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.VBox;
 import panes.TabsPane;
+import tables.CategoriesTable;
+import tables.ProjectsTable;
+import tables.TasksTable;
 
 import java.util.ArrayList;
 
@@ -25,22 +28,27 @@ public class HomeTab extends Tab {
         Button categoriesButton = new Button("Categories");
         Button projectsButton = new Button("Projects");
         Button tasksButton = new Button("Tasks");
+        
+        //Make the tables
+        CategoriesTable categoryTable = new CategoriesTable();
+        ProjectsTable projectTable = new ProjectsTable();
+        TasksTable taskTable = new TasksTable();
 
         //OnClickListeners to show the new tabs
         categoriesButton.setOnAction(e -> {
-            CategoriesTab category = CategoriesTab.getInstance(new ArrayList<>());
+            CategoriesTab category = CategoriesTab.getInstance(categoryTable.getAllCategories());
             TabsPane.tabPane.getTabs().add(category);
             TabsPane.tabPane.getSelectionModel().select(category);
         });
 
         projectsButton.setOnAction(e -> {
-            ProjectsTab project = ProjectsTab.getInstance(new ArrayList<>());
+            ProjectsTab project = ProjectsTab.getInstance(projectTable.getAllProjects());
             TabsPane.tabPane.getTabs().add(project);
             TabsPane.tabPane.getSelectionModel().select(project);
         });
 
         tasksButton.setOnAction(e -> {
-            HourLogsTab hourLogs = HourLogsTab.getInstance(new ArrayList<>());
+            HourLogsTab hourLogs = HourLogsTab.getInstance(taskTable.getAllTasks());
             TabsPane.tabPane.getTabs().add(hourLogs);
             TabsPane.tabPane.getSelectionModel().select(hourLogs);
         });

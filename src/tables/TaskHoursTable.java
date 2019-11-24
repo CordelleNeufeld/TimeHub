@@ -49,8 +49,8 @@ public class TaskHoursTable implements TaskHourDAO {
 	}
 
 	@Override
-	public TaskHour getTaskHour(int taskHourID) {
-		String query = "SELECT * FROM " + Const.TABLE_TASK_HOURS + " WHERE " + Const.TASK_HOURS_COLUMN_TASK_ID + " = " + taskHourID;
+	public TaskHour getTaskHour(int taskId) {
+		String query = "SELECT * FROM " + Const.TABLE_TASK_HOURS + " WHERE " + Const.TASK_HOURS_COLUMN_TASK_ID + " = " + taskId;
         TaskHour taskHours = null;
         try {
             Statement getTaskHours = db.getConnection().createStatement();

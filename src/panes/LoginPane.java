@@ -123,14 +123,19 @@ public class LoginPane extends VBox {
                 }
 
                 if (Database.getInstance().getConnection() == null) {
-                    System.out.println(Database.getInstance().getConnection());
                     error.setText("Login failed. Please Check your database credentials.");
                     error.setManaged(true);
-                    System.out.println("Boop");
-                } else {
-                    Main.mainStage.setScene(new TabsScene());
+                }
+                else {
+                	
+                	Main.mainStage.setScene(new TabsScene());
+                	
                 }
             }
+            
+                  
+                
+            
         });
     }
 }
