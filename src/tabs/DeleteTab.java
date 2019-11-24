@@ -41,7 +41,6 @@ public class DeleteTab extends Tab {
 		
 		tableView.getColumns().add(column1);
 		
-		
 		// COLUMN #2: Task Description
 		
 		// COLUMN #3: Task Hours
@@ -90,4 +89,4 @@ public class DeleteTab extends Tab {
 	
 	} // end of method: DeleteTab getInstance()
 	
-} // end of class: RemoveTab
+} // end of class: DeleteTab
