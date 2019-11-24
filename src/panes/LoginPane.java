@@ -44,9 +44,9 @@ public class LoginPane extends VBox {
         VBox labelsVBox = new VBox(25);
 
         Label hostLabel = new Label("Database Host");
-        Label userLabel = new Label("Database User");
-        Label passwordLabel = new Label("Database Password");
-        Label nameLabel = new Label("Database Name");
+        Label userLabel = new Label("Database Name");
+        Label passwordLabel = new Label("Database User");
+        Label nameLabel = new Label("Database Password");
 
         labelsVBox.getChildren().addAll(hostLabel, userLabel, passwordLabel, nameLabel);
         labelsVBox.setAlignment(Pos.CENTER);
