@@ -6,7 +6,10 @@
 
 package tabs;
 
+import javabeans.Category;
+import javabeans.Project;
 import javabeans.Task;
+import javabeans.TaskHour;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
@@ -42,12 +45,32 @@ public class DeleteTab extends Tab {
 		tableView.getColumns().add(column1);
 		
 		// COLUMN #2: Task Description
+		TableColumn<Task, String> column2 = new TableColumn<>("Description");
+		column2.setCellValueFactory(e -> new SimpleStringProperty(
+				taskViewTable.getTask(e.getValue().getId()).getDescription()));
+		
+		tableView.getColumns().add(column2);
 		
 		// COLUMN #3: Task Hours
+//		TableColumn<Task, Double> column3 = new TableColumn<>("Hour Log");
+//		column3.setCellValueFactory(e -> new SimpleDoubleProperty (
+//				taskViewTable.getTask(e.getValue().getId()).getHours()));
+//		
+//		tableView.getColumns().add(column3);
 		
 		// COLUMN #4: Project Title
+		TableColumn<Project, String> column4 = new TableColumn<>("Project Name");
+		column4.setCellValueFactory(e -> new SimpleStringProperty(
+				projectViewTable.getProject(e.getValue().getId()).getDescription()));
+		
+		tableView.getColumns().add(column4);
 		
 		// COLUMN #5: Category Title
+		TableColumn<Category, String> column5 = new TableColumn<>("Category Name");
+		column5.setCellValueFactory(e -> new SimpleStringProperty(
+				categoryViewTable.getCategory(e.getValue().getId()).getDescription()));
+		
+		tableView.getColumns().add(column5);
 		
 		// display table
 		
