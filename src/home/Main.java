@@ -1,8 +1,11 @@
 package home;
+import classes.Database;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import scenes.LoginScene;
 import scenes.TabsScene;
+
+import java.io.File;
 
 /*
  * TimeHub App
@@ -31,10 +34,17 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		mainStage = primaryStage;
-		//TODO: Check if config.txt exists, and try to access DB if it does
-		mainStage.setScene(new LoginScene());
+		if(new File("config.txt").exists()) {
+			if(Database.getInstance() == null) {
+				mainStage.setScene(new LoginScene());
+			} else {
+				mainStage.setScene(new TabsScene());
+			}
+		} else {
+			mainStage.setScene(new LoginScene());
+		}
+
 		mainStage.show();
 	}
-
 }
 
