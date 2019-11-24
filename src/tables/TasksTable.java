@@ -27,7 +27,7 @@ public class TasksTable implements TaskDAO {
 	@Override
 	public ArrayList<Task> getAllTasks() {
 		String query = "SELECT * FROM " + Const.TABLE_TASKS;
-		tasks = new ArrayList<Task>();
+		tasks = new ArrayList<>();
 		
 		try {
 			Statement getTasks = db.getConnection().createStatement();
@@ -35,12 +35,10 @@ public class TasksTable implements TaskDAO {
 			
 			while(data.next()) {
 				tasks.add(new Task(data.getInt(Const.TASKS_COLUMN_ID),
-						
-						// TODO placeholder
-						new ArrayList<>(),
-						
 						data.getString(Const.TASKS_COLUMN_TITLE),
-						data.getString(Const.TASKS_COLUMN_DESCRIPTION)
+						data.getString(Const.TASKS_COLUMN_DESCRIPTION),
+						data.getDate(Const.TASKS_COLUMN_DATE),
+						data.getDouble(Const.TASKS_COLUMN_HOURS)
 						));
 				
 			} 
@@ -62,12 +60,10 @@ public class TasksTable implements TaskDAO {
             
             while(data.next()) {
                 task = new Task(data.getInt(Const.TASKS_COLUMN_ID),
-						
-						// TODO placeholder
-						new ArrayList<>(),
-						
 						data.getString(Const.TASKS_COLUMN_TITLE),
-						data.getString(Const.TASKS_COLUMN_DESCRIPTION)
+						data.getString(Const.TASKS_COLUMN_DESCRIPTION),
+						data.getDate(Const.TASKS_COLUMN_DATE),
+						data.getDouble(Const.TASKS_COLUMN_HOURS)
 						);
                 
             }
