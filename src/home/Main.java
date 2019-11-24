@@ -35,10 +35,10 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		mainStage = primaryStage;
 		if(new File("config.txt").exists()) {
-			if(Database.getInstance() == null) {
-				mainStage.setScene(new LoginScene());
-			} else {
+			if(Database.getInstance().getConnection() != null) {
 				mainStage.setScene(new TabsScene());
+			} else {
+				mainStage.setScene(new LoginScene());
 			}
 		} else {
 			mainStage.setScene(new LoginScene());
