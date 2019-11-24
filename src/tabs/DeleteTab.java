@@ -9,7 +9,6 @@ package tabs;
 import javabeans.Category;
 import javabeans.Project;
 import javabeans.Task;
-import javabeans.TaskHour;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
