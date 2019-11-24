@@ -12,6 +12,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import scenes.TabsScene;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -69,10 +70,14 @@ public class LoginPane extends VBox {
         labelsAndInputHBox.setAlignment(Pos.CENTER);
 
 
-        //Errors (Make sure to set 'Managed' to false)
+        //Errors (Setting Managed to false, if there is no error to display)
         Text error = new Text();
         error.setFill(Color.RED);
-        error.setManaged(false);
+        if(new File("config.txt").exists()) {
+            error.setText("Stored Database Credentials failed. Please re-enter your credentials.");
+        } else {
+            error.setManaged(false);
+        }
 
 
         //Login Button
@@ -122,9 +127,14 @@ public class LoginPane extends VBox {
                     error.setManaged(true);
                 }
                 else {
+                	
                 	Main.mainStage.setScene(new TabsScene());
+                	
                 }
             }
+            
+                  
+                
             
         });
     }

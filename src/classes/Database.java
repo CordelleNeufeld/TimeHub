@@ -44,7 +44,10 @@ public class Database {
     public static Database getInstance() {
         if (instance == null) {
             instance = new Database();
+        } else if(instance.getConnection() == null){
+            instance = new Database();
         }
+
         return instance;
     }
     
