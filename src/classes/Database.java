@@ -27,7 +27,6 @@ public class Database {
                     connection.createStatement().execute(Const.CREATE_TABLE_PROJECTS);
                     connection.createStatement().execute(Const.CREATE_TABLE_PROJECT_CATEGORIES);
                     connection.createStatement().execute(Const.CREATE_TABLE_TASKS);
-                    connection.createStatement().execute(Const.CREATE_TABLE_TASK_HOURS);
                     connection.createStatement().execute(Const.CREATE_TABLE_USERS);
                     connection.createStatement().execute(Const.CREATE_TABLE_USER_TASKS);
                     
