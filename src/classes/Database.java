@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Scanner;
 
+import database.Const;
+
 public class Database {
 
     private static Database instance = null;
@@ -20,6 +22,15 @@ public class Database {
                     Class.forName("com.mysql.jdbc.Driver");
                     connection = DriverManager.getConnection("jdbc:mysql://" + configReader.nextLine() + "/" + configReader.nextLine(),
                             configReader.nextLine(), configReader.nextLine());
+                    
+                    connection.createStatement().execute(Const.CREATE_TABLE_CATEGORIES);
+                    connection.createStatement().execute(Const.CREATE_TABLE_PROJECTS);
+                    connection.createStatement().execute(Const.CREATE_TABLE_PROJECT_CATEGORIES);
+                    connection.createStatement().execute(Const.CREATE_TABLE_TASKS);
+                    connection.createStatement().execute(Const.CREATE_TABLE_TASK_HOURS);
+                    connection.createStatement().execute(Const.CREATE_TABLE_USERS);
+                    connection.createStatement().execute(Const.CREATE_TABLE_USER_TASKS);
+                    
                     System.out.println("Created Connection");
                 } catch (Exception e) {
                     e.printStackTrace();

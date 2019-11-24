@@ -25,9 +25,9 @@ public class HourLogsTab extends Tab {
         for (Task task : tasks) {
             HBox taskInfoHBox = new HBox(30);
 
-            Text dateText = new Text("Monday");
-            Text hoursText = new Text("5");
-            Text projectText = new Text("Project");
+            Text dateText = new Text(task.getTitle());
+            Text hoursText = new Text(task.getTaskHours().get(task.getId()).getDate() + "");
+            Text projectText = new Text(task.getDescription());
 
             taskInfoHBox.getChildren().addAll(dateText, hoursText, projectText);
 
