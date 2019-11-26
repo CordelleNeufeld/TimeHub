@@ -1,11 +1,13 @@
 package tabs;
 
 import javabeans.Task;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import panes.TabsPane;
 
 import java.util.ArrayList;
 
@@ -19,6 +21,9 @@ public class HourLogsTab extends Tab {
 
         //Create Title
         Text tasksText = new Text("Tasks");
+        Button addTask = new Button("Add Task");
+        
+        addTask.setOnAction(e -> TabsPane.tabPane.getTabs().add(new TaskFormTab(null)));
 
         //ListView for the Tasks
         ListView<HBox> listView = new ListView<>();
@@ -41,7 +46,7 @@ public class HourLogsTab extends Tab {
         }
 
         //Create MainVBox
-        VBox mainVBox = new VBox(tasksText, listView);
+        VBox mainVBox = new VBox(tasksText, listView, addTask);
 
         //Set the Content and Styling of the Tab
         setContent(mainVBox);

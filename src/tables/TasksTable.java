@@ -38,7 +38,8 @@ public class TasksTable implements TaskDAO {
 						data.getString(Const.TASKS_COLUMN_TITLE),
 						data.getString(Const.TASKS_COLUMN_DESCRIPTION),
 						data.getDate(Const.TASKS_COLUMN_DATE),
-						data.getDouble(Const.TASKS_COLUMN_HOURS)
+						data.getDouble(Const.TASKS_COLUMN_HOURS),
+						data.getInt(Const.TASKS_COLUMN_PROJECT_ID)
 						));
 				
 			} 
@@ -63,7 +64,8 @@ public class TasksTable implements TaskDAO {
 						data.getString(Const.TASKS_COLUMN_TITLE),
 						data.getString(Const.TASKS_COLUMN_DESCRIPTION),
 						data.getDate(Const.TASKS_COLUMN_DATE),
-						data.getDouble(Const.TASKS_COLUMN_HOURS)
+						data.getDouble(Const.TASKS_COLUMN_HOURS),
+						data.getInt(Const.TASKS_COLUMN_PROJECT_ID)
 						);
                 
             }
