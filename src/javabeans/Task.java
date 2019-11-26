@@ -8,6 +8,7 @@ public class Task {
     private String description;
     private Date date;
     private double hours;
+    private int projectId;
 
     /**
      * @param id          Task Id
@@ -16,12 +17,13 @@ public class Task {
      * @param date        Task Date
      * @param hours       Task hours
      */
-    public Task(int id, String title, String description, Date date, double hours) {
+    public Task(int id, String title, String description, Date date, double hours, int projectId) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.date = date;
         this.hours = hours;
+        this.projectId = projectId;
     }
 
     /**
@@ -32,12 +34,13 @@ public class Task {
      * @param date        Task Date
      * @param hours       Task hours
      */
-    public Task(String title, String description, Date date, double hours) {
+    public Task(String title, String description, Date date, double hours, int projectId) {
         this.id = 0;
         this.title = title;
         this.description = description;
         this.date = date;
         this.hours = hours;
+        this.projectId = projectId;
     }
 
     public int getId() {
@@ -67,4 +70,12 @@ public class Task {
     public Double getHours() {
         return hours;
     }
+
+	public int getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(int projectId) {
+		this.projectId = projectId;
+	}
 }

@@ -39,6 +39,8 @@ public class ProjectsTab extends Tab {
 
         //New Project Button
         Button newProjectButton = new Button("Add Project");
+        
+        newProjectButton.setOnAction(e -> TabsPane.tabPane.getTabs().add(new ProjectFormTab()));
 
         //Set up borderPane
         BorderPane mainPane = new BorderPane();
