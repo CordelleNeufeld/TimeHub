@@ -15,8 +15,8 @@ public class ProjectOverviewTab extends Tab {
     public ProjectOverviewTab(Project project) {
 
         //Create Form Fields
-        Text projectName = new Text("Title");
-        TextArea projectDesc = new TextArea("Description");
+        Text projectName = new Text(project.getTitle());
+        TextArea projectDesc = new TextArea(project.getDescription());
         Button addProject = new Button("Add Project");
 
         //Create the LeftVBox
