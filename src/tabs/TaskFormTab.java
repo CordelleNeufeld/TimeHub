@@ -4,6 +4,7 @@ import javabeans.Project;
 import javabeans.Task;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
@@ -48,6 +49,9 @@ public class TaskFormTab extends Tab {
         Text error = new Text("Name field cannot be empty");
         error.setFill(Color.RED);
         error.setManaged(false);
+        
+        //Create the date
+        DatePicker date = new DatePicker();
 
         //Create Submit Button
         Button submitBtn = new Button("Submit");
@@ -66,7 +70,7 @@ public class TaskFormTab extends Tab {
 
         //Create MainVBox
         VBox mainVBox = new VBox();
-        mainVBox.getChildren().addAll(taskLabel, labelsAndInputsHBox, error, submitBtn);
+        mainVBox.getChildren().addAll(taskLabel, labelsAndInputsHBox, date, error, submitBtn);
         mainVBox.setAlignment(Pos.CENTER);
         mainVBox.setSpacing(25);
 

@@ -6,9 +6,13 @@
 
 package tabs;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import javabeans.Category;
 import javabeans.Project;
 import javabeans.Task;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
@@ -30,7 +34,16 @@ public class DeleteTab extends Tab {
 
 		TasksTable taskViewTable = new TasksTable();
 		ProjectsTable projectViewTable = new ProjectsTable();
-		CategoriesTable categoryViewTable = new CategoriesTable();
+		
+		// gather projects and categories
+		
+		ArrayList<Project> projects = new ProjectsTable().getAllProjects();
+		
+		HashMap<Integer, Project> hashProjects = new HashMap<>();
+		
+		for (Project project : projects) {
+			hashProjects.put(project.getId(), project);
+		}
 		
 		BorderPane root = new BorderPane();
 		
@@ -51,23 +64,23 @@ public class DeleteTab extends Tab {
 		tableView.getColumns().add(column2);
 		
 		// COLUMN #3: Task Hours
-//		TableColumn<Task, Double> column3 = new TableColumn<>("Hour Log");
-//		column3.setCellValueFactory(e -> new SimpleDoubleProperty (
-//				taskViewTable.getTask(e.getValue().getId()).getHours()));
-//		
-//		tableView.getColumns().add(column3);
+		TableColumn<Task, Double> column3 = new TableColumn<>("Hour Log");
+		column3.setCellValueFactory(e -> new SimpleDoubleProperty (
+				taskViewTable.getTask(e.getValue().getId()).getHours()).asObject());
+		
+		tableView.getColumns().add(column3);
 		
 		// COLUMN #4: Project Title
-		TableColumn<Project, String> column4 = new TableColumn<>("Project Name");
+		TableColumn<Task, String> column4 = new TableColumn<>("Project Name");
 		column4.setCellValueFactory(e -> new SimpleStringProperty(
-				projectViewTable.getProject(e.getValue().getId()).getDescription()));
+				hashProjects.get(e.getValue().getProjectId()).getTitle()));
 		
 		tableView.getColumns().add(column4);
 		
 		// COLUMN #5: Category Title
-		TableColumn<Category, String> column5 = new TableColumn<>("Category Name");
+		TableColumn<Task, String> column5 = new TableColumn<>("Category Name");
 		column5.setCellValueFactory(e -> new SimpleStringProperty(
-				categoryViewTable.getCategory(e.getValue().getId()).getDescription()));
+				hashProjects.get(e.getValue().getProjectId()).getCategories().get(0).getTitle()));
 		
 		tableView.getColumns().add(column5);
 		
