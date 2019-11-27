@@ -6,7 +6,7 @@ public class Task {
     private int id;
     private String title;
     private String description;
-    private Date date;
+    private String date;
     private double hours;
     private int projectId;
 
@@ -17,7 +17,7 @@ public class Task {
      * @param date        Task Date
      * @param hours       Task hours
      */
-    public Task(int id, String title, String description, Date date, double hours, int projectId) {
+    public Task(int id, String title, String description, String date, double hours, int projectId) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -34,7 +34,7 @@ public class Task {
      * @param date        Task Date
      * @param hours       Task hours
      */
-    public Task(String title, String description, Date date, double hours, int projectId) {
+    public Task(String title, String description, String date, double hours, int projectId) {
         this.id = 0;
         this.title = title;
         this.description = description;
@@ -63,7 +63,7 @@ public class Task {
         this.description = description;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 

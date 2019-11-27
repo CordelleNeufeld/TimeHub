@@ -29,16 +29,19 @@ public class ProjectsTable implements ProjectDAO {
 		
 		String query = "SELECT * FROM " + Const.TABLE_PROJECTS;
 		projects = new ArrayList<Project>();
+		ProjectCategoriesTable projectCategories = new ProjectCategoriesTable();
 		
 		try {
 			Statement getProjects = db.getConnection().createStatement();
 			ResultSet data = getProjects.executeQuery(query);
 			
 			while(data.next()) {
-				projects.add(new Project(data.getInt(Const.PROJECTS_COLUMN_ID),
+				
+				int projectID = data.getInt(Const.PROJECTS_COLUMN_ID);
+				
+				projects.add(new Project(projectID,
 						
-						// TODO placeholders
-						new ArrayList<>(),
+						projectCategories.getProjectCategories(projectID),
 						new ArrayList<>(),
 						
 						data.getString(Const.PROJECTS_COLUMN_TITLE),
