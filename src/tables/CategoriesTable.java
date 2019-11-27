@@ -2,6 +2,9 @@
  * Database Access Object Class CategoriesTable for CategoryDAO
  * @author Cordelle Neufeld
  * Creation Date: 2019-11-17
+ * Initial CRUD: Cordelle - Retrieve (get/getAll) and Hasan - Update
+ * Modification Date: 2019-11-22
+ * CRUD Completion: Hasan - Create and Cordelle - Delete
  */
 
 package tables;
@@ -81,14 +84,28 @@ public class CategoriesTable implements CategoryDAO {
 
 	@Override
 	public void deleteCategory(Category category) {
-		// TODO Auto-generated method stub
-		
+		String query  = "DELETE FROM " + Const.TABLE_CATEGORIES + " WHERE " +
+				Const.CATEGORIES_COLUMN_ID + " = " + category.getId();
+		try {
+			db.getConnection().createStatement().execute(query);
+			System.out.println("Deleted category");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void createCategory(Category category) {
-		// TODO Auto-generated method stub
-		
+		String query = "INSERT INTO " + Const.TABLE_CATEGORIES +
+				"(" + Const.CATEGORIES_COLUMN_TITLE + ", " +
+				Const.CATEGORIES_COLUMN_DESCRIPTION + ") VALUES ('" +
+				category.getTitle() + "','" + category.getDescription() + "')";
+		try {
+			db.getConnection().createStatement().execute(query);
+			System.out.println("Inserted Category");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

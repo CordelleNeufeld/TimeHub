@@ -8,12 +8,19 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import panes.TabsPane;
+import tables.CategoriesTable;
+import tables.ProjectsTable;
 
 import java.util.ArrayList;
 
 public class ProjectFormTab extends Tab {
 
-    public ProjectFormTab(ArrayList<Category> categories, ArrayList<Project> projects) {
+    public ProjectFormTab() {
+    	
+    	CategoriesTable catTable = new CategoriesTable();
+    	ArrayList<Category> categories = catTable.getAllCategories();
+    	
 
         //Task Label
         Label taskLabel = new Label("Project Creation Form");
@@ -66,8 +73,11 @@ public class ProjectFormTab extends Tab {
                 error.setManaged(true);
             } else {
                 //TODO: Check for to see if there are any Categories and Add them to the Project
+            	ProjectsTable projectTable = new ProjectsTable();
                 Project project = new Project(categories, null, nameInput.getText(), descInput.getText());
-                projects.add(project);
+                
+                projectTable.createProject(project);
+                TabsPane.tabPane.getTabs().add(ProjectsTab.getInstance(projectTable.getAllProjects()));
             }
         });
 

@@ -11,6 +11,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import panes.TabsPane;
+import tables.TasksTable;
 
 public class TaskFormTab extends Tab {
 
@@ -54,8 +56,11 @@ public class TaskFormTab extends Tab {
             if (nameInput.getText().equals("")) {
                 error.setManaged(true);
             } else {
-                Task task = new Task(null, nameInput.getText(), descInput.getText());
-                project.getTasks().add(task);
+                Task task = new Task(nameInput.getText(), descInput.getText(), null, 0, project.getId());
+                TasksTable taskTable = new TasksTable();
+                
+                taskTable.createTask(task);
+                TabsPane.tabPane.getTabs().remove(TabsPane.tabPane.getSelectionModel().getSelectedIndex());
             }
         });
 

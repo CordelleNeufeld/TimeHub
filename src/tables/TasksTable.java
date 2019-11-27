@@ -2,6 +2,9 @@
  * Database Access Object Class TasksTable for TaskDAO
  * @author Cordelle Neufeld
  * Creation Date: 2019-11-17
+ * Initial CRUD: Cordelle - Retrieve (get/getAll) and Hasan - Update
+ * Modification Date: 2019-11-22
+ * CRUD Completion: Hasan - Create and Cordelle - Delete
  */
 
 package tables;
@@ -24,7 +27,7 @@ public class TasksTable implements TaskDAO {
 	@Override
 	public ArrayList<Task> getAllTasks() {
 		String query = "SELECT * FROM " + Const.TABLE_TASKS;
-		tasks = new ArrayList<Task>();
+		tasks = new ArrayList<>();
 		
 		try {
 			Statement getTasks = db.getConnection().createStatement();
@@ -32,12 +35,11 @@ public class TasksTable implements TaskDAO {
 			
 			while(data.next()) {
 				tasks.add(new Task(data.getInt(Const.TASKS_COLUMN_ID),
-						
-						// TODO placeholder
-						new ArrayList<>(),
-						
 						data.getString(Const.TASKS_COLUMN_TITLE),
-						data.getString(Const.TASKS_COLUMN_DESCRIPTION)
+						data.getString(Const.TASKS_COLUMN_DESCRIPTION),
+						data.getDate(Const.TASKS_COLUMN_DATE),
+						data.getDouble(Const.TASKS_COLUMN_HOURS),
+						data.getInt(Const.TASKS_COLUMN_PROJECT_ID)
 						));
 				
 			} 
@@ -59,12 +61,11 @@ public class TasksTable implements TaskDAO {
             
             while(data.next()) {
                 task = new Task(data.getInt(Const.TASKS_COLUMN_ID),
-						
-						// TODO placeholder
-						new ArrayList<>(),
-						
 						data.getString(Const.TASKS_COLUMN_TITLE),
-						data.getString(Const.TASKS_COLUMN_DESCRIPTION)
+						data.getString(Const.TASKS_COLUMN_DESCRIPTION),
+						data.getDate(Const.TASKS_COLUMN_DATE),
+						data.getDouble(Const.TASKS_COLUMN_HOURS),
+						data.getInt(Const.TASKS_COLUMN_PROJECT_ID)
 						);
                 
             }
@@ -90,14 +91,28 @@ public class TasksTable implements TaskDAO {
 
 	@Override
 	public void deleteTask(Task task) {
-		// TODO Auto-generated method stub
-		
+		String query  = "DELETE FROM " + Const.TABLE_TASKS + " WHERE " +
+				Const.TASKS_COLUMN_ID + " = " + task.getId();
+		try {
+			db.getConnection().createStatement().execute(query);
+			System.out.println("Deleted task");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
 	}
 
 	@Override
 	public void createTask(Task task) {
-		// TODO Auto-generated method stub
-		
+		String query = "INSERT INTO " + Const.TABLE_TASKS +
+				"(" + Const.TASKS_COLUMN_TITLE + ", " +
+				Const.TASKS_COLUMN_DESCRIPTION + ") VALUES ('" +
+				task.getTitle() + "','" + task.getDescription() + "')";
+		try {
+			db.getConnection().createStatement().execute(query);
+			System.out.println("Inserted Task");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

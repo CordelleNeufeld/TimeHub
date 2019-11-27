@@ -12,6 +12,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import scenes.TabsScene;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -43,9 +44,9 @@ public class LoginPane extends VBox {
         VBox labelsVBox = new VBox(25);
 
         Label hostLabel = new Label("Database Host");
-        Label userLabel = new Label("Database User");
-        Label passwordLabel = new Label("Database Password");
-        Label nameLabel = new Label("Database Name");
+        Label userLabel = new Label("Database Name");
+        Label passwordLabel = new Label("Database User");
+        Label nameLabel = new Label("Database Password");
 
         labelsVBox.getChildren().addAll(hostLabel, userLabel, passwordLabel, nameLabel);
         labelsVBox.setAlignment(Pos.CENTER);
@@ -69,10 +70,14 @@ public class LoginPane extends VBox {
         labelsAndInputHBox.setAlignment(Pos.CENTER);
 
 
-        //Errors (Make sure to set 'Managed' to false)
+        //Errors (Setting Managed to false, if there is no error to display)
         Text error = new Text();
         error.setFill(Color.RED);
-        error.setManaged(false);
+        if(new File("config.txt").exists()) {
+            error.setText("Stored Database Credentials failed. Please re-enter your credentials.");
+        } else {
+            error.setManaged(false);
+        }
 
 
         //Login Button
@@ -91,38 +96,46 @@ public class LoginPane extends VBox {
         	// TODO: This section was commented out by Hasan 2019-11-13
         	// to provide a temporary bypass of the login screen direct to HomeTab
         	
-//            Matcher hostMatch = hostPattern.matcher(hostTextField.getText());
-//            Matcher userMatch = alphaNumericPattern.matcher(userTextField.getText());
-//            Matcher passwordMatch = alphaNumericPattern.matcher(passwordTextField.getText());
-//            Matcher nameMatch = alphaNumericPattern.matcher(nameTextField.getText());
-//
-//            if (!hostMatch.matches()) {
-//                error.setText("Please check that the host field contains only letters and periods.");
-//                error.setManaged(true);
-//            } else if (!userMatch.matches()) {
-//                error.setText("Please check that the user field contains only letters and numbers.");
-//                error.setManaged(true);
-//            } else if (!passwordMatch.matches()) {
-//                error.setText("Please check that the database password field contains only letters and numbers");
-//                error.setManaged(true);
-//            } else if (!nameMatch.matches()) {
-//                error.setText("Please check that the database name field does not contain any invalid characters.");
-//                error.setManaged(true);
-//            } else {
-//                try {
-//                    List<String> lines = Arrays.asList(hostTextField.getText(), userTextField.getText(), passwordTextField.getText(), nameTextField.getText());
-//                    Path file = Paths.get("config.txt");
-//                    Files.write(file, lines, StandardCharsets.UTF_8);
-//                } catch (IOException exception) {
-//                    exception.printStackTrace();
-//                }
-//
-//                if (Database.getInstance() == null) {
-//                    error.setText("Login failed. Please Check your database credentials.");
-//                    error.setManaged(true);
-//                }
-//            }
-        	Main.mainStage.setScene(new TabsScene());
+            Matcher hostMatch = hostPattern.matcher(hostTextField.getText());
+            Matcher userMatch = alphaNumericPattern.matcher(userTextField.getText());
+            Matcher passwordMatch = alphaNumericPattern.matcher(passwordTextField.getText());
+            Matcher nameMatch = alphaNumericPattern.matcher(nameTextField.getText());
+
+            if (!hostMatch.matches()) {
+                error.setText("Please check that the host field contains only letters and periods.");
+                error.setManaged(true);
+            } else if (!userMatch.matches()) {
+                error.setText("Please check that the user field contains only letters and numbers.");
+                error.setManaged(true);
+            } else if (!passwordMatch.matches()) {
+                error.setText("Please check that the database password field contains only letters and numbers");
+                error.setManaged(true);
+            } else if (!nameMatch.matches()) {
+                error.setText("Please check that the database name field does not contain any invalid characters.");
+                error.setManaged(true);
+            } else {
+                try {
+                    List<String> lines = Arrays.asList(hostTextField.getText(), userTextField.getText(), passwordTextField.getText(), nameTextField.getText());
+                    Path file = Paths.get("config.txt");
+                    Files.write(file, lines, StandardCharsets.UTF_8);
+                } catch (IOException exception) {
+                    exception.printStackTrace();
+                }
+
+                if (Database.getInstance().getConnection() == null) {
+                    error.setText("Login failed. Please Check your database credentials.");
+                    error.setManaged(true);
+                }
+                else {
+                	
+                	Main.mainStage.setScene(new TabsScene());
+                	
+                }
+            }
+            
+                  
+                
+            
         });
     }
 }
