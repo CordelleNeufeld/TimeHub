@@ -77,7 +77,7 @@ public class ProjectFormTab extends Tab {
                 Project project = new Project(categories, null, nameInput.getText(), descInput.getText());
                 
                 projectTable.createProject(project);
-                TabsPane.tabPane.getTabs().add(ProjectsTab.getInstance(projectTable.getAllProjects()));
+                TabsPane.tabPane.getTabs().add(ProjectsTab.getInstance());
             }
         });
 
