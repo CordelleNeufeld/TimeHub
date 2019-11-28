@@ -19,7 +19,10 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import panes.TabsPane;
 import tables.CategoriesTable;
+import tables.ProjectCategoriesTable;
 import tables.ProjectsTable;
 import tables.TasksTable;
 
@@ -103,7 +106,14 @@ public class DeleteTab extends Tab {
 			
 		});
 		
-		root.setBottom(deleteButton);
+		Button addTaskButton = new Button ("Add Task");
+		
+		addTaskButton.setOnAction(e -> TabsPane.tabPane.getTabs().add(new TaskFormTab(1)));
+		
+		HBox groupButtons = new HBox(25);
+		groupButtons.getChildren().addAll(addTaskButton, deleteButton);
+		
+		root.setBottom(groupButtons);
 		
 		this.setContent(root);
 		

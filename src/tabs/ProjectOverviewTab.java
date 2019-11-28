@@ -23,7 +23,7 @@ public class ProjectOverviewTab extends Tab {
         
         addProject.setOnAction(e -> TabsPane.tabPane.getTabs().add(new ProjectFormTab()));
         
-        addTask.setOnAction(e -> TabsPane.tabPane.getTabs().add(new TaskFormTab(project)));
+        addTask.setOnAction(e -> TabsPane.tabPane.getTabs().add(new TaskFormTab(project.getId())));
 
         HBox buttonsHBox = new HBox(20);
         buttonsHBox.getChildren().addAll(addProject, addTask);

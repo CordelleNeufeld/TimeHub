@@ -23,7 +23,7 @@ public class HourLogsTab extends Tab {
         Text tasksText = new Text("Tasks");
         Button addTask = new Button("Add Task");
         
-        addTask.setOnAction(e -> TabsPane.tabPane.getTabs().add(new TaskFormTab(null)));
+        addTask.setOnAction(e -> TabsPane.tabPane.getTabs().add(new TaskFormTab(1)));
 
         //ListView for the Tasks
         ListView<HBox> listView = new ListView<>();

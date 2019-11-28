@@ -17,7 +17,7 @@ import tables.TasksTable;
 
 public class TaskFormTab extends Tab {
 
-    public TaskFormTab(Project project) {
+    public TaskFormTab(int projectID) {
 
         //Create Task Label
         Label taskLabel = new Label("Task Creation Form");
@@ -25,19 +25,21 @@ public class TaskFormTab extends Tab {
         //Create Name and Descriptions Labels
         Label nameLabel = new Label("Name: ");
         Label descLabel = new Label("Description:");
+        Label hourLabel = new Label("Hours:");
 
         //Create VBox for the Labels
         VBox labelsVBox = new VBox(25);
-        labelsVBox.getChildren().addAll(nameLabel, descLabel);
+        labelsVBox.getChildren().addAll(nameLabel, descLabel, hourLabel);
         labelsVBox.setAlignment(Pos.CENTER);
 
         //Create Name and Description Inputs
         TextField nameInput = new TextField();
         TextField descInput = new TextField();
+        TextField hourInput = new TextField();
 
         //Create VBox for Inputs
         VBox inputsVBox = new VBox(15);
-        inputsVBox.getChildren().addAll(nameInput, descInput);
+        inputsVBox.getChildren().addAll(nameInput, descInput, hourInput);
         inputsVBox.setAlignment(Pos.CENTER);
 
         //Create HBox for Labels and Inputs
@@ -60,7 +62,7 @@ public class TaskFormTab extends Tab {
             if (nameInput.getText().equals("")) {
                 error.setManaged(true);
             } else {
-                Task task = new Task(nameInput.getText(), descInput.getText(), null, 0, project.getId());
+                Task task = new Task(nameInput.getText(), descInput.getText(), date.getValue().toString(), Double.parseDouble(hourInput.getText()), projectID);
                 TasksTable taskTable = new TasksTable();
                 
                 taskTable.createTask(task);

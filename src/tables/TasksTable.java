@@ -37,7 +37,7 @@ public class TasksTable implements TaskDAO {
 				tasks.add(new Task(data.getInt(Const.TASKS_COLUMN_ID),
 						data.getString(Const.TASKS_COLUMN_TITLE),
 						data.getString(Const.TASKS_COLUMN_DESCRIPTION),
-						data.getDate(Const.TASKS_COLUMN_DATE),
+						data.getString(Const.TASKS_COLUMN_DATE),
 						data.getDouble(Const.TASKS_COLUMN_HOURS),
 						data.getInt(Const.TASKS_COLUMN_PROJECT_ID)
 						));
@@ -63,7 +63,7 @@ public class TasksTable implements TaskDAO {
                 task = new Task(data.getInt(Const.TASKS_COLUMN_ID),
 						data.getString(Const.TASKS_COLUMN_TITLE),
 						data.getString(Const.TASKS_COLUMN_DESCRIPTION),
-						data.getDate(Const.TASKS_COLUMN_DATE),
+						data.getString(Const.TASKS_COLUMN_DATE),
 						data.getDouble(Const.TASKS_COLUMN_HOURS),
 						data.getInt(Const.TASKS_COLUMN_PROJECT_ID)
 						);
@@ -105,8 +105,13 @@ public class TasksTable implements TaskDAO {
 	public void createTask(Task task) {
 		String query = "INSERT INTO " + Const.TABLE_TASKS +
 				"(" + Const.TASKS_COLUMN_TITLE + ", " +
-				Const.TASKS_COLUMN_DESCRIPTION + ") VALUES ('" +
-				task.getTitle() + "','" + task.getDescription() + "')";
+				Const.TASKS_COLUMN_DESCRIPTION + ", " +
+				Const.TASKS_COLUMN_HOURS + ", " +
+				Const.TASKS_COLUMN_DATE + ", " +
+				Const.TASKS_COLUMN_PROJECT_ID + ") VALUES ('" +
+				task.getTitle() + "','" + task.getDescription() + "','" +
+				task.getHours() + "','" + task.getDate() + "','" + 
+				task.getProjectId() + "')";
 		try {
 			db.getConnection().createStatement().execute(query);
 			System.out.println("Inserted Task");
