@@ -5,6 +5,7 @@ import home.Main;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -44,11 +45,11 @@ public class LoginPane extends VBox {
         VBox labelsVBox = new VBox(25);
 
         Label hostLabel = new Label("Database Host");
-        Label userLabel = new Label("Database Name");
-        Label passwordLabel = new Label("Database User");
-        Label nameLabel = new Label("Database Password");
+        Label nameLabel = new Label("Database Name");
+        Label userLabel = new Label("Database User");
+        Label passwordLabel = new Label("Database Password");
 
-        labelsVBox.getChildren().addAll(hostLabel, userLabel, passwordLabel, nameLabel);
+        labelsVBox.getChildren().addAll(hostLabel, nameLabel, userLabel, passwordLabel);
         labelsVBox.setAlignment(Pos.CENTER);
 
 
@@ -56,11 +57,12 @@ public class LoginPane extends VBox {
         VBox textFieldVBox = new VBox(15);
 
         TextField hostTextField = new TextField();
-        TextField userTextField = new TextField();
-        TextField passwordTextField = new TextField();
         TextField nameTextField = new TextField();
+        TextField userTextField = new TextField();
+        PasswordField passwordTextField = new PasswordField();
 
-        textFieldVBox.getChildren().addAll(hostTextField, userTextField, passwordTextField, nameTextField);
+
+        textFieldVBox.getChildren().addAll(hostTextField, nameTextField, userTextField, passwordTextField);
         textFieldVBox.setAlignment(Pos.CENTER);
 
 
@@ -73,7 +75,7 @@ public class LoginPane extends VBox {
         //Errors (Setting Managed to false, if there is no error to display)
         Text error = new Text();
         error.setFill(Color.RED);
-        if(new File("config.txt").exists()) {
+        if (new File("config.txt").exists()) {
             error.setText("Stored Database Credentials failed. Please re-enter your credentials.");
         } else {
             error.setManaged(false);
@@ -92,10 +94,10 @@ public class LoginPane extends VBox {
 
         //Button Listener
         loginBtn.setOnMouseClicked(e -> {
-        	
-        	// TODO: This section was commented out by Hasan 2019-11-13
-        	// to provide a temporary bypass of the login screen direct to HomeTab
-        	
+
+            // TODO: This section was commented out by Hasan 2019-11-13
+            // to provide a temporary bypass of the login screen direct to HomeTab
+
             Matcher hostMatch = hostPattern.matcher(hostTextField.getText());
             Matcher userMatch = alphaNumericPattern.matcher(userTextField.getText());
             Matcher passwordMatch = alphaNumericPattern.matcher(passwordTextField.getText());
@@ -115,7 +117,7 @@ public class LoginPane extends VBox {
                 error.setManaged(true);
             } else {
                 try {
-                    List<String> lines = Arrays.asList(hostTextField.getText(), userTextField.getText(), passwordTextField.getText(), nameTextField.getText());
+                    List<String> lines = Arrays.asList(hostTextField.getText(), nameTextField.getText(), userTextField.getText(), passwordTextField.getText());
                     Path file = Paths.get("config.txt");
                     Files.write(file, lines, StandardCharsets.UTF_8);
                 } catch (IOException exception) {
@@ -125,17 +127,10 @@ public class LoginPane extends VBox {
                 if (Database.getInstance().getConnection() == null) {
                     error.setText("Login failed. Please Check your database credentials.");
                     error.setManaged(true);
-                }
-                else {
-                	
-                	Main.mainStage.setScene(new TabsScene());
-                	
+                } else {
+                    Main.mainStage.setScene(new TabsScene());
                 }
             }
-            
-                  
-                
-            
         });
     }
 }
