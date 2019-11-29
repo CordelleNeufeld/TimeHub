@@ -5,6 +5,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import tables.CategoriesTable;
 
 import java.util.ArrayList;
 
@@ -12,7 +13,10 @@ public class CategoriesTab extends Tab {
 
     private static CategoriesTab instance = null;
 
-    private CategoriesTab(ArrayList<Category> categories) {
+    private CategoriesTab() {
+    	
+    	ArrayList<Category> categories = new CategoriesTable().getAllCategories();
+    	
         //Title
         Text projectsTitle = new Text("Projects");
         projectsTitle.setTextAlignment(TextAlignment.CENTER);
@@ -37,12 +41,13 @@ public class CategoriesTab extends Tab {
         //Add content to Tab
         setContent(mainPane);
         setText("Categories");
-        this.setClosable(true);
+		this.setClosable(false);
+
     }
 
-    public static CategoriesTab getInstance(ArrayList<Category> categories) {
+    public static CategoriesTab getInstance() {
         if (instance == null) {
-            instance = new CategoriesTab(categories);
+            instance = new CategoriesTab();
         }
 
         return instance;

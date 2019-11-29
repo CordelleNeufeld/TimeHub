@@ -9,6 +9,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import panes.TabsPane;
+import tables.ProjectsTable;
 
 import java.util.ArrayList;
 
@@ -16,7 +17,9 @@ public class ProjectsTab extends Tab {
 
     private static ProjectsTab instance = null;
 
-    private ProjectsTab(ArrayList<Project> projects) {
+    private ProjectsTab() {
+    	
+    	ArrayList<Project> projects = new ProjectsTable().getAllProjects();
 
         //Title
         Text projectsTitle = new Text("Projects");
@@ -51,12 +54,12 @@ public class ProjectsTab extends Tab {
         //Add content to Tab
         setContent(mainPane);
         setText("Projects");
-        this.setClosable(true);
+        this.setClosable(false);
     }
 
-    public static ProjectsTab getInstance(ArrayList<Project> projects) {
+    public static ProjectsTab getInstance() {
         if (instance == null) {
-            instance = new ProjectsTab(projects);
+            instance = new ProjectsTab();
         }
         return instance;
     }
