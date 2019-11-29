@@ -1,0 +1,18 @@
+/* root style for scenes */
+
+.root {
+	-fx-font-size: 16pt;
+    -fx-font-family: "Courier New";
+    -fx-base: rgb(143, 151, 121);
+    -fx-background: rgb(169, 186, 157);
+}
+
+/* 
+ * Background:
+ * Colour Source: https://graf1x.com/shades-of-green-color-palette-html-hex-rgb-code/
+ * Base: artichoke
+ * Background: laurel
+ * 
+ * Documentation:
+ * https://docs.oracle.com/javase/8/javafx/api/javafx/scene/doc-files/cssref.html#typecolor
+ */
