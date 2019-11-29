@@ -28,7 +28,6 @@ public class Database {
                     try {
                         connection.createStatement().execute(createTable);
                     } catch (Exception e) {
-                        e.printStackTrace();
                     }
                 }
 

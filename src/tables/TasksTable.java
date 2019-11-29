@@ -105,7 +105,7 @@ public class TasksTable implements TaskDAO {
 	public void createTask(Task task) {
 		String projectId = task.getProjectId() + "";
 		if(projectId.equals("-1")) {
-			projectId = null;
+			projectId = "NULL";
 		}
 
 		String query = "INSERT INTO " + Const.TABLE_TASKS +
