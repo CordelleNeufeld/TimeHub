@@ -124,5 +124,29 @@ public class TasksTable implements TaskDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	public double getAllHours(int projectId) {
+		
+		String query = "SELECT SUM(hours) FROM " + Const.TABLE_TASKS +
+				" WHERE " + Const.TASKS_COLUMN_PROJECT_ID + " = " +
+				projectId;
+		
+		double hours = 0.0;
+		
+		try {
+			Statement statement = Database.getInstance().getConnection().createStatement();
+			ResultSet data = statement.executeQuery(query);
+			
+			while(data.next()) {
+				hours = data.getDouble("SUM(hours)");
+			}
+			
+			System.out.println("Returned hours for project!");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return hours;
+	}
 
 }

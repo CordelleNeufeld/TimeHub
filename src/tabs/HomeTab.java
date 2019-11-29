@@ -12,13 +12,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.VBox;
 import panes.TabsPane;
+import tables.TasksTable;
 
 public class HomeTab extends Tab {
 
     private static HomeTab instance = null;
 
     private HomeTab() {
-
+    	
         //Create Buttons for different Tabs
         Button categoriesButton = new Button("Categories");
         Button projectsButton = new Button("Projects");

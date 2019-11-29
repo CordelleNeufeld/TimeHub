@@ -32,14 +32,9 @@ public class ProjectOverviewTab extends Tab {
         VBox leftVBox = new VBox(30);
         leftVBox.getChildren().addAll(projectName, projectDesc, buttonsHBox);
 
-        //Create tabPane
-        TabPane tabPane = new TabPane();
-        tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
-        tabPane.getTabs().addAll(new Tab("Tab 1"), new Tab("Tab 2"));
-
         //Create MainHBox
         HBox mainHBox = new HBox(30);
-        mainHBox.getChildren().addAll(leftVBox, tabPane);
+        mainHBox.getChildren().addAll(leftVBox);
 
         //Set Content and Styling of the Tab
         setContent(mainHBox);
