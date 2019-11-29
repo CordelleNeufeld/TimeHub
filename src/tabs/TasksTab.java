@@ -108,7 +108,7 @@ public class TasksTab extends Tab {
 		
 		Button addTaskButton = new Button ("Add Task");
 		
-		addTaskButton.setOnAction(e -> TabsPane.tabPane.getTabs().add(new TaskFormTab(1)));
+		addTaskButton.setOnAction(e -> TabsPane.tabPane.getTabs().add(new TaskFormTab(-1)));
 		
 		HBox groupButtons = new HBox(25);
 		groupButtons.getChildren().addAll(addTaskButton, deleteButton);
