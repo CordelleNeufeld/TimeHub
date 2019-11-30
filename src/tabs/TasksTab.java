@@ -26,14 +26,14 @@ import tables.ProjectCategoriesTable;
 import tables.ProjectsTable;
 import tables.TasksTable;
 
-public class DeleteTab extends Tab {
+public class TasksTab extends Tab {
 	
-	private static DeleteTab tab;
+	private static TasksTab tab;
 	
 	public TableView tableView;
 	
-	private DeleteTab() {
-		this.setText("Delete");
+	private TasksTab() {
+		this.setText("Tasks");
 
 		TasksTable taskViewTable = new TasksTable();
 		ProjectsTable projectViewTable = new ProjectsTable();
@@ -108,7 +108,7 @@ public class DeleteTab extends Tab {
 		
 		Button addTaskButton = new Button ("Add Task");
 		
-		addTaskButton.setOnAction(e -> TabsPane.tabPane.getTabs().add(new TaskFormTab(1)));
+		addTaskButton.setOnAction(e -> TabsPane.tabPane.getTabs().add(new TaskFormTab(-1)));
 		
 		HBox groupButtons = new HBox(25);
 		groupButtons.getChildren().addAll(addTaskButton, deleteButton);
@@ -116,6 +116,7 @@ public class DeleteTab extends Tab {
 		root.setBottom(groupButtons);
 		
 		this.setContent(root);
+		this.setClosable(false);
 		
 	} // end of method: DeleteTab()
 	
@@ -126,9 +127,9 @@ public class DeleteTab extends Tab {
 	
 	} // end of method: refreshTable()
 
-	public static DeleteTab getInstance() {
+	public static TasksTab getInstance() {
 		if(tab == null) {
-			tab = new DeleteTab();
+			tab = new TasksTab();
 		}
 		return tab;
 	

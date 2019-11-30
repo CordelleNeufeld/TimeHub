@@ -103,6 +103,11 @@ public class TasksTable implements TaskDAO {
 
 	@Override
 	public void createTask(Task task) {
+		String projectId = task.getProjectId() + "";
+		if(projectId.equals("-1")) {
+			projectId = "NULL";
+		}
+
 		String query = "INSERT INTO " + Const.TABLE_TASKS +
 				"(" + Const.TASKS_COLUMN_TITLE + ", " +
 				Const.TASKS_COLUMN_DESCRIPTION + ", " +
@@ -111,13 +116,37 @@ public class TasksTable implements TaskDAO {
 				Const.TASKS_COLUMN_PROJECT_ID + ") VALUES ('" +
 				task.getTitle() + "','" + task.getDescription() + "','" +
 				task.getHours() + "','" + task.getDate() + "','" + 
-				task.getProjectId() + "')";
+				projectId + "')";
 		try {
 			db.getConnection().createStatement().execute(query);
 			System.out.println("Inserted Task");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public double getAllHours(int projectId) {
+		
+		String query = "SELECT SUM(hours) FROM " + Const.TABLE_TASKS +
+				" WHERE " + Const.TASKS_COLUMN_PROJECT_ID + " = " +
+				projectId;
+		
+		double hours = 0.0;
+		
+		try {
+			Statement statement = Database.getInstance().getConnection().createStatement();
+			ResultSet data = statement.executeQuery(query);
+			
+			while(data.next()) {
+				hours = data.getDouble("SUM(hours)");
+			}
+			
+			System.out.println("Returned hours for project!");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return hours;
 	}
 
 }

@@ -12,45 +12,42 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.VBox;
 import panes.TabsPane;
-import tables.CategoriesTable;
-import tables.ProjectsTable;
 import tables.TasksTable;
-
-import java.util.ArrayList;
 
 public class HomeTab extends Tab {
 
     private static HomeTab instance = null;
 
     private HomeTab() {
-
+    	
         //Create Buttons for different Tabs
         Button categoriesButton = new Button("Categories");
         Button projectsButton = new Button("Projects");
         Button tasksButton = new Button("Tasks");
-        
-        //Make the tables
-        CategoriesTable categoryTable = new CategoriesTable();
-        ProjectsTable projectTable = new ProjectsTable();
-        TasksTable taskTable = new TasksTable();
 
         //OnClickListeners to show the new tabs
         categoriesButton.setOnAction(e -> {
-            CategoriesTab category = CategoriesTab.getInstance(categoryTable.getAllCategories());
-            TabsPane.tabPane.getTabs().add(category);
+            CategoriesTab category = CategoriesTab.getInstance();
+            if(!TabsPane.tabPane.getTabs().contains(category)) {
+            	TabsPane.tabPane.getTabs().add(category);
+            }
             TabsPane.tabPane.getSelectionModel().select(category);
         });
 
         projectsButton.setOnAction(e -> {
-            ProjectsTab project = ProjectsTab.getInstance(projectTable.getAllProjects());
-            TabsPane.tabPane.getTabs().add(project);
+            ProjectsTab project = ProjectsTab.getInstance();
+            if(!TabsPane.tabPane.getTabs().contains(project)) {
+            	TabsPane.tabPane.getTabs().add(project);
+            }
             TabsPane.tabPane.getSelectionModel().select(project);
         });
 
         tasksButton.setOnAction(e -> {
-            HourLogsTab hourLogs = HourLogsTab.getInstance(taskTable.getAllTasks());
-            TabsPane.tabPane.getTabs().add(hourLogs);
-            TabsPane.tabPane.getSelectionModel().select(hourLogs);
+            TasksTab task = TasksTab.getInstance();
+            if(!TabsPane.tabPane.getTabs().contains(task)) {
+            	TabsPane.tabPane.getTabs().add(task);
+            }
+            TabsPane.tabPane.getSelectionModel().select(task);
         });
 
         //Create VBox to hold the Buttons
