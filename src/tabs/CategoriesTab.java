@@ -5,6 +5,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import panes.TabsPane;
 
 import java.util.ArrayList;
 
@@ -27,6 +28,12 @@ public class CategoriesTab extends Tab {
 
         //New Category Button
         Button newCategoryButton = new Button("Add Category");
+
+        newCategoryButton.setOnAction(e -> {
+            CategoryFormTab formTab = new CategoryFormTab();
+            TabsPane.tabPane.getTabs().add(formTab);
+            TabsPane.tabPane.getSelectionModel().select(formTab);
+        });
 
         //Set up borderPane
         BorderPane mainPane = new BorderPane();
