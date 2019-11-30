@@ -5,6 +5,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import panes.TabsPane;
 import tables.CategoriesTable;
 
 import java.util.ArrayList;
@@ -14,9 +15,8 @@ public class CategoriesTab extends Tab {
     private static CategoriesTab instance = null;
 
     private CategoriesTab() {
-    	
     	ArrayList<Category> categories = new CategoriesTable().getAllCategories();
-    	
+
         //Title
         Text projectsTitle = new Text("Projects");
         projectsTitle.setTextAlignment(TextAlignment.CENTER);
@@ -32,6 +32,12 @@ public class CategoriesTab extends Tab {
         //New Category Button
         Button newCategoryButton = new Button("Add Category");
 
+        newCategoryButton.setOnAction(e -> {
+            CategoryFormTab formTab = new CategoryFormTab();
+            TabsPane.tabPane.getTabs().add(formTab);
+            TabsPane.tabPane.getSelectionModel().select(formTab);
+        });
+
         //Set up borderPane
         BorderPane mainPane = new BorderPane();
         mainPane.setTop(projectsTitle);
@@ -42,7 +48,6 @@ public class CategoriesTab extends Tab {
         setContent(mainPane);
         setText("Categories");
 		this.setClosable(false);
-
     }
 
     public static CategoriesTab getInstance() {
@@ -50,6 +55,11 @@ public class CategoriesTab extends Tab {
             instance = new CategoriesTab();
         }
 
+        return instance;
+    }
+
+    public static CategoriesTab refresh() {
+        instance = new CategoriesTab();
         return instance;
     }
 }

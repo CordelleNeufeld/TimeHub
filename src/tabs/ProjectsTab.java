@@ -18,8 +18,8 @@ public class ProjectsTab extends Tab {
     private static ProjectsTab instance = null;
 
     private ProjectsTab() {
-    	
-    	ArrayList<Project> projects = new ProjectsTable().getAllProjects();
+
+        ArrayList<Project> projects = new ProjectsTable().getAllProjects();
 
         //Title
         Text projectsTitle = new Text("Projects");
@@ -34,7 +34,7 @@ public class ProjectsTab extends Tab {
             projectButton.setOnAction(event -> {
                 Tab projectTab = new ProjectOverviewTab(((ProjectButton) event.getSource()).getProject());
                 TabsPane.tabPane.getTabs().add(projectTab);
-
+                TabsPane.tabPane.getSelectionModel().select(projectTab);
             });
 
             buttonListView.getItems().add(projectButton);
@@ -42,8 +42,12 @@ public class ProjectsTab extends Tab {
 
         //New Project Button
         Button newProjectButton = new Button("Add Project");
-        
-        newProjectButton.setOnAction(e -> TabsPane.tabPane.getTabs().add(new ProjectFormTab()));
+
+        newProjectButton.setOnAction(e -> {
+            ProjectFormTab formTab = new ProjectFormTab();
+            TabsPane.tabPane.getTabs().add(formTab);
+            TabsPane.tabPane.getSelectionModel().select(formTab);
+        });
 
         //Set up borderPane
         BorderPane mainPane = new BorderPane();
@@ -61,6 +65,11 @@ public class ProjectsTab extends Tab {
         if (instance == null) {
             instance = new ProjectsTab();
         }
+        return instance;
+    }
+
+    public static ProjectsTab refresh() {
+        instance = new ProjectsTab();
         return instance;
     }
 }

@@ -1,13 +1,8 @@
 package tabs;
 
-import javabeans.Project;
 import javabeans.Task;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -51,7 +46,7 @@ public class TaskFormTab extends Tab {
         Text error = new Text("Name field cannot be empty");
         error.setFill(Color.RED);
         error.setManaged(false);
-        
+
         //Create the date
         DatePicker date = new DatePicker();
 
@@ -64,9 +59,10 @@ public class TaskFormTab extends Tab {
             } else {
                 Task task = new Task(nameInput.getText(), descInput.getText(), date.getValue().toString(), Double.parseDouble(hourInput.getText()), projectID);
                 TasksTable taskTable = new TasksTable();
-                
+
                 taskTable.createTask(task);
-                TabsPane.tabPane.getTabs().remove(TabsPane.tabPane.getSelectionModel().getSelectedIndex());
+                TabsPane.tabPane.getTabs().remove(this);
+                TasksTab.getInstance().refreshTable();
             }
         });
 
