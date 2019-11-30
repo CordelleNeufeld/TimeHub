@@ -2,7 +2,10 @@ package tabs;
 
 import javabeans.Category;
 import javafx.geometry.Pos;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -59,7 +62,7 @@ public class CategoryFormTab extends Tab {
                 Category newCategory = new Category(0, nameInput.getText(), descInput.getText());
 
                 categoriesTable.createCategory(newCategory);
-                TabsPane.tabPane.getTabs().add(CategoriesTab.getInstance(categoriesTable.getAllCategories()));
+                TabsPane.tabPane.getTabs().add(CategoriesTab.getInstance());
             }
         });
 
