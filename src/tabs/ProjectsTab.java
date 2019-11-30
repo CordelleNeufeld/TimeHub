@@ -67,4 +67,9 @@ public class ProjectsTab extends Tab {
         }
         return instance;
     }
+
+    public static ProjectsTab refresh() {
+        instance = new ProjectsTab();
+        return instance;
+    }
 }

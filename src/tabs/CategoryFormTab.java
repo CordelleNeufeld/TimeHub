@@ -62,7 +62,10 @@ public class CategoryFormTab extends Tab {
                 Category newCategory = new Category(0, nameInput.getText(), descInput.getText());
 
                 categoriesTable.createCategory(newCategory);
-                TabsPane.tabPane.getTabs().add(CategoriesTab.getInstance());
+                TabsPane.tabPane.getTabs().remove(this);
+                TabsPane.tabPane.getTabs().remove(CategoriesTab.getInstance());
+                TabsPane.tabPane.getTabs().add(CategoriesTab.refresh());
+                TabsPane.tabPane.getSelectionModel().select(CategoriesTab.getInstance());
             }
         });
 

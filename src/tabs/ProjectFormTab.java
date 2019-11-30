@@ -17,9 +17,9 @@ import java.util.ArrayList;
 public class ProjectFormTab extends Tab {
 
     public ProjectFormTab() {
-    	
-    	CategoriesTable catTable = new CategoriesTable();
-    	ArrayList<Category> categories = catTable.getAllCategories();
+
+        CategoriesTable catTable = new CategoriesTable();
+        ArrayList<Category> categories = catTable.getAllCategories();
 
         //Task Label
         Label taskLabel = new Label("Project Creation Form");
@@ -72,11 +72,14 @@ public class ProjectFormTab extends Tab {
                 error.setManaged(true);
             } else {
                 //TODO: Check for to see if there are any Categories and Add them to the Project
-            	ProjectsTable projectTable = new ProjectsTable();
+                ProjectsTable projectTable = new ProjectsTable();
                 Project project = new Project(categories, null, nameInput.getText(), descInput.getText());
-                
+
                 projectTable.createProject(project);
-                TabsPane.tabPane.getTabs().add(ProjectsTab.getInstance());
+                TabsPane.tabPane.getTabs().remove(this);
+                TabsPane.tabPane.getTabs().remove(ProjectsTab.getInstance());
+                TabsPane.tabPane.getTabs().add(ProjectsTab.refresh());
+                TabsPane.tabPane.getSelectionModel().select(ProjectsTab.getInstance());
             }
         });
 

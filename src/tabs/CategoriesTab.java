@@ -15,7 +15,6 @@ public class CategoriesTab extends Tab {
     private static CategoriesTab instance = null;
 
     private CategoriesTab() {
-
     	ArrayList<Category> categories = new CategoriesTable().getAllCategories();
 
         //Title
@@ -49,7 +48,6 @@ public class CategoriesTab extends Tab {
         setContent(mainPane);
         setText("Categories");
 		this.setClosable(false);
-
     }
 
     public static CategoriesTab getInstance() {
@@ -57,6 +55,11 @@ public class CategoriesTab extends Tab {
             instance = new CategoriesTab();
         }
 
+        return instance;
+    }
+
+    public static CategoriesTab refresh() {
+        instance = new CategoriesTab();
         return instance;
     }
 }
