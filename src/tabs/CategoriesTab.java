@@ -12,7 +12,6 @@ public class CategoriesTab extends Tab {
     private static CategoriesTab instance = null;
 
     private CategoriesTab() {
-    	
     	ArrayList<Category> categories = new CategoriesTable().getAllCategories();
 
         //Set up the List View
@@ -26,6 +25,12 @@ public class CategoriesTab extends Tab {
 
         //New Category Button
         Button newCategoryButton = new Button("Add Category");
+
+        newCategoryButton.setOnAction(e -> {
+            CategoryFormTab formTab = new CategoryFormTab();
+            TabsPane.tabPane.getTabs().add(formTab);
+            TabsPane.tabPane.getSelectionModel().select(formTab);
+        });
 
         //Set up borderPane
         BorderPane mainPane = new BorderPane();
@@ -44,6 +49,11 @@ public class CategoriesTab extends Tab {
             instance = new CategoriesTab();
         }
 
+        return instance;
+    }
+
+    public static CategoriesTab refresh() {
+        instance = new CategoriesTab();
         return instance;
     }
 }
