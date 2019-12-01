@@ -28,21 +28,21 @@ public class ProjectsTab extends Tab {
         projectsTitle.setTextAlignment(TextAlignment.CENTER);
 
         //Set up the List View
-        ListView<ProjectButton> buttonListView = new ListView<>();
-        buttonListView.setMaxWidth(600);
-        buttonListView.setMaxHeight(500);
-
-        for (Project project : projects) {
-            ProjectButton projectButton = new ProjectButton(project.getTitle(), project);
-
-            projectButton.setOnAction(event -> {
-                Tab projectTab = new ProjectOverviewTab(((ProjectButton) event.getSource()).getProject());
-                TabsPane.tabPane.getTabs().add(projectTab);
-                TabsPane.tabPane.getSelectionModel().select(projectTab);
-            });
-
-            buttonListView.getItems().add(projectButton);
-        }
+//        ListView<ProjectButton> buttonListView = new ListView<>();
+//        buttonListView.setMaxWidth(600);
+//        buttonListView.setMaxHeight(500);
+//
+//        for (Project project : projects) {
+//            ProjectButton projectButton = new ProjectButton(project.getTitle(), project);
+//
+//            projectButton.setOnAction(event -> {
+//                Tab projectTab = new ProjectOverviewTab(((ProjectButton) event.getSource()).getProject());
+//                TabsPane.tabPane.getTabs().add(projectTab);
+//                TabsPane.tabPane.getSelectionModel().select(projectTab);
+//            });
+//
+//            buttonListView.getItems().add(projectButton);
+//        }
 
         //New Project Button
         Button newProjectButton = new Button("Add Project");
@@ -52,10 +52,18 @@ public class ProjectsTab extends Tab {
             TabsPane.tabPane.getTabs().add(formTab);
             TabsPane.tabPane.getSelectionModel().select(formTab);
         });
+        
+        ListView<Project> projectsList = new ListView<>();
+        projectsList.setMaxWidth(600);
+        projectsList.setMaxHeight(500);
+        
+        for(Project project : projects) {
+        		projectsList.getItems().add(project);
+        }
 
         //Set up VBox
         VBox mainPane = new VBox();
-        mainPane.getChildren().addAll(projectsTitle, buttonListView, newProjectButton);
+        mainPane.getChildren().addAll(projectsTitle, projectsList, newProjectButton);
         mainPane.setAlignment(Pos.CENTER);
         mainPane.setSpacing(100);
 

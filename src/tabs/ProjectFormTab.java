@@ -62,7 +62,7 @@ public class ProjectFormTab extends Tab {
         
         //Error Text if no name is entered
         Text error = new Text("Name field cannot be empty");
-        error.setFill(Color.RED);
+        error.setFill(Color.TRANSPARENT);
         error.setManaged(false);
 
         //Create and Populate the Main VBox
@@ -74,6 +74,7 @@ public class ProjectFormTab extends Tab {
         submitButton.setOnAction(e -> {
             //Show Error if needed
             if (nameInput.getText().equals("")) {
+            	error.setFill(Color.RED);
                 error.setManaged(true);
             } else {
                 //TODO: Check for to see if there are any Categories and Add them to the Project

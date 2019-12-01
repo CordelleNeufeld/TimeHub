@@ -47,9 +47,17 @@ public class TaskFormTab extends Tab {
         labelsAndInputsHBox.setAlignment(Pos.CENTER);
 
         //Create Error Text
-        Text error = new Text("Name field cannot be empty");
-        error.setFill(Color.RED);
+        Text error = new Text("Name Field cannot be empty");
+        error.setFill(Color.TRANSPARENT);
         error.setManaged(false);
+        
+        Text errorHours = new Text("Hour Field cannot be empty");
+        errorHours.setFill(Color.TRANSPARENT);
+        errorHours.setManaged(false);
+        
+        Text errorDate = new Text("Date Field cannot be empty");
+        errorDate.setFill(Color.TRANSPARENT);
+        errorDate.setManaged(false);
         
       //Create the date
         DatePicker date = new DatePicker();
@@ -67,8 +75,19 @@ public class TaskFormTab extends Tab {
         submitBtn.setOnAction(e -> {
             //Show Error if Necessary
             if (nameInput.getText().equals("")) {
+            	error.setFill(Color.RED);
                 error.setManaged(true);
-            } 
+            } else if (hourInput.getText().equals("")) {
+            	error.setManaged(false);
+                error.setFill(Color.TRANSPARENT);
+            	errorHours.setFill(Color.RED);
+            	errorHours.setManaged(true);
+            } else if (date.getValue() == null) {
+            	errorHours.setManaged(false);
+            	errorHours.setFill(Color.TRANSPARENT);
+            	errorDate.setFill(Color.RED);
+            	errorDate.setManaged(true);
+            }
             else if(task != null) {   	
             	Task updateTask = new Task(task.getId(), nameInput.getText(), descInput.getText(), date.getValue().toString(), Double.parseDouble(hourInput.getText()), projectID);
             	TasksTable taskTable = new TasksTable();
@@ -92,12 +111,12 @@ public class TaskFormTab extends Tab {
 
         //Create MainVBox
         VBox mainVBox = new VBox();
-        mainVBox.getChildren().addAll(taskLabel, labelsAndInputsHBox, date, error, submitBtn);
+        mainVBox.getChildren().addAll(taskLabel, labelsAndInputsHBox, date, error, errorHours, errorDate, submitBtn);
         mainVBox.setAlignment(Pos.CENTER);
         mainVBox.setSpacing(25);
 
         //Set Content and Styling of the Tab
-        getStyleClass().add("root");
+        getStyleClass().add("root"); //stylesheet
         setContent(mainVBox);
         setText("Task Form");
         setClosable(true);
