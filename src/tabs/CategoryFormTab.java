@@ -1,28 +1,23 @@
 package tabs;
 
 import javabeans.Category;
-import javabeans.Project;
 import javafx.geometry.Pos;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import panes.TabsPane;
 import tables.CategoriesTable;
-import tables.ProjectsTable;
 
-import java.util.ArrayList;
+public class CategoryFormTab extends Tab {
 
-public class ProjectFormTab extends Tab {
-
-    public ProjectFormTab() {
-
-        CategoriesTable catTable = new CategoriesTable();
-        ArrayList<Category> categories = catTable.getAllCategories();
-
+    public CategoryFormTab() {
         //Task Label
-        Label taskLabel = new Label("Project Creation Form");
+        Label taskLabel = new Label("Category Creation Form");
 
         //Name and Description Labels
         Label nameLabel = new Label("Name: ");
@@ -56,14 +51,6 @@ public class ProjectFormTab extends Tab {
         VBox mainVBox = new VBox();
         mainVBox.getChildren().addAll(taskLabel, labelsAndInputsHBox);
 
-        //Create and Display the Category Checkboxes
-        ArrayList<CheckBox> checkboxes = new ArrayList<>();
-        for (Category category : categories) {
-            CheckBox checkbox = new CheckBox(category.getTitle());
-            checkboxes.add(checkbox);
-            mainVBox.getChildren().add(checkbox);
-        }
-
         //Create the SubmitButton
         Button submitButton = new Button("Submit");
         submitButton.setOnAction(e -> {
@@ -71,15 +58,14 @@ public class ProjectFormTab extends Tab {
             if (nameInput.getText().equals("")) {
                 error.setManaged(true);
             } else {
-                //TODO: Check for to see if there are any Categories and Add them to the Project
-                ProjectsTable projectTable = new ProjectsTable();
-                Project project = new Project(categories, null, nameInput.getText(), descInput.getText());
+                CategoriesTable categoriesTable = new CategoriesTable();
+                Category newCategory = new Category(0, nameInput.getText(), descInput.getText());
 
-                projectTable.createProject(project);
+                categoriesTable.createCategory(newCategory);
                 TabsPane.tabPane.getTabs().remove(this);
-                TabsPane.tabPane.getTabs().remove(ProjectsTab.getInstance());
-                TabsPane.tabPane.getTabs().add(ProjectsTab.refresh());
-                TabsPane.tabPane.getSelectionModel().select(ProjectsTab.getInstance());
+                TabsPane.tabPane.getTabs().remove(CategoriesTab.getInstance());
+                TabsPane.tabPane.getTabs().add(CategoriesTab.refresh());
+                TabsPane.tabPane.getSelectionModel().select(CategoriesTab.getInstance());
             }
         });
 

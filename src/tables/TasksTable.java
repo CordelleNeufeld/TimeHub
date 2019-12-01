@@ -103,10 +103,6 @@ public class TasksTable implements TaskDAO {
 
 	@Override
 	public void createTask(Task task) {
-		String projectId = task.getProjectId() + "";
-		if(projectId.equals("-1")) {
-			projectId = "NULL";
-		}
 
 		String query = "INSERT INTO " + Const.TABLE_TASKS +
 				"(" + Const.TASKS_COLUMN_TITLE + ", " +
@@ -115,8 +111,13 @@ public class TasksTable implements TaskDAO {
 				Const.TASKS_COLUMN_DATE + ", " +
 				Const.TASKS_COLUMN_PROJECT_ID + ") VALUES ('" +
 				task.getTitle() + "','" + task.getDescription() + "','" +
-				task.getHours() + "','" + task.getDate() + "','" + 
-				projectId + "')";
+				task.getHours() + "','" + task.getDate() + "',";
+
+		if(task.getProjectId() == -1) {
+			query += "NULL)";
+		} else {
+			query += "'" + task.getProjectId() + "')";
+		}
 		try {
 			db.getConnection().createStatement().execute(query);
 			System.out.println("Inserted Task");
