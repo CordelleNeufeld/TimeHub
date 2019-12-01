@@ -10,12 +10,14 @@ import javabeans.Project;
 import javabeans.Task;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import panes.TabsPane;
 import tables.ProjectsTable;
 import tables.TasksTable;
@@ -30,7 +32,9 @@ public class TasksTab extends Tab {
     public TableView tableView;
 
     private TasksTab() {
-        this.setText("Tasks");
+        setText("Tasks");
+
+        Text title = new Text("Tasks");
 
         TasksTable taskViewTable = new TasksTable();
         ProjectsTable projectViewTable = new ProjectsTable();
@@ -44,8 +48,6 @@ public class TasksTab extends Tab {
         for (Project project : projects) {
             hashProjects.put(project.getId(), project);
         }
-
-        BorderPane root = new BorderPane();
 
         tableView = new TableView();
 
@@ -97,8 +99,8 @@ public class TasksTab extends Tab {
         // display table
 
         tableView.getItems().addAll(taskViewTable.getAllTasks());
+        tableView.setMaxWidth(900);
 
-        root.setCenter(tableView);
         Button deleteButton = new Button("Delete Task");
         deleteButton.setOnAction(e -> {
 
@@ -133,10 +135,15 @@ public class TasksTab extends Tab {
         HBox groupButtons = new HBox(25);
         groupButtons.getChildren().addAll(addTaskButton, updateButton, deleteButton);
 
-        root.setBottom(groupButtons);
+        VBox root = new VBox();
+        root.getChildren().addAll(title, tableView, groupButtons);
+        root.setAlignment(Pos.CENTER);
+        root.setSpacing(100);
 
-        this.setContent(root);
-        this.setClosable(false);
+        groupButtons.setAlignment(Pos.CENTER);
+
+        setContent(root);
+        setClosable(false);
 
     } // end of method: DeleteTab()
 
@@ -144,7 +151,6 @@ public class TasksTab extends Tab {
         TasksTable table = new TasksTable();
         tableView.getItems().clear();
         tableView.getItems().addAll(table.getAllTasks());
-
     } // end of method: refreshTable()
 
     public static TasksTab getInstance() {

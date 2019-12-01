@@ -29,7 +29,7 @@ public class ProjectsTab extends Tab {
 
         //Set up the List View
         ListView<ProjectButton> buttonListView = new ListView<>();
-        buttonListView.setMaxWidth(300);
+        buttonListView.setMaxWidth(600);
         buttonListView.setMaxHeight(500);
 
         for (Project project : projects) {
