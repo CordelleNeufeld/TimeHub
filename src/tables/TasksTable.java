@@ -78,12 +78,15 @@ public class TasksTable implements TaskDAO {
 	@Override
 	public void updateTask(Task task) {
 		String query = "UPDATE " + Const.TABLE_TASKS + " SET " +
-				Const.TASKS_COLUMN_TITLE + " " + task.getTitle() + "," +
-				Const.TASKS_COLUMN_DESCRIPTION + " " + task.getDescription() + 
-				" WHERE " + Const.TASKS_COLUMN_ID + " = " + task.getId();
+				Const.TASKS_COLUMN_TITLE + " = '" + task.getTitle() + "', " +
+				Const.TASKS_COLUMN_DESCRIPTION + " = '" + task.getDescription() + "', " +
+				Const.TASKS_COLUMN_HOURS + " = '" + task.getHours() + "', " +
+				Const.TASKS_COLUMN_DATE + " = '" + task.getDate() + "', " +
+				Const.TASKS_COLUMN_PROJECT_ID + " = '" + task.getProjectId() +
+				"' WHERE " + Const.TASKS_COLUMN_ID + " = " + task.getId();
+		System.out.println(query);
 			try {
-				Statement updateTask = db.getConnection().createStatement();
-				updateTask.executeQuery(query);
+				db.getConnection().createStatement().execute(query);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -142,7 +145,6 @@ public class TasksTable implements TaskDAO {
 				hours = data.getDouble("SUM(hours)");
 			}
 			
-			System.out.println("Returned hours for project!");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
