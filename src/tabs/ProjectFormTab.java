@@ -2,6 +2,8 @@ package tabs;
 
 import javabeans.Category;
 import javabeans.Project;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -46,7 +48,18 @@ public class ProjectFormTab extends Tab {
         HBox labelsAndInputsHBox = new HBox(15);
         labelsAndInputsHBox.getChildren().addAll(labelsVBox, inputsVBox);
         labelsAndInputsHBox.setAlignment(Pos.CENTER);
-
+        
+        //Create ComboBox for all the categories
+        
+        ArrayList<String> categoriesStrings = new ArrayList<>();
+        
+        for(Category category : new CategoriesTable().getAllCategories()) {
+        	categoriesStrings.add(category.getTitle());
+        }
+        
+        ComboBox<String> categoriesCombo = new ComboBox<>(FXCollections.observableArrayList(categoriesStrings));
+        
+        
         //Error Text if no name is entered
         Text error = new Text("Name field cannot be empty");
         error.setFill(Color.RED);
@@ -54,15 +67,7 @@ public class ProjectFormTab extends Tab {
 
         //Create and Populate the Main VBox
         VBox mainVBox = new VBox();
-        mainVBox.getChildren().addAll(taskLabel, labelsAndInputsHBox);
-
-        //Create and Display the Category Checkboxes
-        ArrayList<CheckBox> checkboxes = new ArrayList<>();
-        for (Category category : categories) {
-            CheckBox checkbox = new CheckBox(category.getTitle());
-            checkboxes.add(checkbox);
-            mainVBox.getChildren().add(checkbox);
-        }
+        mainVBox.getChildren().addAll(taskLabel, labelsAndInputsHBox, categoriesCombo);
 
         //Create the SubmitButton
         Button submitButton = new Button("Submit");

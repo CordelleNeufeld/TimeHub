@@ -116,13 +116,22 @@ public class TasksTab extends Tab {
         Button addTaskButton = new Button("Add Task");
 
         addTaskButton.setOnAction(e -> {
-            TaskFormTab formTab = new TaskFormTab(-1);
+            TaskFormTab formTab = new TaskFormTab(null, -1);
             TabsPane.tabPane.getTabs().add(formTab);
             TabsPane.tabPane.getSelectionModel().select(formTab);
         });
+        
+        Button updateButton = new Button("Update Task");
+        
+        updateButton.setOnAction(e -> {
+        	Task selectedTask = (Task) tableView.getSelectionModel().getSelectedItem();
+        	TaskFormTab formTab = new TaskFormTab(selectedTask, selectedTask.getProjectId());
+        	TabsPane.tabPane.getTabs().add(formTab);
+        	TabsPane.tabPane.getSelectionModel().select(formTab);
+        });
 
         HBox groupButtons = new HBox(25);
-        groupButtons.getChildren().addAll(addTaskButton, deleteButton);
+        groupButtons.getChildren().addAll(addTaskButton, updateButton, deleteButton);
 
         root.setBottom(groupButtons);
 

@@ -1,5 +1,9 @@
 package tabs;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
+
 import javabeans.Task;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -12,7 +16,7 @@ import tables.TasksTable;
 
 public class TaskFormTab extends Tab {
 
-    public TaskFormTab(int projectID) {
+    public TaskFormTab(Task task, int projectID) {
 
         //Create Task Label
         Label taskLabel = new Label("Task Creation Form");
@@ -46,9 +50,17 @@ public class TaskFormTab extends Tab {
         Text error = new Text("Name field cannot be empty");
         error.setFill(Color.RED);
         error.setManaged(false);
-
-        //Create the date
+        
+      //Create the date
         DatePicker date = new DatePicker();
+        
+        if(task != null) {
+	        nameInput.setText(task.getTitle());
+	        descInput.setText(task.getDescription());
+	        hourInput.setText(task.getHours() + "");
+	        LocalDate localDate = LocalDate.parse(task.getDate());
+	        date.setValue(localDate);
+        }
 
         //Create Submit Button
         Button submitBtn = new Button("Submit");
@@ -56,12 +68,24 @@ public class TaskFormTab extends Tab {
             //Show Error if Necessary
             if (nameInput.getText().equals("")) {
                 error.setManaged(true);
-            } else {
-                Task task = new Task(nameInput.getText(), descInput.getText(), date.getValue().toString(), Double.parseDouble(hourInput.getText()), projectID);
+            } 
+            else if(task != null) {   	
+            	Task updateTask = new Task(task.getId(), nameInput.getText(), descInput.getText(), date.getValue().toString(), Double.parseDouble(hourInput.getText()), projectID);
+            	TasksTable taskTable = new TasksTable();
+            	
+            	taskTable.updateTask(updateTask);
+            	TabsPane.tabPane.getTabs().remove(this);
+            	
+                TasksTab.getInstance().refreshTable();
+                TabsPane.tabPane.getSelectionModel().select(TasksTab.getInstance());
+            }
+            else {
+                Task createTask = new Task(nameInput.getText(), descInput.getText(), date.getValue().toString(), Double.parseDouble(hourInput.getText()), projectID);
                 TasksTable taskTable = new TasksTable();
 
-                taskTable.createTask(task);
+                taskTable.createTask(createTask);
                 TabsPane.tabPane.getTabs().remove(this);
+                TabsPane.tabPane.getSelectionModel().select(TasksTab.getInstance());
                 TasksTab.getInstance().refreshTable();
             }
         });
