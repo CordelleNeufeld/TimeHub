@@ -2,10 +2,12 @@ package tabs;
 
 import classes.ProjectButton;
 import javabeans.Project;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import panes.TabsPane;
@@ -27,6 +29,8 @@ public class ProjectsTab extends Tab {
 
         //Set up the List View
         ListView<ProjectButton> buttonListView = new ListView<>();
+        buttonListView.setMaxWidth(300);
+        buttonListView.setMaxHeight(500);
 
         for (Project project : projects) {
             ProjectButton projectButton = new ProjectButton(project.getTitle(), project);
@@ -49,16 +53,16 @@ public class ProjectsTab extends Tab {
             TabsPane.tabPane.getSelectionModel().select(formTab);
         });
 
-        //Set up borderPane
-        BorderPane mainPane = new BorderPane();
-        mainPane.setTop(projectsTitle);
-        mainPane.setCenter(buttonListView);
-        mainPane.setBottom(newProjectButton);
+        //Set up VBox
+        VBox mainPane = new VBox();
+        mainPane.getChildren().addAll(projectsTitle, buttonListView, newProjectButton);
+        mainPane.setAlignment(Pos.CENTER);
+        mainPane.setSpacing(100);
 
         //Add content to Tab
         setContent(mainPane);
         setText("Projects");
-        this.setClosable(false);
+        setClosable(false);
     }
 
     public static ProjectsTab getInstance() {

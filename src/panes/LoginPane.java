@@ -133,6 +133,6 @@ public class LoginPane extends VBox {
             }
         });
         
-        this.getStyleClass().add("root");
+        getStyleClass().add("root");
     }
 }
