@@ -97,6 +97,7 @@ public class TaskFormTab extends Tab {
         mainVBox.setSpacing(25);
 
         //Set Content and Styling of the Tab
+        getStyleClass().add("root");
         setContent(mainVBox);
         setText("Task Form");
         setClosable(true);
