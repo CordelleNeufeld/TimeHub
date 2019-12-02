@@ -41,7 +41,7 @@ public class LoginPane extends VBox {
 
         //Set up labels
         Label promptLabel = new Label("Please enter your database login credentials");
-
+        
         VBox labelsVBox = new VBox(25);
 
         Label hostLabel = new Label("Database Host");
@@ -132,5 +132,7 @@ public class LoginPane extends VBox {
                 }
             }
         });
+        
+        getStyleClass().add("root");
     }
 }
