@@ -1,14 +1,14 @@
 package panes;
 
+import home.Main;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.layout.BorderPane;
-import tabs.*;
 
-import java.util.ArrayList;
+import scenes.LoginScene;
+import tabs.*;
 
 /*
  * Provide the user with a screen to add daily hours
@@ -29,15 +29,17 @@ public class TabsPane extends BorderPane {
 		Menu creditsMenu = new Menu("Credits");
 		
 		// Build menu items
+		MenuItem changeDB = new MenuItem("Change Database");
 		MenuItem exit = new MenuItem("Exit");
-		
+
+		//Set ChangeDB
+		changeDB.setOnAction(e-> Main.mainStage.setScene(new LoginScene()));
+
 		// Set exit
-		exit.setOnAction(e->{
-			System.exit(0);
-		});
+		exit.setOnAction(e-> System.exit(0));
 		
 		// Add menu items to the bar
-		fileMenu.getItems().add(exit);
+		fileMenu.getItems().addAll(changeDB, exit);
 		menuTimeHub.getMenus().addAll(fileMenu, creditsMenu);
 		
 		// Create a TabPane

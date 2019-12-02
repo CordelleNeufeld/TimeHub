@@ -13,7 +13,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import scenes.TabsScene;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -33,6 +32,7 @@ public class LoginPane extends VBox {
 
     private Pattern alphaNumericPattern = Pattern.compile("^[a-zA-Z0-9 ]*$");
     private Pattern hostPattern = Pattern.compile("^[a-zA-Z .]*$");
+    public static boolean failedLogin = false;
 
     /**
      * LoginPane no-arg constructor
@@ -75,7 +75,7 @@ public class LoginPane extends VBox {
         //Errors (Setting Managed to false, if there is no error to display)
         Text error = new Text();
         error.setFill(Color.RED);
-        if (new File("config.txt").exists()) {
+        if (failedLogin) {
             error.setText("Stored Database Credentials failed. Please re-enter your credentials.");
         } else {
             error.setManaged(false);
@@ -129,6 +129,7 @@ public class LoginPane extends VBox {
                     error.setManaged(true);
                 } else {
                     Main.mainStage.setScene(new TabsScene());
+                    failedLogin = false;
                 }
             }
         });

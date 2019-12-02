@@ -2,6 +2,7 @@ package home;
 import classes.Database;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import panes.LoginPane;
 import scenes.LoginScene;
 import scenes.TabsScene;
 
@@ -38,6 +39,7 @@ public class Main extends Application {
 			if(Database.getInstance().getConnection() != null) {
 				mainStage.setScene(new TabsScene());
 			} else {
+				LoginPane.failedLogin = true;
 				mainStage.setScene(new LoginScene());
 			}
 		} else {
