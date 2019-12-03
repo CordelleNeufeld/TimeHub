@@ -86,7 +86,7 @@ public class TasksTab extends Tab {
         // COLUMN #4: Project Title
         TableColumn<Task, String> column4 = new TableColumn<>("Project Name");
         column4.setCellValueFactory(e -> {
-            String value = "No Project Assigned";
+            String value = "No Project";
             if (hashProjects.get(e.getValue().getProjectId()) != null) {
                 value = hashProjects.get(e.getValue().getProjectId()).getTitle();
             }
@@ -98,7 +98,7 @@ public class TasksTab extends Tab {
         // COLUMN #5: Category Title
         TableColumn<Task, String> column5 = new TableColumn<>("Category Name");
         column5.setCellValueFactory(e -> {
-            String value = "No Category Assigned";
+            String value = "No Category";
             if (hashProjects.get(e.getValue().getProjectId()) != null && !hashProjects.get(e.getValue().getProjectId()).getCategories().isEmpty()) {
                 value = hashProjects.get(e.getValue().getProjectId()).getCategories().get(0).getTitle();
             }
@@ -121,8 +121,7 @@ public class TasksTab extends Tab {
             // regenerate the table view
             refreshTable();
 
-            // TODO: Statistics
-            // StatsTab.getInstance().generateChart();
+            StatsTab.getInstance().generateChart();
 
         });
 
@@ -140,6 +139,7 @@ public class TasksTab extends Tab {
         	Task selectedTask = (Task) tableView.getSelectionModel().getSelectedItem();
         	TaskFormTab formTab = new TaskFormTab(selectedTask, selectedTask.getProjectId());
         	TabsPane.tabPane.getTabs().add(formTab);
+        	StatsTab.getInstance().generateChart();
         	TabsPane.tabPane.getSelectionModel().select(formTab);
         });
 

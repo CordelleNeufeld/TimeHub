@@ -68,4 +68,5 @@ public class StatsTab extends Tab {
     	chart.setData(chartData);
     	
     }
+    
 }
