@@ -2,6 +2,8 @@ package tabs;
 
 import classes.ProjectButton;
 import javabeans.Project;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -60,6 +62,18 @@ public class ProjectsTab extends Tab {
         for(Project project : projects) {
         		projectsList.getItems().add(project);
         }
+        
+        //set on click for listview to navigate to the select project's overview screen
+        projectsList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Project>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Project> observable, Project oldValue, Project newValue) {
+				ProjectOverviewTab overviewTab = new ProjectOverviewTab(newValue);
+				TabsPane.tabPane.getTabs().add(overviewTab);
+				TabsPane.tabPane.getSelectionModel().select(overviewTab);
+			}
+        	
+        });
 
         //Set up VBox
         VBox mainPane = new VBox();
