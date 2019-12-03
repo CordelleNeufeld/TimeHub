@@ -6,24 +6,24 @@
 
 package tables;
 
-import java.util.ArrayList;
-
 import daos.UserTasksDAO;
 import javabeans.Task;
 import javabeans.User;
 
+import java.util.ArrayList;
+
 public class UserTasksTable implements UserTasksDAO {
 
-	@Override
-	public ArrayList<User> getUserTasks(int userID) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public ArrayList<User> getUserTasks(int userID) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	@Override
-	public ArrayList<Task> getTaskUsers(int taskID) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public ArrayList<Task> getTaskUsers(int taskID) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
 }

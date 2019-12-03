@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.util.Scanner;
 
 import static database.Const.*;
+import static database.PatternMatch.escapeSpecialCharacters;
 
 public class Database {
 
@@ -19,8 +20,8 @@ public class Database {
 
             try {
                 Class.forName("com.mysql.jdbc.Driver");
-                connection = DriverManager.getConnection("jdbc:mysql://" + configReader.nextLine() + "/" + configReader.nextLine(),
-                        configReader.nextLine(), configReader.nextLine());
+                connection = DriverManager.getConnection("jdbc:mysql://" + escapeSpecialCharacters(configReader.nextLine()) + "/" + escapeSpecialCharacters(configReader.nextLine()),
+                        escapeSpecialCharacters(configReader.nextLine()), escapeSpecialCharacters(configReader.nextLine()));
 
                 String[] createTables = {CREATE_TABLE_CATEGORIES, CREATE_TABLE_PROJECTS, CREATE_TABLE_PROJECT_CATEGORIES, CREATE_TABLE_TASKS, CREATE_TABLE_USERS, CREATE_TABLE_USER_TASKS};
 
@@ -53,11 +54,11 @@ public class Database {
     public Connection getConnection() {
         return connection;
     }
-    
+
     public static void clearInstance() {
-    	if(instance != null) {
-    		instance = null;
-    	}
+        if (instance != null) {
+            instance = null;
+        }
     }
 
 }
