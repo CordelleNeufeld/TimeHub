@@ -14,6 +14,12 @@
 	-fx-pref-width: 10em;
 }
 
+.chart-title {
+	-fx-font-size: 50;
+	-fx-font-family: "Courier New";
+	-fx-font-weight: bold;
+}
+
 /* 
  * Background:
  * Colour Source: https://graf1x.com/shades-of-green-color-palette-html-hex-rgb-code/

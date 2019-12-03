@@ -4,12 +4,17 @@ import classes.ProjectButton;
 import javabeans.Project;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import panes.TabsPane;
@@ -24,27 +29,15 @@ public class ProjectsTab extends Tab {
     private ProjectsTab() {
 
         ArrayList<Project> projects = new ProjectsTable().getAllProjects();
+        
+        ImageView projImage = new ImageView(new Image("resources/sundial_nav_400_280.png"));
+        projImage.setFitWidth(240);
+        projImage.setFitHeight(168);
 
         //Title
         Text projectsTitle = new Text("Projects");
+        projectsTitle.setFont(Font.font("Courier New",FontWeight.BOLD, 30));
         projectsTitle.setTextAlignment(TextAlignment.CENTER);
-
-        //Set up the List View
-//        ListView<ProjectButton> buttonListView = new ListView<>();
-//        buttonListView.setMaxWidth(600);
-//        buttonListView.setMaxHeight(500);
-//
-//        for (Project project : projects) {
-//            ProjectButton projectButton = new ProjectButton(project.getTitle(), project);
-//
-//            projectButton.setOnAction(event -> {
-//                Tab projectTab = new ProjectOverviewTab(((ProjectButton) event.getSource()).getProject());
-//                TabsPane.tabPane.getTabs().add(projectTab);
-//                TabsPane.tabPane.getSelectionModel().select(projectTab);
-//            });
-//
-//            buttonListView.getItems().add(projectButton);
-//        }
 
         //New Project Button
         Button newProjectButton = new Button("Add Project");
@@ -56,30 +49,26 @@ public class ProjectsTab extends Tab {
         });
         
         ListView<Project> projectsList = new ListView<>();
-        projectsList.setMaxWidth(600);
-        projectsList.setMaxHeight(500);
+        projectsList.setMaxWidth(500);
+        projectsList.setMaxHeight(300);
         
         for(Project project : projects) {
         		projectsList.getItems().add(project);
         }
         
         //set on click for listview to navigate to the select project's overview screen
-        projectsList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Project>() {
-
-			@Override
-			public void changed(ObservableValue<? extends Project> observable, Project oldValue, Project newValue) {
-				ProjectOverviewTab overviewTab = new ProjectOverviewTab(newValue);
-				TabsPane.tabPane.getTabs().add(overviewTab);
-				TabsPane.tabPane.getSelectionModel().select(overviewTab);
-			}
-        	
+        projectsList.getSelectionModel().selectedItemProperty().addListener(e -> {
+        	ProjectOverviewTab overviewTab = new ProjectOverviewTab(projectsList.getSelectionModel().getSelectedItem());
+			TabsPane.tabPane.getTabs().add(overviewTab);
+			TabsPane.tabPane.getSelectionModel().select(overviewTab);
         });
 
         //Set up VBox
         VBox mainPane = new VBox();
-        mainPane.getChildren().addAll(projectsTitle, projectsList, newProjectButton);
-        mainPane.setAlignment(Pos.CENTER);
-        mainPane.setSpacing(100);
+        mainPane.getChildren().addAll(projImage, projectsTitle, projectsList, newProjectButton);
+        mainPane.setAlignment(Pos.TOP_CENTER);
+        mainPane.setSpacing(45);
+        mainPane.setPadding(new Insets(20, 0, 0, 0));
 
         //Add content to Tab
         setContent(mainPane);

@@ -111,11 +111,13 @@ public class ProjectsTable implements ProjectDAO {
 	@Override
 	public void createProject(Project project) {	
 		String query = "INSERT INTO " + Const.TABLE_PROJECTS +
+				"OUTPUT Inserted." + Const.PROJECTS_COLUMN_ID +
 				"(" + Const.PROJECTS_COLUMN_TITLE + ", " +
 				Const.PROJECTS_COLUMN_DESCRIPTION + ") VALUES ('" +
 				project.getTitle() + "','" + project.getDescription() + "')";
 		try {
-			db.getConnection().createStatement().execute(query);
+			Statement insertProject = Database.getInstance().getConnection().createStatement();
+			ResultSet data = insertProject.executeQuery(query);
 			System.out.println("Inserted Project");
 		} catch (SQLException e) {
 			e.printStackTrace();

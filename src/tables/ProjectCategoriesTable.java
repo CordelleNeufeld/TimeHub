@@ -83,4 +83,14 @@ public class ProjectCategoriesTable implements ProjectCategoriesDAO {
 		return projects;
 			
 	}
+	
+	public void insertProjectCategory(int catId, int projId) {
+		String query = "INSERT INTO " + Const.TABLE_PROJECT_CATEGORIES + " VALUES ('" + projId + "', '" + catId + "')";
+		
+		try {
+			Database.getInstance().getConnection().createStatement().execute(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }
