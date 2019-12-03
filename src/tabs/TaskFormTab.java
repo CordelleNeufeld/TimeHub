@@ -96,6 +96,7 @@ public class TaskFormTab extends Tab {
             	TabsPane.tabPane.getTabs().remove(this);
             	
             	TasksTab.getInstance().refreshTable();
+            	StatsTab.getInstance().generateChart();
                 TabsPane.tabPane.getSelectionModel().select(TasksTab.getInstance());
             }
             else {
@@ -105,6 +106,7 @@ public class TaskFormTab extends Tab {
                 taskTable.createTask(createTask);
                 TabsPane.tabPane.getTabs().remove(this);
                 TasksTab.getInstance().refreshTable();
+                StatsTab.getInstance().generateChart();
                 TabsPane.tabPane.getSelectionModel().select(TasksTab.getInstance());
             }
         });

@@ -23,10 +23,15 @@ public class ProjectOverviewTab extends Tab {
         
         addProject.setOnAction(e -> TabsPane.tabPane.getTabs().add(new ProjectFormTab()));
         
-        addTask.setOnAction(e -> TabsPane.tabPane.getTabs().add(new TaskFormTab(null, project.getId())));
+        addTask.setOnAction(e -> {
+        	TaskFormTab taskForm = new TaskFormTab(null, project.getId());
+        	TabsPane.tabPane.getTabs().add(taskForm);
+        	TabsPane.tabPane.getTabs().remove(TabsPane.tabPane.getSelectionModel().getSelectedIndex());
+        	TabsPane.tabPane.getSelectionModel().select(taskForm);
+        });
 
         HBox buttonsHBox = new HBox(20);
-        buttonsHBox.getChildren().addAll(addProject, addTask);
+        buttonsHBox.getChildren().addAll(addTask);
         
         //Create the LeftVBox
         VBox leftVBox = new VBox(30);
