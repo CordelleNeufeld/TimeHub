@@ -1,5 +1,8 @@
 package panes;
 
+import java.io.File;
+
+import classes.Database;
 import home.Main;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -33,7 +36,14 @@ public class TabsPane extends BorderPane {
 		MenuItem exit = new MenuItem("Exit");
 
 		//Set ChangeDB
-		changeDB.setOnAction(e-> Main.mainStage.setScene(new LoginScene()));
+		changeDB.setOnAction(e->  {
+			File configFile = new File("config.txt");
+			if(new File("config.txt").exists()) {
+				configFile.delete();
+				Database.clearInstance();
+			}
+			Main.mainStage.setScene(new LoginScene());
+			});
 
 		// Set exit
 		exit.setOnAction(e-> System.exit(0));

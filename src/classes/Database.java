@@ -53,5 +53,11 @@ public class Database {
     public Connection getConnection() {
         return connection;
     }
+    
+    public static void clearInstance() {
+    	if(instance != null) {
+    		instance = null;
+    	}
+    }
 
 }
