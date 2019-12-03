@@ -8,7 +8,7 @@ public class PatternMatch {
     public static final Pattern alphaNumericPeriodPattern = Pattern.compile("^[a-zA-Z .]*$");
 
     public static String escapeSpecialCharacters(String string) {
-        final String[] specialCharacters = {"\\", "'"};
+        final String[] specialCharacters = {"\\", "'", "\""};
 
         for (String specialCharacter : specialCharacters) {
             if (string.contains(specialCharacter)) {
