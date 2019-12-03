@@ -2,15 +2,20 @@ package panes;
 
 import classes.Database;
 import home.Main;
+import javafx.animation.FadeTransition;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import scenes.TabsScene;
 
 import java.io.IOException;
@@ -38,6 +43,20 @@ public class LoginPane extends VBox {
      * LoginPane no-arg constructor
      */
     public LoginPane() {
+    	
+    	ImageView loginImage = new ImageView(new Image("resources/sundial_500_525.png"));
+    	loginImage.setFitHeight(250);
+    	loginImage.setFitWidth(250);
+    	
+    	FadeTransition fade = new FadeTransition();  
+    	fade.setDuration(Duration.millis(5000));  
+    	fade.setFromValue(0);  
+        fade.setToValue(10); 
+        fade.setNode(loginImage);
+        fade.play();
+    	
+    	Text introText = new Text("Welcome to TimeHub!");
+    	introText.setFont(new Font(50));
 
         //Set up labels
         Label promptLabel = new Label("Please enter your database login credentials");
@@ -87,7 +106,7 @@ public class LoginPane extends VBox {
 
 
         //Put everything on the screen
-        getChildren().addAll(promptLabel, labelsAndInputHBox, error, loginBtn);
+        getChildren().addAll(loginImage, introText, promptLabel, labelsAndInputHBox, error, loginBtn);
         setSpacing(35);
         setAlignment(Pos.CENTER);
 

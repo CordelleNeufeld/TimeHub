@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Font;
 import tables.ProjectsTable;
 import tables.TasksTable;
 

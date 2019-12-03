@@ -12,6 +12,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import panes.TabsPane;
 import tables.CategoriesTable;
+import tables.ProjectCategoriesTable;
 import tables.ProjectsTable;
 
 import java.util.ArrayList;
@@ -51,9 +52,10 @@ public class ProjectFormTab extends Tab {
         
         //Create ComboBox for all the categories
         
+        ArrayList<Category> categoriesList = new CategoriesTable().getAllCategories();
         ArrayList<String> categoriesStrings = new ArrayList<>();
         
-        for(Category category : new CategoriesTable().getAllCategories()) {
+        for(Category category : categoriesList) {
         	categoriesStrings.add(category.getTitle());
         }
         
@@ -80,6 +82,10 @@ public class ProjectFormTab extends Tab {
                 //TODO: Check for to see if there are any Categories and Add them to the Project
                 ProjectsTable projectTable = new ProjectsTable();
                 Project project = new Project(categories, null, nameInput.getText(), descInput.getText());
+                
+                ProjectCategoriesTable projectCategoriesTable = new ProjectCategoriesTable();
+                
+                projectCategoriesTable.insertProjectCategory(categoriesList.get(categoriesCombo.getSelectionModel().getSelectedIndex()).getId(), );
 
                 projectTable.createProject(project);
                 TabsPane.tabPane.getTabs().remove(this);

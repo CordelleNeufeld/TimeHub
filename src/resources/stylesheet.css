@@ -11,7 +11,13 @@
 }
 
 .table-column {
-	-fx-pref-width: 7.9em;
+	-fx-pref-width: 10em;
+}
+
+.chart-title {
+	-fx-font-size: 50;
+	-fx-font-family: "Courier New";
+	-fx-font-weight: bold;
 }
 
 /* 

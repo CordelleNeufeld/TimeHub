@@ -1,9 +1,14 @@
 package tabs;
 
 import javabeans.Category;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import panes.TabsPane;
@@ -18,7 +23,12 @@ public class CategoriesTab extends Tab {
     private CategoriesTab() {
     	ArrayList<Category> categories = new CategoriesTable().getAllCategories();
 
+    	ImageView catImage = new ImageView(new Image("resources/sundial_nav_400_280.png"));
+    	catImage.setFitWidth(240);
+    	catImage.setFitHeight(168);
+    	
         Text title = new Text("Categories");
+        title.setFont(Font.font("Courier New",FontWeight.BOLD, 30));
         title.setTextAlignment(TextAlignment.CENTER);
 
         //Set up the List View
@@ -41,10 +51,10 @@ public class CategoriesTab extends Tab {
         });
 
         //Set up VBox
-        VBox mainPane = new VBox();
-        mainPane.getChildren().addAll(title, newCategoryButton, accordion);
-        mainPane.setSpacing(100);
-        mainPane.setAlignment(Pos.CENTER);
+        VBox mainPane = new VBox(45);
+        mainPane.getChildren().addAll(catImage, title, newCategoryButton, accordion);
+        mainPane.setAlignment(Pos.TOP_CENTER);
+        mainPane.setPadding(new Insets(20, 0, 0, 0));
 
         //Add content to Tab
         setContent(mainPane);

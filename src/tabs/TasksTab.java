@@ -10,14 +10,20 @@ import javabeans.Project;
 import javabeans.Task;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import panes.TabsPane;
 import tables.ProjectsTable;
 import tables.TasksTable;
@@ -32,9 +38,14 @@ public class TasksTab extends Tab {
     public TableView tableView;
 
     private TasksTab() {
-        setText("Tasks");
+        
+        ImageView taskImage = new ImageView(new Image("resources/sundial_nav_400_280.png"));
+        taskImage.setFitWidth(240);
+        taskImage.setFitHeight(168);
 
         Text title = new Text("Tasks");
+        title.setFont(Font.font("Courier New",FontWeight.BOLD, 30));
+        title.setTextAlignment(TextAlignment.CENTER);
 
         TasksTable taskViewTable = new TasksTable();
         ProjectsTable projectViewTable = new ProjectsTable();
@@ -58,12 +69,12 @@ public class TasksTab extends Tab {
 
         tableView.getColumns().add(column1);
 
-        // COLUMN #2: Task Description
-        TableColumn<Task, String> column2 = new TableColumn<>("Description");
-        column2.setCellValueFactory(e -> new SimpleStringProperty(
-                taskViewTable.getTask(e.getValue().getId()).getDescription()));
-
-        tableView.getColumns().add(column2);
+//        // COLUMN #2: Task Description
+//        TableColumn<Task, String> column2 = new TableColumn<>("Description");
+//        column2.setCellValueFactory(e -> new SimpleStringProperty(
+//                taskViewTable.getTask(e.getValue().getId()).getDescription()));
+//
+//        tableView.getColumns().add(column2);
 
         // COLUMN #3: Task Hours
         TableColumn<Task, Double> column3 = new TableColumn<>("Hour Log");
@@ -135,13 +146,14 @@ public class TasksTab extends Tab {
         HBox groupButtons = new HBox(25);
         groupButtons.getChildren().addAll(addTaskButton, updateButton, deleteButton);
 
-        VBox root = new VBox();
-        root.getChildren().addAll(title, tableView, groupButtons);
-        root.setAlignment(Pos.CENTER);
-        root.setSpacing(100);
+        VBox root = new VBox(45);
+        root.getChildren().addAll(taskImage, title, tableView, groupButtons);
+        root.setAlignment(Pos.TOP_CENTER);
+        root.setPadding(new Insets(20, 0, 0, 0));
 
         groupButtons.setAlignment(Pos.CENTER);
 
+        setText("Tasks");
         setContent(root);
         setClosable(false);
 
