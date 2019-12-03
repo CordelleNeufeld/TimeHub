@@ -9,7 +9,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
-
+import scenes.CreditScene;
 import scenes.LoginScene;
 import tabs.*;
 
@@ -29,10 +29,10 @@ public class TabsPane extends BorderPane {
 		// Build menu bar
 		MenuBar menuTimeHub = new MenuBar();
 		Menu fileMenu = new Menu("File");
-		Menu creditsMenu = new Menu("Credits");
 		
 		// Build menu items
 		MenuItem changeDB = new MenuItem("Change Database");
+		MenuItem credits = new MenuItem("Credits");
 		MenuItem exit = new MenuItem("Exit");
 
 		//Set ChangeDB
@@ -44,13 +44,14 @@ public class TabsPane extends BorderPane {
 			}
 			Main.mainStage.setScene(new LoginScene());
 			});
+		credits.setOnAction(e -> Main.mainStage.setScene(new CreditScene()));
 
 		// Set exit
 		exit.setOnAction(e-> System.exit(0));
 		
 		// Add menu items to the bar
-		fileMenu.getItems().addAll(changeDB, exit);
-		menuTimeHub.getMenus().addAll(fileMenu, creditsMenu);
+		fileMenu.getItems().addAll(changeDB, credits, exit);
+		menuTimeHub.getMenus().addAll(fileMenu);
 		
 		// Create a TabPane
 		tabPane = new TabPane();

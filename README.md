@@ -49,14 +49,14 @@ The user has the option to create a list of categories. It is optional to classi
 The user has the option to create a list of projects. It is optional to record completed tasks under the classification of a project.
 
 ![Image of TimeHub Tab for Projects](README-TimeHubProjects.png)
-*Figure 5. TimeHub Tasks Tab*
+*Figure 5. TimeHub Projects Tab*
 
 ### Tasks
 
 The user defines a task with hours. The user may also provide this task with an optional description. A task may be assigned by the user to a project predefined by the user in the Projects tab. It is optional to assign a project to a task. However, statistics are only provided for **projects** with assigned tasks.
 
 ![Image of TimeHub Tab for Tasks](README-TimeHubTasks.png)
-*Figure 6. TimeHub Projects Tab*
+*Figure 6. TimeHub Tasks Tab*
 
 ## Statistics
 
