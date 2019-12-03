@@ -99,7 +99,7 @@ public class TasksTab extends Tab {
         TableColumn<Task, String> column5 = new TableColumn<>("Category Name");
         column5.setCellValueFactory(e -> {
             String value = "No Category Assigned";
-            if (hashProjects.get(e.getValue().getProjectId()) != null) {
+            if (hashProjects.get(e.getValue().getProjectId()) != null && !hashProjects.get(e.getValue().getProjectId()).getCategories().isEmpty()) {
                 value = hashProjects.get(e.getValue().getProjectId()).getCategories().get(0).getTitle();
             }
             return new SimpleStringProperty(value);

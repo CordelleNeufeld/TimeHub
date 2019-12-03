@@ -81,10 +81,9 @@ public class TasksTable implements TaskDAO {
 				Const.TASKS_COLUMN_TITLE + " = '" + task.getTitle() + "', " +
 				Const.TASKS_COLUMN_DESCRIPTION + " = '" + task.getDescription() + "', " +
 				Const.TASKS_COLUMN_HOURS + " = '" + task.getHours() + "', " +
-				Const.TASKS_COLUMN_DATE + " = '" + task.getDate() + "', " +
-				Const.TASKS_COLUMN_PROJECT_ID + " = '" + task.getProjectId() +
+				Const.TASKS_COLUMN_DATE + " = '" + task.getDate() +
 				"' WHERE " + Const.TASKS_COLUMN_ID + " = " + task.getId();
-		System.out.println(query);
+				
 			try {
 				db.getConnection().createStatement().execute(query);
 			} catch (SQLException e) {
