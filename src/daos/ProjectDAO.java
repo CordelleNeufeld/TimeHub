@@ -16,6 +16,6 @@ public interface ProjectDAO {
 	public Project getProject(int projectID);
 	public void updateProject(Project project);
 	public void deleteProject(Project project);
-	public void createProject(Project project);
+	public int createProject(Project project);
 	
 }

@@ -79,13 +79,14 @@ public class ProjectFormTab extends Tab {
             	error.setFill(Color.RED);
                 error.setManaged(true);
             } else {
-                //TODO: Check for to see if there are any Categories and Add them to the Project
                 ProjectsTable projectTable = new ProjectsTable();
                 Project project = new Project(categories, null, nameInput.getText(), descInput.getText());
                 
                 ProjectCategoriesTable projectCategoriesTable = new ProjectCategoriesTable();
                 
-                projectTable.createProject(project);
+                int projectID = projectTable.createProject(project);
+                projectCategoriesTable.insertProjectCategory(categoriesList.get(categoriesCombo.getSelectionModel().getSelectedIndex()).getId(), projectID);
+
                 TabsPane.tabPane.getTabs().remove(this);
                 TabsPane.tabPane.getTabs().remove(ProjectsTab.getInstance());
                 TabsPane.tabPane.getTabs().add(ProjectsTab.refresh());
