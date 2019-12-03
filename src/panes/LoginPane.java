@@ -2,6 +2,7 @@ package panes;
 
 import classes.Database;
 import home.Main;
+import javafx.animation.FadeTransition;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,6 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import scenes.TabsScene;
 
 import java.io.IOException;
@@ -45,6 +47,13 @@ public class LoginPane extends VBox {
     	ImageView loginImage = new ImageView(new Image("resources/sundial_500_525.png"));
     	loginImage.setFitHeight(250);
     	loginImage.setFitWidth(250);
+    	
+    	FadeTransition fade = new FadeTransition();  
+    	fade.setDuration(Duration.millis(5000));  
+    	fade.setFromValue(0);  
+        fade.setToValue(10); 
+        fade.setNode(loginImage);
+        fade.play();
     	
     	Text introText = new Text("Welcome to TimeHub!");
     	introText.setFont(new Font(50));

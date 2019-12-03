@@ -58,12 +58,12 @@ public class TasksTab extends Tab {
 
         tableView.getColumns().add(column1);
 
-        // COLUMN #2: Task Description
-        TableColumn<Task, String> column2 = new TableColumn<>("Description");
-        column2.setCellValueFactory(e -> new SimpleStringProperty(
-                taskViewTable.getTask(e.getValue().getId()).getDescription()));
-
-        tableView.getColumns().add(column2);
+//        // COLUMN #2: Task Description
+//        TableColumn<Task, String> column2 = new TableColumn<>("Description");
+//        column2.setCellValueFactory(e -> new SimpleStringProperty(
+//                taskViewTable.getTask(e.getValue().getId()).getDescription()));
+//
+//        tableView.getColumns().add(column2);
 
         // COLUMN #3: Task Hours
         TableColumn<Task, Double> column3 = new TableColumn<>("Hour Log");
