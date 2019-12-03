@@ -26,7 +26,9 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import static database.PatternMatch.alphaNumericPattern;
+import static database.PatternMatch.alphaNumericPeriodPattern;
 
 /**
  * This class is for the login screen
@@ -35,8 +37,6 @@ import java.util.regex.Pattern;
  */
 public class LoginPane extends VBox {
 
-    private Pattern alphaNumericPattern = Pattern.compile("^[a-zA-Z0-9 ]*$");
-    private Pattern hostPattern = Pattern.compile("^[a-zA-Z .]*$");
     public static boolean failedLogin = false;
 
     /**
@@ -117,7 +117,7 @@ public class LoginPane extends VBox {
             // TODO: This section was commented out by Hasan 2019-11-13
             // to provide a temporary bypass of the login screen direct to HomeTab
 
-            Matcher hostMatch = hostPattern.matcher(hostTextField.getText());
+            Matcher hostMatch = alphaNumericPeriodPattern.matcher(hostTextField.getText());
             Matcher userMatch = alphaNumericPattern.matcher(userTextField.getText());
             Matcher passwordMatch = alphaNumericPattern.matcher(passwordTextField.getText());
             Matcher nameMatch = alphaNumericPattern.matcher(nameTextField.getText());
