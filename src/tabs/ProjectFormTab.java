@@ -85,9 +85,9 @@ public class ProjectFormTab extends Tab {
                 
                 ProjectCategoriesTable projectCategoriesTable = new ProjectCategoriesTable();
                 
-                projectCategoriesTable.insertProjectCategory(categoriesList.get(categoriesCombo.getSelectionModel().getSelectedIndex()).getId(), );
-
-                projectTable.createProject(project);
+                int projectID = projectTable.createProject(project);
+                projectCategoriesTable.insertProjectCategory(categoriesList.get(categoriesCombo.getSelectionModel().getSelectedIndex()).getId(), projectID);
+                
                 TabsPane.tabPane.getTabs().remove(this);
                 TabsPane.tabPane.getTabs().remove(ProjectsTab.getInstance());
                 TabsPane.tabPane.getTabs().add(ProjectsTab.refresh());
