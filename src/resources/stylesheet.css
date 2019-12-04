@@ -1,0 +1,31 @@
+/* root style for scenes */
+
+.root {
+	-fx-font-size: 16pt;
+    -fx-font-family: "Courier New";
+    -fx-base: #ffffff;
+    -fx-accent: lightgrey;
+    -fx-background: #c7c7c7;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.table-column {
+	-fx-pref-width: 10em;
+}
+
+.chart-title {
+	-fx-font-size: 50;
+	-fx-font-family: "Courier New";
+	-fx-font-weight: bold;
+}
+
+/* 
+ * Background:
+ * Colour Source: https://graf1x.com/shades-of-green-color-palette-html-hex-rgb-code/
+ * Base: artichoke
+ * Background: laurel
+ * 
+ * Documentation:
+ * https://docs.oracle.com/javase/8/javafx/api/javafx/scene/doc-files/cssref.html#typecolor
+ */

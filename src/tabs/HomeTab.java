@@ -7,55 +7,69 @@
 
 package tabs;
 
+import javafx.animation.FadeTransition;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 import panes.TabsPane;
-import tables.CategoriesTable;
-import tables.ProjectsTable;
 import tables.TasksTable;
-
-import java.util.ArrayList;
 
 public class HomeTab extends Tab {
 
     private static HomeTab instance = null;
 
     private HomeTab() {
-
+    	
+    	ImageView homeImage = new ImageView(new Image("resources/sundial_home_500_310.png"));
+    	
+    	FadeTransition fade = new FadeTransition();  
+    	fade.setDuration(Duration.millis(5000));  
+    	fade.setFromValue(0);  
+        fade.setToValue(10); 
+        fade.setNode(homeImage);
+        fade.play();
+    	
         //Create Buttons for different Tabs
         Button categoriesButton = new Button("Categories");
         Button projectsButton = new Button("Projects");
         Button tasksButton = new Button("Tasks");
         
-        //Make the tables
-        CategoriesTable categoryTable = new CategoriesTable();
-        ProjectsTable projectTable = new ProjectsTable();
-        TasksTable taskTable = new TasksTable();
+        categoriesButton.setMinSize(200, 60);
+        projectsButton.setMinSize(200, 60);
+        tasksButton.setMinSize(200, 60);
 
         //OnClickListeners to show the new tabs
         categoriesButton.setOnAction(e -> {
-            CategoriesTab category = CategoriesTab.getInstance(categoryTable.getAllCategories());
-            TabsPane.tabPane.getTabs().add(category);
+            CategoriesTab category = CategoriesTab.getInstance();
+            if(!TabsPane.tabPane.getTabs().contains(category)) {
+            	TabsPane.tabPane.getTabs().add(category);
+            }
             TabsPane.tabPane.getSelectionModel().select(category);
         });
 
         projectsButton.setOnAction(e -> {
-            ProjectsTab project = ProjectsTab.getInstance(projectTable.getAllProjects());
-            TabsPane.tabPane.getTabs().add(project);
+            ProjectsTab project = ProjectsTab.getInstance();
+            if(!TabsPane.tabPane.getTabs().contains(project)) {
+            	TabsPane.tabPane.getTabs().add(project);
+            }
             TabsPane.tabPane.getSelectionModel().select(project);
         });
 
         tasksButton.setOnAction(e -> {
-            HourLogsTab hourLogs = HourLogsTab.getInstance(taskTable.getAllTasks());
-            TabsPane.tabPane.getTabs().add(hourLogs);
-            TabsPane.tabPane.getSelectionModel().select(hourLogs);
+            TasksTab task = TasksTab.getInstance();
+            if(!TabsPane.tabPane.getTabs().contains(task)) {
+            	TabsPane.tabPane.getTabs().add(task);
+            }
+            TabsPane.tabPane.getSelectionModel().select(task);
         });
 
         //Create VBox to hold the Buttons
         VBox buttonsVBox = new VBox(50);
-        buttonsVBox.getChildren().addAll(categoriesButton, projectsButton, tasksButton);
+        buttonsVBox.getChildren().addAll(homeImage, categoriesButton, projectsButton, tasksButton);
         buttonsVBox.setAlignment(Pos.CENTER);
 
         //Set Content and Styles for the Tab

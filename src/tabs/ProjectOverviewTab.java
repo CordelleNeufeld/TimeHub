@@ -23,23 +23,23 @@ public class ProjectOverviewTab extends Tab {
         
         addProject.setOnAction(e -> TabsPane.tabPane.getTabs().add(new ProjectFormTab()));
         
-        addTask.setOnAction(e -> TabsPane.tabPane.getTabs().add(new TaskFormTab(project)));
+        addTask.setOnAction(e -> {
+        	TaskFormTab taskForm = new TaskFormTab(null, project.getId());
+        	TabsPane.tabPane.getTabs().add(taskForm);
+        	TabsPane.tabPane.getTabs().remove(TabsPane.tabPane.getSelectionModel().getSelectedIndex());
+        	TabsPane.tabPane.getSelectionModel().select(taskForm);
+        });
 
         HBox buttonsHBox = new HBox(20);
-        buttonsHBox.getChildren().addAll(addProject, addTask);
+        buttonsHBox.getChildren().addAll(addTask);
         
         //Create the LeftVBox
         VBox leftVBox = new VBox(30);
         leftVBox.getChildren().addAll(projectName, projectDesc, buttonsHBox);
 
-        //Create tabPane
-        TabPane tabPane = new TabPane();
-        tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
-        tabPane.getTabs().addAll(new Tab("Tab 1"), new Tab("Tab 2"));
-
         //Create MainHBox
         HBox mainHBox = new HBox(30);
-        mainHBox.getChildren().addAll(leftVBox, tabPane);
+        mainHBox.getChildren().addAll(leftVBox);
 
         //Set Content and Styling of the Tab
         setContent(mainHBox);

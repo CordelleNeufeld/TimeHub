@@ -2,17 +2,22 @@ package panes;
 
 import classes.Database;
 import home.Main;
+import javafx.animation.FadeTransition;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import scenes.TabsScene;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -20,8 +25,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 /**
  * This class is for the login screen
@@ -30,13 +34,26 @@ import java.util.regex.Pattern;
  */
 public class LoginPane extends VBox {
 
-    private Pattern alphaNumericPattern = Pattern.compile("^[a-zA-Z0-9 ]*$");
-    private Pattern hostPattern = Pattern.compile("^[a-zA-Z .]*$");
+    public static boolean failedLogin = false;
 
     /**
      * LoginPane no-arg constructor
      */
     public LoginPane() {
+
+        ImageView loginImage = new ImageView(new Image("resources/sundial_500_525.png"));
+        loginImage.setFitHeight(250);
+        loginImage.setFitWidth(250);
+
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(5000));
+        fade.setFromValue(0);
+        fade.setToValue(10);
+        fade.setNode(loginImage);
+        fade.play();
+
+        Text introText = new Text("Welcome to TimeHub!");
+        introText.setFont(new Font(50));
 
         //Set up labels
         Label promptLabel = new Label("Please enter your database login credentials");
@@ -44,11 +61,11 @@ public class LoginPane extends VBox {
         VBox labelsVBox = new VBox(25);
 
         Label hostLabel = new Label("Database Host");
-        Label userLabel = new Label("Database Name");
-        Label passwordLabel = new Label("Database User");
-        Label nameLabel = new Label("Database Password");
+        Label nameLabel = new Label("Database Name");
+        Label userLabel = new Label("Database User");
+        Label passwordLabel = new Label("Database Password");
 
-        labelsVBox.getChildren().addAll(hostLabel, userLabel, passwordLabel, nameLabel);
+        labelsVBox.getChildren().addAll(hostLabel, nameLabel, userLabel, passwordLabel);
         labelsVBox.setAlignment(Pos.CENTER);
 
 
@@ -56,11 +73,12 @@ public class LoginPane extends VBox {
         VBox textFieldVBox = new VBox(15);
 
         TextField hostTextField = new TextField();
-        TextField userTextField = new TextField();
-        TextField passwordTextField = new TextField();
         TextField nameTextField = new TextField();
+        TextField userTextField = new TextField();
+        PasswordField passwordTextField = new PasswordField();
 
-        textFieldVBox.getChildren().addAll(hostTextField, userTextField, passwordTextField, nameTextField);
+
+        textFieldVBox.getChildren().addAll(hostTextField, nameTextField, userTextField, passwordTextField);
         textFieldVBox.setAlignment(Pos.CENTER);
 
 
@@ -73,7 +91,7 @@ public class LoginPane extends VBox {
         //Errors (Setting Managed to false, if there is no error to display)
         Text error = new Text();
         error.setFill(Color.RED);
-        if(new File("config.txt").exists()) {
+        if (failedLogin) {
             error.setText("Stored Database Credentials failed. Please re-enter your credentials.");
         } else {
             error.setManaged(false);
@@ -85,57 +103,36 @@ public class LoginPane extends VBox {
 
 
         //Put everything on the screen
-        getChildren().addAll(promptLabel, labelsAndInputHBox, error, loginBtn);
+        getChildren().addAll(loginImage, introText, promptLabel, labelsAndInputHBox, error, loginBtn);
         setSpacing(35);
         setAlignment(Pos.CENTER);
 
 
         //Button Listener
         loginBtn.setOnMouseClicked(e -> {
-        	
-        	// TODO: This section was commented out by Hasan 2019-11-13
-        	// to provide a temporary bypass of the login screen direct to HomeTab
-        	
-            Matcher hostMatch = hostPattern.matcher(hostTextField.getText());
-            Matcher userMatch = alphaNumericPattern.matcher(userTextField.getText());
-            Matcher passwordMatch = alphaNumericPattern.matcher(passwordTextField.getText());
-            Matcher nameMatch = alphaNumericPattern.matcher(nameTextField.getText());
 
-            if (!hostMatch.matches()) {
-                error.setText("Please check that the host field contains only letters and periods.");
-                error.setManaged(true);
-            } else if (!userMatch.matches()) {
-                error.setText("Please check that the user field contains only letters and numbers.");
-                error.setManaged(true);
-            } else if (!passwordMatch.matches()) {
-                error.setText("Please check that the database password field contains only letters and numbers");
-                error.setManaged(true);
-            } else if (!nameMatch.matches()) {
-                error.setText("Please check that the database name field does not contain any invalid characters.");
+            // TODO: This section was commented out by Hasan 2019-11-13
+            // to provide a temporary bypass of the login screen direct to HomeTab
+
+
+            try {
+                List<String> lines = Arrays.asList(hostTextField.getText(), nameTextField.getText(), userTextField.getText(), passwordTextField.getText());
+                Path file = Paths.get("config.txt");
+                Files.write(file, lines, StandardCharsets.UTF_8);
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            }
+
+            if (Database.getInstance().getConnection() == null) {
+                error.setText("Login failed. Please Check your database credentials.");
                 error.setManaged(true);
             } else {
-                try {
-                    List<String> lines = Arrays.asList(hostTextField.getText(), userTextField.getText(), passwordTextField.getText(), nameTextField.getText());
-                    Path file = Paths.get("config.txt");
-                    Files.write(file, lines, StandardCharsets.UTF_8);
-                } catch (IOException exception) {
-                    exception.printStackTrace();
-                }
-
-                if (Database.getInstance().getConnection() == null) {
-                    error.setText("Login failed. Please Check your database credentials.");
-                    error.setManaged(true);
-                }
-                else {
-                	
-                	Main.mainStage.setScene(new TabsScene());
-                	
-                }
+                Main.mainStage.setScene(new TabsScene());
+                failedLogin = false;
             }
-            
-                  
-                
-            
+
         });
+
+        getStyleClass().add("root");
     }
 }

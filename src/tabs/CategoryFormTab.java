@@ -1,31 +1,23 @@
 package tabs;
 
 import javabeans.Category;
-import javabeans.Project;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import panes.TabsPane;
 import tables.CategoriesTable;
-import tables.ProjectCategoriesTable;
-import tables.ProjectsTable;
 
-import java.util.ArrayList;
+public class CategoryFormTab extends Tab {
 
-public class ProjectFormTab extends Tab {
-
-    public ProjectFormTab() {
-
-        CategoriesTable catTable = new CategoriesTable();
-        ArrayList<Category> categories = catTable.getAllCategories();
-
+    public CategoryFormTab() {
         //Task Label
-        Label taskLabel = new Label("Project Creation Form");
+        Label taskLabel = new Label("Category Creation Form");
 
         //Name and Description Labels
         Label nameLabel = new Label("Name: ");
@@ -49,19 +41,7 @@ public class ProjectFormTab extends Tab {
         HBox labelsAndInputsHBox = new HBox(15);
         labelsAndInputsHBox.getChildren().addAll(labelsVBox, inputsVBox);
         labelsAndInputsHBox.setAlignment(Pos.CENTER);
-        
-        //Create ComboBox for all the categories
-        
-        ArrayList<Category> categoriesList = new CategoriesTable().getAllCategories();
-        ArrayList<String> categoriesStrings = new ArrayList<>();
-        
-        for(Category category : categoriesList) {
-        	categoriesStrings.add(category.getTitle());
-        }
-        
-        ComboBox<String> categoriesCombo = new ComboBox<>(FXCollections.observableArrayList(categoriesStrings));
-        
-        
+
         //Error Text if no name is entered
         Text error = new Text("Name field cannot be empty");
         error.setFill(Color.TRANSPARENT);
@@ -69,7 +49,7 @@ public class ProjectFormTab extends Tab {
 
         //Create and Populate the Main VBox
         VBox mainVBox = new VBox();
-        mainVBox.getChildren().addAll(taskLabel, labelsAndInputsHBox, categoriesCombo);
+        mainVBox.getChildren().addAll(taskLabel, labelsAndInputsHBox);
 
         //Create the SubmitButton
         Button submitButton = new Button("Submit");
@@ -79,20 +59,14 @@ public class ProjectFormTab extends Tab {
             	error.setFill(Color.RED);
                 error.setManaged(true);
             } else {
-                ProjectsTable projectTable = new ProjectsTable();
-                Project project = new Project(categories, null, nameInput.getText(), descInput.getText());
-                
-                ProjectCategoriesTable projectCategoriesTable = new ProjectCategoriesTable();
-                
-                int projectID = projectTable.createProject(project);
-                if (categoriesCombo.getSelectionModel().getSelectedItem() != null) {
-                	projectCategoriesTable.insertProjectCategory(categoriesList.get(categoriesCombo.getSelectionModel().getSelectedIndex()).getId(), projectID);
-                }
+                CategoriesTable categoriesTable = new CategoriesTable();
+                Category newCategory = new Category(0, nameInput.getText(), descInput.getText());
 
+                categoriesTable.createCategory(newCategory);
                 TabsPane.tabPane.getTabs().remove(this);
-                TabsPane.tabPane.getTabs().remove(ProjectsTab.getInstance());
-                TabsPane.tabPane.getTabs().add(ProjectsTab.refresh());
-                TabsPane.tabPane.getSelectionModel().select(ProjectsTab.getInstance());
+                TabsPane.tabPane.getTabs().remove(CategoriesTab.getInstance());
+                TabsPane.tabPane.getTabs().add(CategoriesTab.refresh());
+                TabsPane.tabPane.getSelectionModel().select(CategoriesTab.getInstance());
             }
         });
 
