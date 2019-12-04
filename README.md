@@ -16,7 +16,7 @@ The user is required to enter data into the following fields in order to login:
 * Database User
 * Database Password
 
-![Image of TimeHub Login](README-TimeHubLogin.png)
+![Image of TimeHub Login](src/resources/README-TimeHubLogin.png)
 *Figure 1. TimeHub Login*
 
 This information can be reset from the File menu item: Change Database.
@@ -27,42 +27,42 @@ This information can be reset from the File menu item: Change Database.
 
 When a user logs in, a database connection is created and tables are created on this database.
 
-![Image of TimeHub SQL Tables](README-TimeHubTables.png)
+![Image of TimeHub SQL Tables](src/resources/README-TimeHubTables.png)
 *Figure 2. SQL Table Structure*
 
 ### Home
 
 The Home screen provides easy access to stats, user-defined categories and projects, and user entry of completed tasks with associated task hours.
 
-![Image of TimeHub Home Tab](README-TimeHubHome.png)
+![Image of TimeHub Home Tab](src/resources/README-TimeHubHome.png)
 *Figure 3. TimeHub Home*
 
 ### Categories
 
 The user has the option to create a list of categories. It is optional to classify projects under the broader classification of a category.
 
-![Image of TimeHub Tab for Categories](README-TimeHubCategories.png)
+![Image of TimeHub Tab for Categories](src/resources/README-TimeHubCategories.png)
 *Figure 4. TimeHub Categories Tab*
 
 ### Projects
 
 The user has the option to create a list of projects. It is optional to record completed tasks under the classification of a project.
 
-![Image of TimeHub Tab for Projects](README-TimeHubProjects.png)
+![Image of TimeHub Tab for Projects](src/resources/README-TimeHubProjects.png)
 *Figure 5. TimeHub Projects Tab*
 
 ### Tasks
 
 The user defines a task with hours. The user may also provide this task with an optional description. A task may be assigned by the user to a project predefined by the user in the Projects tab. It is optional to assign a project to a task. However, statistics are only provided for **projects** with assigned tasks.
 
-![Image of TimeHub Tab for Tasks](README-TimeHubTasks.png)
+![Image of TimeHub Tab for Tasks](src/resources/README-TimeHubTasks.png)
 *Figure 6. TimeHub Tasks Tab*
 
 ## Statistics
 
 A pie chart is provided to the user that displays proportional data of cumulative task hours according to the corresponding slice of pie for each **project**.
 
-![Image of TimeHub Tab for Stats](README-TimeHubStats.png)
+![Image of TimeHub Tab for Stats](src/resources/README-TimeHubStats.png)
 *Figure 7. TimeHub Stats Tab*
 
 ## Built With
